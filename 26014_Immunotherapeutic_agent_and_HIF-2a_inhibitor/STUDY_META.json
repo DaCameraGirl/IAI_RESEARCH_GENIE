@@ -1,0 +1,78 @@
+{
+  "title": "Immunotherapeutic_agent_and_HIF-2a_inhibitor",
+  "type": "patent",
+  "patent": "US10335388",
+  "critical_date": "2015-04-17",
+  "focus": "See STUDY_BRIEF.md \u2014 Research Requirements",
+  "keywords": [
+    "especially conference",
+    "conference abstracts",
+    "trials especially conference",
+    "especially conference abstracts",
+    "conference abstracts Please",
+    "clinical trials especially conference",
+    "trials especially conference abstracts",
+    "especially conference abstracts Please",
+    "conference abstracts Please see",
+    "early clinical trials especially conference",
+    "clinical trials especially conference abstracts",
+    "trials especially conference abstracts Please",
+    "especially conference abstracts Please see",
+    "conference abstracts Please see the",
+    "concerning early clinical trials especially conference",
+    "early clinical trials especially conference abstracts",
+    "clinical trials especially conference abstracts Please",
+    "trials especially conference abstracts Please see",
+    "especially conference abstracts Please see the",
+    "conference abstracts Please see the Study",
+    ") inhibitor in combination",
+    "an immunotherapeutic agent",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated",
+    "poor patient prognoses",
+    "Belzutifan is a small-molecule drug",
+    "the chemical formula C17H12F3NO4S",
+    "inhibitor can be administered in combination",
+    "an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
+    "conference"
+  ],
+  "requirements": [
+    {
+      "id": "1",
+      "name": "To satisfy, complete 4 priority there is also 1 optional A method of treating cancer comprising the steps of: 1.1 administering a HIF-2\u03b1 inhibitor; 1.2 administering an immunotherapeutic agent, specifically, a PD-1 inhibitor or a CTLA-4 inhibitor; 1.3 wherein the immunotherapeutic agent is pembrolizumab, nivolumab, tremelimumab, or ipilimumab; 1.4 wherein the HIF-2\u03b1 inhibitor is belzutifan; 1.5 wherein the cancer is one of the following: melanoma, renal cell carcinoma, or colorectal cancer.",
+      "keywords": []
+    }
+  ],
+  "priority_req_ids": [
+    "1"
+  ],
+  "synonym_queries": [
+    ") inhibitor in combination\" \"an immunotherapeutic agent",
+    ") inhibitor in combination\" solvent \"an immunotherapeutic agent",
+    ") inhibitor in combination\" solubilization \"an immunotherapeutic agent",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" \"poor patient prognoses",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solvent \"poor patient prognoses",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solubilization \"poor patient prognoses",
+    "Belzutifan is a small-molecule drug\" \"the chemical formula C17H12F3NO4S",
+    "Belzutifan is a small-molecule drug\" solvent \"the chemical formula C17H12F3NO4S",
+    "Belzutifan is a small-molecule drug\" solubilization \"the chemical formula C17H12F3NO4S",
+    "inhibitor can be administered in combination\" \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
+    "inhibitor can be administered in combination\" solvent \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
+    "inhibitor can be administered in combination\" solubilization \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma"
+  ],
+  "cpc_queries": [],
+  "npl_queries": [
+    ") inhibitor in combination\" \"an immunotherapeutic agent\" conference abstract",
+    ") inhibitor in combination\" solvent \"an immunotherapeutic agent\" conference abstract",
+    ") inhibitor in combination\" solubilization \"an immunotherapeutic agent\" conference abstract",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" \"poor patient prognoses\" conference abstract",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solvent \"poor patient prognoses\" conference abstract",
+    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solubilization \"poor patient prognoses\" conference abstract",
+    "Belzutifan is a small-molecule drug\" \"the chemical formula C17H12F3NO4S\" conference abstract",
+    "Belzutifan is a small-molecule drug\" solvent \"the chemical formula C17H12F3NO4S\" conference abstract",
+    "Belzutifan is a small-molecule drug\" solubilization \"the chemical formula C17H12F3NO4S\" conference abstract",
+    "inhibitor can be administered in combination\" \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract",
+    "inhibitor can be administered in combination\" solvent \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract",
+    "inhibitor can be administered in combination\" solubilization \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract"
+  ],
+  "assignees": []
+}

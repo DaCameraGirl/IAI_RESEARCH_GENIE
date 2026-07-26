@@ -1,25 +1,32 @@
 {
   "mode": "one_at_a_time",
-  "current_study": "25974",
+  "current_study": "26006",
   "queue": [
     "26052",
     "25974",
     "26005",
     "26006",
-    "26016"
+    "26016",
+    "25853",
+    "25854",
+    "25867",
+    "25992",
+    "25994",
+    "25995",
+    "26014"
   ],
   "studies": {
     "26052": {
       "folder": "26052_Rechargeable_Blender_Offset_Blades",
       "status": "done",
       "rounds_completed": 3,
-      "candidates_found": 0,
+      "candidates_found": 4,
       "submissions_made": 0,
       "lanes_complete": []
     },
     "25974": {
       "folder": "25974_Oximidol",
-      "status": "active",
+      "status": "done",
       "rounds_completed": 1,
       "candidates_found": 0,
       "submissions_made": 0,
@@ -35,16 +42,72 @@
     },
     "26006": {
       "folder": "26006_Hymn_Research_Russian",
-      "status": "queued",
-      "rounds_completed": 0,
+      "status": "active",
+      "rounds_completed": 1,
       "candidates_found": 0,
       "submissions_made": 0,
       "lanes_complete": []
     },
     "26016": {
       "folder": "26016_Hymn_Research_Italian",
-      "status": "queued",
+      "status": "active",
       "rounds_completed": 0,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25853": {
+      "folder": "25853_Light_Emitting_Device_Resin_Package",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25854": {
+      "folder": "25854_Semiconductor_Wafer_Dividing",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25867": {
+      "folder": "25867_Remote_Memory_Transactions",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25992": {
+      "folder": "25992_Treating_Cancer_with_Pembrolizumab",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25994": {
+      "folder": "25994_Pembrolizumab_and_Axitinib",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "25995": {
+      "folder": "25995_Pembrolizumab_and_Lenvatinib",
+      "status": "queued",
+      "rounds_completed": 1,
+      "candidates_found": 0,
+      "submissions_made": 0,
+      "lanes_complete": []
+    },
+    "26014": {
+      "folder": "26014_Immunotherapeutic_agent_and_HIF-2a_inhibitor",
+      "status": "queued",
+      "rounds_completed": 1,
       "candidates_found": 0,
       "submissions_made": 0,
       "lanes_complete": []

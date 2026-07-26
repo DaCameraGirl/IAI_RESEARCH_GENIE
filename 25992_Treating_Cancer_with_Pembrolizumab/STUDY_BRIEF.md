@@ -1,0 +1,75 @@
+# 25992 Treating_Cancer_with_Pembrolizumab
+
+Status: active
+Type: Patent / invalidity
+Study patent: US12358984
+Critical date: 2018-02-13
+Expiration date: 2026-08-07
+
+## Raw RWS brief (as pasted)
+
+Study ID
+25992
+Category
+Pharmaceutical & Biologics
+Research Type
+Invalidity
+Expiration Date
+07 August 2026
+
+Biochemistry Bioengineering Molecular & Cell Biology Pharmaceutical & Medicinal Chemistry Pharmacology Medicine and Dentistry
+ Leads
+Added on 23 July 2026
+Thank you for your participation.
+
+We are interested in documents describing, supporting, or motivating modifications to the standard pembrolizumab dosing regimen of 200 mg every 3 weeks (Q3W), particularly higher-dose regimens administered at longer intervals (e.g., once every 6 weeks rather than every 3 weeks). Relevant materials may discuss pharmacokinetic rationale (PK study), efficacy, safety, side-effect, patient convenience, healthcare resource utilization, or other potential benefits of less frequent dosing. (Requirement 1.2).
+
+Thank you!
+
+Added on 16 July 2026
+Thank you for your participation.
+
+Please focus on the administration of pembrolizumab at a dosage of 400 mg every six (6) weeks (Requirements 1.1 and 1.2). We are also interested in any suggestions regarding increasing the dosage to achieve less frequent dosing, ideally in comparison with the previously used 200 mg every 3 weeks regimen.
+
+Thank you!
+
+ Description
+This Study is directed to previously unidentified prior art references, including patent and non-patent literature.
+
+PD-1 is recognized as an important player in immune regulation and the maintenance of peripheral tolerance. PD-1 is moderately expressed on naive T, B and NKT cells 25 and up-regulated by T/B cell receptor signaling on lymphocytes, monocytes and myeloid cells (Sharpe et al., The function of programmed cell death 1 and its ligands in regulating autoimmunity and infection. Nature Immunology (2007); 8:239-245).
+
+Two known ligands for PD-1, PD-L1 (B7-H1) and PD-L2 (B7-DC), are expressed in human cancers arising in various tissues. An antibody that blocks binding of the human PD-L1 and PD-L2 (receptors located on a tumor cell) to the human PD-1 (receptors located on a T-cell) can block this interaction and allow the T-cells to attack the cancer cell. Pembrolizumab is a known anti-PD-1 antibody marked by Merck under the name Keytruda for the treatment of cancer.
+
+Specifically, we are interested in the use of pembrolizumab (formerly known as MK-3475, SCH 900475 and lambrolizumab), a humanized IgG4 mAb (further details can be found in the Study Patent) to treat cancer. More specifically, we want to see Pembrolizumab administered in a 400 mg dose once every 6 weeks to treat a cancer patient. This dosing schedule can be used to treat a large number of different types of cancer, including:  melanoma, non-small cell lung cancer, head and neck cancer, urothelial cancer, breast cancer, gastric cancer, multiple myeloma, hepatocellular cancer, non-Hodgkin lymphoma, renal cancer, Hodgkin lymphoma, mesothelioma, ovarian cancer, small cell lung cancer, esophageal cancer, anal cancer, biliary tract cancer, colorectal cancer, cervical cancer, thyroid cancer, endometrial cancer, squamous cell carcinoma, Merkel cell carcinoma and salivary cancer.  We would also be interested in similar antibodies given at this dosage schedule for cancer treatment.
+
+We are particularly interested in locating NPL concerning early clinical trials, especially conference abstracts. 
+
+Please see Study Patent for additional details.
+
+ Study Patents
+US12358984
+CPC Class: A61K
+
+Latest Date for Responses
+13 February 2018 
+Relevant Patent Dates:
+US Patent Date
+Priority Date
+US Application Date
+Priority Date
+EP Date
+Publication Date
+Other Patent Authorities
+Publication Date
+1 
+To satisfy, complete 3 priority 
+A method of treating cancer  comprising:
+
+1.1 
+administering pembrolizumab;
+
+1.2 
+wherein the dosage is 400 mg of pembrolizumab every six (6) weeks;
+
+1.3 
+wherein the cancer is one of the following:  melanoma, non-small cell lung cancer, head and neck cancer, urothelial cancer, breast cancer, gastric cancer, multiple myeloma, hepatocellular cancer, non-Hodgkin lymphoma, renal cancer, Hodgkin lymphoma, mesothelioma, ovarian cancer, small cell lung cancer, esophageal cancer, anal cancer, biliary tract cancer, colorectal cancer, cervical cancer, thyroid cancer, endometrial cancer, squamous cell carcinoma, Merkel cell carcinoma or salivary cancer.

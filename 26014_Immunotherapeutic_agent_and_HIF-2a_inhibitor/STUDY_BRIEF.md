@@ -1,0 +1,100 @@
+# 26014 Immunotherapeutic_agent_and_HIF-2a_inhibitor
+
+Status: active
+Type: Patent / invalidity
+Study patent: US10335388
+Critical date: 2015-04-17
+Expiration date: 2026-08-14
+
+## Raw RWS brief (as pasted)
+
+Immunotherapeutic agent and HIF-2α inhibitor
+Closes in 19 days
+Immunotherapeutic agent and HIF-2α inhibitor
+Closes in 19 days
+Study ID
+26014
+Category
+Pharmaceutical & Biologics
+Research Type
+Invalidity
+Expiration Date
+14 August 2026
+
+This Study relates to treating certain cancers with an immunotherapeutic agent and a HIF-2α inhibitor.
+
+ 
+Biochemistry Bioengineering Biotechnology Pharmaceutical & Medicinal Chemistry Medicine and Dentistry
+ Leads
+Added on 24 July 2026
+Please note that the main focus at this point should be a combination cancer treatment including both an HIF-2α inhibitor AND an immunotherapeutic agent, specifically, a PD-1 inhibitor or a CTLA-4 inhibitor. Thank you!
+
+Please remember to look for clinical trial data, especially early phases before the latest date for responses.
+
+ Description
+This Study is directed to previously unidentified prior art references, including patent and non-patent literature.
+
+This study is focused on identifying publications that disclose or discuss treating certain types of cancer with a hypoxia inducible factor-2α (HIF-2α) inhibitor in combination with an immunotherapeutic agent.
+
+A hypoxic (low oxygen) environment in tissue activates a signaling cascade that drives the induction or repression of the transcription of genes implicated in, for example, cell survival or death.  Hypoxia-inducible factors (HIFs) are key to this transcriptional response.  But HIFs are dysregulated in many cancers, and the expression of HIFs are associated with poor patient prognoses.  HIFs consist of a HIFα subunit (with 3 subunits called HIF-1α, HIF-2α, and HIF-3α) and a HIFβ subunit.  HIF-2α is a monomeric protein, and it is also known by the names Endothelial PAS Domain Protein 1 (EPAS 1), HIF2A, Per-ARNT-Sim D2 (PASD2), HIF-2-Alpha, HIF2-Alpha, HLF, Hypoxia-Inducible Factor 2-Alpha, HIF-1 alpha-Like Factor, and MOP2.  A HIF-2α inhibitor slows, reduces, alters, eliminates, and/or prevents HIF-2α activity (e.g., activating transcription mediated by HIF-2α).  An example of a HIGF-2α inhibitor is belzutifan (sold under the brand name Welireg).  Belzutifan is a small-molecule drug with the chemical formula C17H12F3NO4S.  The chemical name of belzutifan is 3-[[(1S,2S,3R)-2,3-Difluoro-2,3-dihydro-1-hydroxy-7-(methylsulfonyl)-1H-inden-4-yl]oxy]-5-fluorobenzonitrile.  Its chemical structure, as provided on the Prescribing Information, is below:
+
+Picture1
+
+https://azuksaopblb01.blob.core.windows.net/studydocs/625dc4760ae04df883a3bf04edeb38ff_26014-Picture1.png
+
+ Study Patents
+US10335388
+CPC Class: A61K
+Download (in your folder)
+
+
+
+
+An immunotherapeutic agent is any agent that induces, enhances, suppresses, or otherwise modifies an immune response.  For purposes of this study, an immunotherapeutic agent is a PD-1 inhibitor or a CTLA-4 inhibitor. 
+
+This animated video provides a nice overview of how the PD-L1/PD-1 pathway works.  Pembrolizumab is an antibody that blocks binding of the human PD-L1 and PD-L2 (receptors located on a tumor cell) to the human PD-1 (receptors located on a T-cell).  This video explains how pembrolizumab works at a high level.  Another example of a PD-1 inhibitor is nivolumab.
+
+CTLA-4 (Cytotoxic T-lymphocyte-associated antigen 4) is an immunoglobulin expressed on the surface of T cells.  CTLA-4 transmits an inhibitory signal to T cells, and blocking CTLA-4 increases the proliferation of T-cells and interleukin-2 production, boosting the bodies immune response.  Examples of CTLA-4 inhibitors include tremelimumab and ipilimumab.
+
+A HIF-2α inhibitor can be administered in combination with an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma, and colorectal cancer.  Search results for this study can include any dosing regimens of HIF-2α inhibitor and PD-1 inhibitor or CTLA-4 inhibitor.
+
+We are particularly interested in NPL concerning early clinical trials, especially conference abstracts.
+
+Please see the Study Patent for additional detail.  Please note that the Study Patent discloses belzutifan as compound 289.
+
+Descriptions of the research requirements are for purposes of identifying a broad range of potentially useful prior art and are not, and should not be interpreted to reflect, an attempt to delineate the coverage or boundaries of any patent claim.
+
+ Study Patents
+US10335388
+CPC Class: A61K
+Download
+ Research Requirements 
+Latest Date for Responses
+17 April 2015 
+Relevant Patent Dates:
+US Patent Date
+Priority Date
+US Application Date
+Priority Date
+EP Date
+Publication Date
+Other Patent Authorities
+Publication Date
+1 
+To satisfy, complete 4 priority there is also 1 optional 
+A method of treating cancer comprising the steps of:
+
+1.1 
+administering a HIF-2α inhibitor;
+
+1.2 
+administering an immunotherapeutic agent, specifically, a PD-1 inhibitor or a CTLA-4 inhibitor;
+
+1.3 
+wherein the immunotherapeutic agent is pembrolizumab, nivolumab, tremelimumab, or ipilimumab;
+
+1.4 
+wherein the HIF-2α inhibitor is belzutifan;
+
+1.5 
+wherein the cancer is one of the following: melanoma, renal cell carcinoma, or colorectal cancer.

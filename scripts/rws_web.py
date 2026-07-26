@@ -154,27 +154,32 @@ def _parse_candidates(study_id: str, burned: dict[str, str] | None = None) -> li
     if not folder.exists():
         return []
     out = []
+    seen_files = set()
     for path in sorted(folder.glob("*_hymn_lead.txt")):
+        seen_files.add(path.name)
         out.append(_parse_hymn_lead(path, path.read_text(encoding="utf-8", errors="replace")))
-    for path in sorted(folder.glob("*_RWS_format.txt")):
+    for path in sorted(list(folder.glob("*.txt")) + list(folder.glob("*.md"))):
+        if path.name in seen_files:
+            continue
+        seen_files.add(path.name)
         text = path.read_text(encoding="utf-8", errors="replace")
-        rank_m = re.search(r"Self-rank:\s*(\d)\s*/\s*3", text, re.I)
-        conf_m = re.search(r"In-scope confidence:\s*(high|med|low)", text, re.I)
-        pub_m = re.search(r"publication:\s*(.+)", text, re.I)
-        title_m = re.search(r"title:\s*(.+)", text, re.I)
-        url_m = re.search(r"^  URL:\s*(.+)$", text, re.I | re.M)
-        pdf_m = re.search(r"^  PDF URL:\s*(.+)$", text, re.I | re.M)
-        doi_m = re.search(r"^  DOI:\s*(.+)$", text, re.I | re.M)
+        rank_m = re.search(r"(?:Self-rank|Self rank|Rank):\s*(\d)", text, re.I)
+        conf_m = re.search(r"(?:In-scope confidence|Confidence):\s*(high|med|low)", text, re.I)
+        pub_m = re.search(r"(?:publication|publisher|source):\s*(.+)", text, re.I)
+        title_m = re.search(r"(?:title):\s*(.+)", text, re.I)
+        url_m = re.search(r"^\s*(?:URL|Link):\s*(.+)$", text, re.I | re.M)
+        pdf_m = re.search(r"^\s*(?:PDF URL|PDF):\s*(.+)$", text, re.I | re.M)
+        doi_m = re.search(r"^\s*(?:DOI):\s*(.+)$", text, re.I | re.M)
         dl_m = re.search(r"Downloadable PDF:\s*yes\s*\+\s*(.+)", text, re.I)
-        rank = int(rank_m.group(1)) if rank_m else 0
-        conf = conf_m.group(1).lower() if conf_m else "low"
+        rank = int(rank_m.group(1)) if rank_m else 1
+        conf = conf_m.group(1).lower() if conf_m else ("high" if "READY" in path.name else "med")
         url = (url_m.group(1).strip() if url_m else "") or ""
         pdf = (pdf_m.group(1).strip() if pdf_m else "") or ""
         if not pdf and dl_m:
             pdf = dl_m.group(1).strip()
         doi = (doi_m.group(1).strip() if doi_m else "") or "not found"
         publication = pub_m.group(1).strip() if pub_m else path.stem
-        title = title_m.group(1).strip() if title_m else ""
+        title = title_m.group(1).strip() if title_m else path.stem.replace('_', ' ')
         burned_hit, burn_rel = is_burned(publication, burned)
         if not burned_hit and title:
             burned_hit, burn_rel = is_burned(title, burned)
@@ -183,8 +188,8 @@ def _parse_candidates(study_id: str, burned: dict[str, str] | None = None) -> li
         if burned_hit:
             path.unlink(missing_ok=True)
             continue
-        ready = is_ready(rank, conf) and not burned_hit
-        tier = _candidate_tier(path, text, rank, conf, ready)
+        ready = (is_ready(rank, conf) or "READY" in path.name) and not burned_hit
+        tier = "READY" if ready else ("HOLD" if "HOLD" in path.name else _candidate_tier(path, text, rank, conf, ready))
         out.append(
             {
                 "file": path.name,
@@ -203,6 +208,7 @@ def _parse_candidates(study_id: str, burned: dict[str, str] | None = None) -> li
             }
         )
     return out
+
 
 
 def _burn_count(study_id: str) -> int:
@@ -540,9 +546,13 @@ header {
   box-shadow: 0 0 8px rgba(139,149,168,0.45);
 }
 .cand-signal.ready {
-  background: var(--green);
-  box-shadow: 0 0 10px rgba(94,207,138,0.7);
-  animation: cand-pulse 1s ease-in-out infinite;
+  background: #34d399;
+  box-shadow: 0 0 14px #34d399, 0 0 28px rgba(52,211,153,0.9);
+  animation: blink-green 0.7s ease-in-out infinite alternate;
+}
+@keyframes blink-green {
+  0% { opacity: 0.25; transform: scale(0.85); box-shadow: 0 0 4px #34d399; }
+  100% { opacity: 1; transform: scale(1.35); box-shadow: 0 0 20px #34d399, 0 0 35px #5ecf8a; }
 }
 .cand-signal.lead {
   background: var(--blue);
@@ -557,16 +567,24 @@ header {
   box-shadow: 0 0 10px rgba(240,113,120,0.7);
   animation: none;
 }
-@keyframes cand-pulse {
-  0%, 100% { opacity: 0.55; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.15); }
-}
 .cand .pub { font-weight: 600; font-size: 0.9rem; }
 .cand .ttl { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
 .badge {
   display: inline-block; margin-top: 8px; padding: 3px 10px;
   border-radius: 6px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
 }
+.badge.ready {
+  background: rgba(52,211,153,0.25);
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.7);
+  box-shadow: 0 0 14px rgba(52,211,153,0.5);
+  animation: badge-pulse 1.2s ease-in-out infinite;
+}
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(52,211,153,0.3); }
+  50% { box-shadow: 0 0 20px rgba(52,211,153,0.8); }
+}
+
 .badge.ready { background: rgba(94,207,138,0.2); color: var(--green); }
 .badge.hold { background: rgba(139,149,168,0.2); color: var(--muted); }
 .badge.burned { background: rgba(248,113,113,0.2); color: var(--red); }
@@ -663,6 +681,7 @@ footer {
         <div class="actions">
           <button class="btn btn-hunt" id="huntBtn">Run Deep Hunt</button>
           <button class="btn btn-round-done" id="roundBtn" style="display:none">✓ Round Done</button>
+          <button class="btn btn-ghost" id="toggleStatusBtn">✓ Mark Completed</button>
           <button class="btn btn-stop" id="stopBtn" style="display:none">Stop</button>
         </div>
       </div>
@@ -821,7 +840,8 @@ function renderState(data) {
 
   const pills = $('pills');
   pills.innerHTML = '';
-  data.queue.forEach(id => {
+  const activePills = data.queue.filter(id => data.studies[id]?.status !== 'done' && data.studies[id]?.status !== 'completed');
+  activePills.forEach(id => {
     const p = document.createElement('button');
     p.className = 'pill' + (id === selectedStudy ? ' active' : '');
     p.dataset.id = id;
@@ -830,17 +850,52 @@ function renderState(data) {
     pills.appendChild(p);
   });
 
+
   const q = $('queue');
   q.innerHTML = '';
-  data.queue.forEach(id => {
-    const s = data.studies[id];
-    const div = document.createElement('div');
-    div.className = 'queue-item' + (id === data.current ? ' current' : '');
-    const dotClass = s.blocked ? 'blocked' : (s.status === 'active' ? 'active' : 'queued');
-    div.innerHTML = `<div class="qid"><span class="status-dot ${dotClass}"></span>${id}</div><div class="qtitle">${s.title}</div>`;
-    div.onclick = () => { selectedStudy = id; renderState(state); loadCandidates(); };
-    q.appendChild(div);
-  });
+  const activeIds = data.queue.filter(id => data.studies[id]?.status !== 'done' && data.studies[id]?.status !== 'completed');
+  const doneIds = data.queue.filter(id => data.studies[id]?.status === 'done' || data.studies[id]?.status === 'completed');
+
+  if (activeIds.length) {
+    const hdr1 = document.createElement('div');
+    hdr1.style = "font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin:4px 0 8px;font-weight:600;";
+    hdr1.textContent = "Active Queue";
+    q.appendChild(hdr1);
+    activeIds.forEach(id => {
+      const s = data.studies[id];
+      const div = document.createElement('div');
+      div.className = 'queue-item' + (id === selectedStudy ? ' current' : '');
+      const dotClass = s.blocked ? 'blocked' : (s.status === 'active' ? 'active' : 'queued');
+      div.innerHTML = `<div class="qid"><span class="status-dot ${dotClass}"></span>${id}</div><div class="qtitle">${s.title}</div>`;
+      div.onclick = () => { selectedStudy = id; renderState(state); loadCandidates(); };
+      q.appendChild(div);
+    });
+  }
+
+  if (doneIds.length) {
+    const hdr2 = document.createElement('div');
+    hdr2.style = "font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin:16px 0 8px;font-weight:600;";
+    hdr2.textContent = "✓ Completed Studies";
+    q.appendChild(hdr2);
+    doneIds.forEach(id => {
+      const s = data.studies[id];
+      const div = document.createElement('div');
+      div.className = 'queue-item' + (id === selectedStudy ? ' current' : '');
+      div.innerHTML = `<div class="qid"><span class="status-dot" style="background:var(--green)"></span>${id} (Done)</div><div class="qtitle">${s.title}</div>`;
+      div.onclick = () => { selectedStudy = id; renderState(state); loadCandidates(); };
+      q.appendChild(div);
+    });
+  }
+
+  const toggleBtn = $('toggleStatusBtn');
+  if (toggleBtn) {
+    const isDone = meta.status === 'done' || meta.status === 'completed';
+    toggleBtn.textContent = isDone ? '↩ Move to Active' : '✓ Mark Completed';
+    toggleBtn.onclick = async () => {
+      await api('/api/study/toggle-status', { study: selectedStudy, status: isDone ? 'queued' : 'done' });
+      await loadState();
+    };
+  }
 
   const huntBtn = $('huntBtn');
   if (meta.blocked) {
@@ -856,6 +911,7 @@ function renderState(data) {
     huntBtn.disabled = !!meta.blocked;
     if (!meta.blocked) huntBtn.textContent = `⚡ ${meta.hunt_label}`;
   }
+
 }
 
 function appendLog(entry, c=$('console')) {
@@ -1081,7 +1137,28 @@ class RWSHandler(BaseHTTPRequestHandler):
 
         if path == "/api/state":
             state = load_state()
+            changed = False
+            for d in REPO.iterdir():
+                if d.is_dir() and d.name[0].isdigit() and '_' in d.name:
+                    sid = d.name.split('_')[0]
+                    if sid not in state.get("queue", []):
+                        state.setdefault("queue", []).append(sid)
+                        changed = True
+                    if sid not in state.get("studies", {}):
+                        state.setdefault("studies", {})[sid] = {
+                            "folder": d.name,
+                            "status": "queued",
+                            "rounds_completed": 1,
+                            "candidates_found": 0,
+                            "submissions_made": 0,
+                            "lanes_complete": []
+                        }
+                        changed = True
+            if changed:
+                save_state(state)
+
             cur = current_id(state)
+
             active_hunts = _active_hunt_studies()
             studies = {}
             for sid in state["queue"]:
@@ -1090,8 +1167,9 @@ class RWSHandler(BaseHTTPRequestHandler):
                 st = state["studies"][sid]
                 blocked = is_blocked(sid)
                 cands = _parse_candidates(sid)
-                ready = sum(1 for c in cands if c["ready"])
+                ready = sum(1 for c in cands if c.get("ready"))
                 leads = sum(1 for c in cands if c.get("tier") == "LEAD")
+
                 hold = sum(1 for c in cands if c.get("tier") == "HOLD")
                 studies[sid] = {
                     "title": meta["title"],
@@ -1175,6 +1253,17 @@ class RWSHandler(BaseHTTPRequestHandler):
             _json_response(self, {"ok": True})
             return
 
+        if path == "/api/study/toggle-status":
+            sid = data.get("study") or current_id(load_state())
+            new_status = data.get("status", "done")
+            st = load_state()
+            if sid in st.get("studies", {}):
+                st["studies"][sid]["status"] = new_status
+                save_state(st)
+            _json_response(self, {"ok": True, "status": new_status})
+            return
+
+
         if path == "/api/burn-check":
             sid = data.get("study") or current_id(load_state())
             pub = data.get("pub", "")
@@ -1224,8 +1313,9 @@ def _startup_purge() -> None:
             if d:
                 print(f"  Regraded {d} weak READY → HOLD for study {sid}")
             if sid in state.get("studies", {}):
-                ready = sum(1 for c in _parse_candidates(sid) if c["ready"])
+                ready = sum(1 for c in _parse_candidates(sid) if c.get("ready"))
                 state["studies"][sid]["candidates_found"] = ready
+
         except Exception as exc:
             print(f"  Purge skip {sid}: {exc}")
     save_state(state)

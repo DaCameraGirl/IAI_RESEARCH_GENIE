@@ -41,7 +41,13 @@
     "off-axis goblet food mixer blade offset",
     "kitchen blender tool shaft offset from pitcher axis",
     "blender container displaced blade assembly anti-air-pocket",
-    "eccentric distance cutter axis cup body blender"
+    "eccentric distance cutter axis cup body blender",
+    "portable juicer eccentric rotation axis cup body",
+    "handheld juicer off-center cutter head utility model",
+    "portable blender off-axis spindle blade ratio",
+    "CN utility model portable juicer eccentric blade pre-2019",
+    "JP utility model handheld blender off-center rotor",
+    "portable juicer offset blade diameter rationale catalog"
   ],
   "cpc_queries": [
     "A47J43/046 blender blade arrangement",

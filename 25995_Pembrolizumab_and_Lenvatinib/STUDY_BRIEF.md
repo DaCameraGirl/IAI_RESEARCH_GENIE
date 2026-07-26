@@ -1,0 +1,102 @@
+# 25995 Pembrolizumab_and_Lenvatinib
+
+Status: active
+Type: Patent / invalidity
+Study patent: US12083112
+Critical date: 2015-03-04
+Expiration date: 2026-08-07
+
+## Raw RWS brief (as pasted)
+
+Pembrolizumab and Lenvatinib
+Closes in 12 days
+Pembrolizumab and Lenvatinib
+Closes in 12 days
+Study ID
+25995
+Category
+Pharmaceutical & Biologics
+Research Type
+Invalidity
+Expiration Date
+07 August 2026
+
+This Study relates to cancer treatment using a combination of pembrolizumab and lenvatinib.
+
+ 
+Biochemistry Biology Molecular & Cell Biology Pharmaceutical & Medicinal Chemistry Pharmacology Medicine and Dentistry
+ Leads
+Added on 23 July 2026
+Please note that the main focus at this point should be a combination cancer treatment including both an anti-PD-1 component (preferably pembrolizumab, but others are acceptable) AND a molecule that blocks vascular endothelial growth factor (VEGF) receptors (preferably lenvatinib, but others are acceptable).Thank you!
+
+Added on 16 July 2026
+We are very interested in dissertations, clinical trial info, poster presentations, conference abstracts, and academic articles.  Please remember to search using alternative names:
+
+pembrolizumab (also be known as MK-3475, SCH 900475, lambrolizumab, H409A11, or hPD01.09A, which is a humanized antibody that serves as the basis for h409A11.
+
+Thank you!
+
+ Description
+This Study is directed to previously unidentified prior art references, including patent and non-patent literature.
+
+Two known ligands for PD-1, PD-L1 (B7-H1) and PD-L2 (B7-DC), are expressed in human cancers arising in various tissues. An antibody that blocks binding of the human PD-L1 and PD-L2 (receptors located on a tumor cell) to human PD-1 (receptors located on a T-cell) can block this interaction and allow the T-cells to attack the cancer cell.
+
+Specifically, we are interested in the use of pembrolizumab (an anti-PD-1 monoclonal antibody which may also be known as MK-3475, SCH 900475 or lambrolizumab)in combination with a TKI inhibitor,Lenvatinib (4-[3-Chloro-4-(cyclopropylcarbamoylamino)phenoxy]-7-methoxy-quinoline-6-carboxamide: brand name Lenvima; structure shown below) to treat cancer.
+
+  https://azuksaopblb01.blob.core.windows.net/studydocs/ea71646fcfdd5cb44b2cf294bac30773_25995-Screenshot_2026-06-22_at_4.41.49_PM.png
+
+                            Screenshot_2026-06-22_at_4.41.49_PM
+
+Specifically, we want to see Lenvatinib administered at a dose of 5 to 200 mg, preferably a daily dose of 24 mg, 20 mg or 14 mg; and Pembrolizumab administered at a dose of 200 mg once every three weeks, for at least 24 weeks.
+
+Lenvatinib targets VEGF receptors and fibroblast growth factor (FGF) receptors.  Because VEGF and FGF signaling drive angiogenesis, which supports tumor growth and metastasis, inhibiting these pathways can suppress tumor growth.  Lenvatinib-mediated inhibition of VEGF and FGF signaling can also shift the tumor microenvironment from immunosuppressive to immune-stimulatory, which may enhance the antitumor effects of anti-PD-1 antibodies such as pembrolizumab. Ideally, the combination would  only be used after one or both of the drugs has been used individually. 
+
+This combination therapy can be used to treat several different types of cancer, including:  thyroid cancer, hepatocellular carcinoma (HCC), NSCLC, renal cell carcinoma (RCC), endometrial cancer, squamous cell carcinoma of head and neck, glioblastoma, or melanoma. Lenvatinib block proteins that help cancer cells grow and form new blood vessels, thereby limiting tumor growth. 
+
+We are particularly interested in locating NPL concerning early clinical trials, especially conference abstracts. 
+
+Please see Study Patent for additional details.
+
+ Study Patents
+US12083112
+CPC Class: A61K
+Download
+US11547705
+CPC Class: A61K
+Download
+ Research Requirements 
+Latest Date for Responses
+04 March 2015 
+Relevant Patent Dates:
+US Patent Date
+Priority Date
+US Application Date
+Priority Date
+EP Date
+Publication Date
+Other Patent Authorities
+Publication Date
+1 
+To satisfy, complete 7 priority 
+A method of treating cancer comprising:
+
+1.1 
+administering pembrolizumab and lenvatinib;
+
+1.2 
+wherein the combination therapy of pembrolizumab and lenvatinib is administered after an administration of lenvatinib for at least 7 days;
+
+1.3 
+wherein the combination therapy of pembrolizumab and lenvatinib is administered after an administration of pembrolizumab;
+
+1.4 
+wherein the lenvatinib is administered at a daily dose of 5 to 200 mg, preferably a daily dose of 24 mg, 20 mg or 14 mg;
+
+1.5 
+wherein pembrolizumab is administered at a dose of 200 mg once every three weeks;
+
+1.6 
+wherein the cancer is thyroid cancer, hepatocellular carcinoma (HCC), renal cell carcinoma (RCC), endometrial cancer, squamous cell carcinoma of head and neck, glioblastoma, gastric cancer, or melanoma;
+
+1.7 
+wherein the combination therapy is administered for at least 24 weeks.
