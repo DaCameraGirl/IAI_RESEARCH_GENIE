@@ -936,12 +936,16 @@ let candidateRequestSeq = 0;
 async function loadCandidates() {
   const reqSeq = ++candidateRequestSeq;
   const targetStudy = selectedStudy;
+  const list = $('candList');
+  const prev = $('candPreview');
+  if (list) list.innerHTML = `<div class="empty" style="padding:16px;color:var(--muted)">Loading candidates for study ${targetStudy}...</div>`;
+  if (prev) prev.style.display = 'none';
   await ensureFreshBuild();
   const data = await api('/api/candidates?study=' + targetStudy);
   if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
-  const list = $('candList');
-  const prev = $('candPreview');
+
   // Client-side burn gate — never show known art even from stale files
+
   const clear = [];
   for (const c of data.candidates) {
     const burn = await api('/api/burn-check', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study:targetStudy, pub:c.publication})});
