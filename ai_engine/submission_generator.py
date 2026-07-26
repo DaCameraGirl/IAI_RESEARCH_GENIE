@@ -107,12 +107,16 @@ class SubmissionGenerator:
             selected_reqs
         )
         
-        # Determine tier
-        tier = self._classify_tier(
-            scoring_result,
-            selected_reqs,
-            study_config
-        )
+        # Determine tier structurally with manual review / fallback safety gate
+        if document_metadata.get("requires_manual_review") or document_metadata.get("match_mode") == "fallback":
+            tier = "HOLD"
+        else:
+            tier = self._classify_tier(
+                scoring_result,
+                selected_reqs,
+                study_config
+            )
+
         
         # Generate filename
         filename = self._generate_filename(

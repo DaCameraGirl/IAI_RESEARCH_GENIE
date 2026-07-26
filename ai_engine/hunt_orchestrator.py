@@ -96,13 +96,39 @@ class HuntOrchestrator:
     
     def _load_study_data(self):
         """Load study requirements and known art"""
-        # Load study config
-        config_path = Path("config") / f"{self.config.study_id}_config.json"
-        if config_path.exists():
-            with open(config_path) as f:
-                study_config = json.load(f)
-                requirements = study_config.get('requirements', [])
-                self.semantic_matcher.load_requirements(self.config.study_id, requirements)
+        possible_config_paths = [
+            self.config.study_folder / "STUDY_META.json",
+            self.config.study_folder / "study_config.json",
+            Path("config") / f"{self.config.study_id}_config.json"
+        ]
+        
+        requirements = []
+        for config_path in possible_config_paths:
+            if config_path.exists():
+                try:
+                    with open(config_path, 'r', encoding='utf-8') as f:
+                        study_data = json.load(f)
+                        raw_reqs = study_data.get('requirements', [])
+                        if raw_reqs:
+                            requirements = [
+                                {
+                                    **req,
+                                    "text": req.get("text") or req.get("name", "") or req.get("description", ""),
+                                    "must_show_elements": req.get("must_show_elements", []),
+                                    "keywords": req.get("keywords", [])
+                                }
+                                for req in raw_reqs
+                            ]
+                            print(f" [+] Loaded {len(requirements)} study requirements from {config_path.name}")
+                            break
+                except Exception as e:
+                    print(f"  [!] Error loading study config from {config_path}: {e}")
+                    
+        if requirements:
+            self.semantic_matcher.load_requirements(self.config.study_id, requirements)
+        else:
+            print(f"  [!] Warning: No requirement definition found for study {self.config.study_id}")
+
         
         # Load known art for duplicate detection
         known_art_path = self.config.study_folder / "known_art" / "known_citations.csv"
@@ -353,15 +379,7 @@ class HuntOrchestrator:
                 metadata["match_mode"] = "fallback"
                 metadata["requires_manual_review"] = True
                 scoring_result.recommendation = "HOLD"
-                self.stats['hold'] += 1
-            elif scoring_result.recommendation == 'SUBMIT':
-                self.stats['ready_submit'] += 1
-            else:
-                self.stats['hold'] += 1
-                scoring_result.recommendation = 'HOLD'
 
-
-            
             # Generate submission
             submission = self.submission_generator.generate_submission(
                 metadata,
@@ -381,10 +399,12 @@ class HuntOrchestrator:
             
             self.stats['candidates_generated'] += 1
             
+            # Increment statistics ONCE based on final submission tier
             if submission.tier == 'READY_SUBMIT':
                 self.stats['ready_submit'] += 1
             elif submission.tier == 'HOLD':
                 self.stats['hold'] += 1
+
         
         return candidates
     

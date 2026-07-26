@@ -530,16 +530,27 @@ class AdvancedSearchEngine:
             
             for source_type, items in raw_results.items():
                 for item in items:
+                    raw_date = item.get("published_date") or item.get("date") or item.get("created_date") or item.get("year")
+                    if not raw_date or str(raw_date).lower() in ["unknown", "none", ""]:
+                        date_str = "unknown"
+                        item["date_verified"] = False
+                        item["requires_manual_review"] = True
+                        item["match_mode"] = "unknown_date"
+                    else:
+                        date_str = str(raw_date)
+                        item["date_verified"] = True
+
                     res = SearchResult(
                         title=item.get("title", item.get("name", "Product Evidence")),
                         url=item.get("url", item.get("link", "")),
                         source=f"l7_{source_type}",
-                        date=item.get("published_date", item.get("date", item.get("created_date", before_date))),
+                        date=date_str,
                         snippet=item.get("description", item.get("snippet", item.get("selftext", ""))),
                         metadata=item,
                         open_access=True,
-                        confidence=0.8
+                        confidence=0.8 if date_str != "unknown" else 0.5
                     )
+
                     if not self.is_known_citation(res):
                         results.append(res)
                     else:
