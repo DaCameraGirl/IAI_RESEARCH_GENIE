@@ -1268,8 +1268,11 @@ class RWSHandler(BaseHTTPRequestHandler):
             engine = _hunt_engines.get(sid)
             if engine:
                 engine.stop()
+            _hunt_threads.pop(sid, None)
+            _hunt_engines.pop(sid, None)
             _json_response(self, {"ok": True})
             return
+
 
         if path == "/api/study/toggle-status":
             sid = data.get("study") or current_id(load_state())
