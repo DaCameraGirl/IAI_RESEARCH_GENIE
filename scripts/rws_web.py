@@ -962,7 +962,9 @@ async function loadCandidates() {
 
   list.innerHTML = '';
   data.candidates.forEach((c, i) => {
+    if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
     const div = document.createElement('div');
+
     div.className = 'cand' + (i === 0 ? ' sel' : '');
     const links = [];
     if (c.url && c.url.startsWith('http')) links.push(`<a href="${c.url}" target="_blank">Google</a>`);
