@@ -481,24 +481,31 @@ class AdvancedSearchEngine:
                         
                 reddit_hits = product_search.search_reddit(query_str, before_timestamp=before_ts, max_results=max_results)
                 for item in reddit_hits:
+                    raw_date = item.get("created_date") or item.get("date")
+                    if raw_date and str(raw_date).lower() not in ["unknown", "none", ""]:
+                        date_str = str(raw_date)
+                        item["date_verified"] = True
+                    else:
+                        date_str = "unknown"
+                        item["date_verified"] = False
+                        item["requires_manual_review"] = True
+                        item["match_mode"] = "unknown_date"
+
                     res = SearchResult(
                         title=item.get("title", "Reddit Discussion"),
                         url=item.get("url", ""),
                         source="forums",
-                        date=item.get("created_date", date_range[0] if date_range else "2000-01-01"),
+                        date=date_str,
                         snippet=f"[{item.get('subreddit')}] {item.get('selftext', '')}",
-                        metadata={
-                            'author': item.get('author'),
-                            'score': item.get('score'),
-                            'subreddit': item.get('subreddit')
-                        },
+                        metadata=item,
                         open_access=True,
-                        confidence=0.75
+                        confidence=0.75 if date_str != "unknown" else 0.5
                     )
                     if not self.is_known_citation(res):
                         results.append(res)
                     else:
                         self.stats['filtered_known'] += 1
+
         except Exception as e:
             print(f"  [Forums] Search error: {e}")
             

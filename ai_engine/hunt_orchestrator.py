@@ -124,10 +124,12 @@ class HuntOrchestrator:
                 except Exception as e:
                     print(f"  [!] Error loading study config from {config_path}: {e}")
                     
+        self.study_requirements = requirements
         if requirements:
             self.semantic_matcher.load_requirements(self.config.study_id, requirements)
         else:
             print(f"  [!] Warning: No requirement definition found for study {self.config.study_id}")
+
 
         
         # Load known art for duplicate detection
@@ -362,8 +364,9 @@ class HuntOrchestrator:
                 'study_id': self.config.study_id,
                 'critical_date': self.config.critical_date,
                 'type': 'invalidity',
-                'requirements': []  # TODO: Load from config
+                'requirements': getattr(self, 'study_requirements', [])
             }
+
             
             features = self.relevance_scorer.extract_features(
                 metadata,
