@@ -15,6 +15,12 @@ from .semantic_matcher import SemanticMatcher
 from .relevance_scorer import RelevanceScorer
 from .submission_generator import SubmissionGenerator
 
+try:
+    from .keyword_expander import KeywordExpander
+except ImportError:
+    KeywordExpander = None
+
+
 
 @dataclass
 class HuntConfig:
@@ -40,8 +46,9 @@ class HuntConfig:
     enable_forums: bool = True
     
     # Limits
-    max_results_per_source: int = 20
+    max_results_per_source: int = 50
     min_confidence: float = 0.6
+
 
 
 class HuntOrchestrator:
@@ -66,7 +73,8 @@ class HuntOrchestrator:
         
         # Initialize components
         self.search_engine = AdvancedSearchEngine(hunt_config.study_folder)
-        self.duplicate_detector = DuplicateDetector()
+        self.duplicate_detector = DuplicateDetector(hunt_config.study_folder.parent)
+
         self.semantic_matcher = SemanticMatcher()
         self.relevance_scorer = RelevanceScorer()
         self.submission_generator = SubmissionGenerator()
@@ -120,6 +128,19 @@ class HuntOrchestrator:
         print(f"Keywords: {', '.join(self.config.keywords[:5])}")
         print(f"{'='*70}\n")
         
+        # Step A: Keyword expansion lattice
+        if KeywordExpander:
+            try:
+                expander = KeywordExpander()
+                expanded = expander.expand_keywords(self.config.keywords)
+                if expanded:
+                    orig_count = len(self.config.keywords)
+                    self.config.keywords = list(dict.fromkeys(self.config.keywords + expanded))
+
+                    print(f" [+] Expanded keyword lattice: {orig_count} -> {len(self.config.keywords)} terms active\n")
+            except Exception as e:
+                print(f"  [!] Keyword expansion skipped: {e}\n")
+
         # Build query config for all enabled sources
         query_config = self._build_query_config()
         
@@ -130,13 +151,27 @@ class HuntOrchestrator:
             max_results_per_source=self.config.max_results_per_source
         )
         
+        # Phase 1b: Product Evidence Lane (L7)
+        product_kw = self.config.keywords[:5] + (self.config.part_numbers or [])
+        tech_terms = self.config.keywords[5:10] if len(self.config.keywords) > 5 else self.config.keywords[:3]
+        l7_results = self.search_engine.search_product_lane(
+            product_keywords=product_kw,
+            technical_terms=tech_terms,
+            before_date=self.config.critical_date,
+            max_per_source=self.config.max_results_per_source
+        )
+        if l7_results:
+            search_results.extend(l7_results)
+            search_results = self.search_engine._filter_and_deduplicate(search_results)
+        
         self.stats['total_found'] = len(search_results)
         self.stats['filtered_known'] = self.search_engine.stats['filtered_known']
         self.stats['filtered_paywall'] = self.search_engine.stats['filtered_paywall']
         
-        print(f"✓ Found {len(search_results)} unique results")
+        print(f" [+] Found {len(search_results)} unique results across all lanes")
         print(f"  Filtered {self.stats['filtered_known']} known citations")
         print(f"  Filtered {self.stats['filtered_paywall']} paywalled documents\n")
+
         
         if not search_results:
             print("No new candidates found. Hunt complete.\n")
@@ -146,7 +181,7 @@ class HuntOrchestrator:
         print("Phase 2: Processing candidates through AI pipeline...")
         candidates = self._process_candidates(search_results)
         
-        print(f"✓ Generated {len(candidates)} candidate submissions")
+        print(f" [+] Generated {len(candidates)} candidate submissions")
         print(f"  READY_SUBMIT: {self.stats['ready_submit']}")
         print(f"  HOLD: {self.stats['hold']}")
         print(f"  Filtered (low score): {self.stats['filtered_low_score']}\n")
@@ -155,7 +190,7 @@ class HuntOrchestrator:
         print("Phase 3: Writing submissions to files...")
         output_files = self._write_submissions(candidates)
         
-        print(f"✓ Wrote {len(output_files)} submission files\n")
+        print(f" [+] Wrote {len(output_files)} submission files\n")
         
         # Generate hunt report
         report = self._generate_hunt_report(candidates)
@@ -312,9 +347,20 @@ class HuntOrchestrator:
             
             scoring_result = self.relevance_scorer.score_candidate(features)
             
-            if scoring_result.recommendation == 'SKIP':
-                self.stats['filtered_low_score'] += 1
-                continue
+            # Fallback match metadata tagging and safety gate
+            has_fallback = any(getattr(m, 'requirement_id', '') == "REQ-FALLBACK" for m in matches)
+            if has_fallback:
+                metadata["match_mode"] = "fallback"
+                metadata["requires_manual_review"] = True
+                scoring_result.recommendation = "HOLD"
+                self.stats['hold'] += 1
+            elif scoring_result.recommendation == 'SUBMIT':
+                self.stats['ready_submit'] += 1
+            else:
+                self.stats['hold'] += 1
+                scoring_result.recommendation = 'HOLD'
+
+
             
             # Generate submission
             submission = self.submission_generator.generate_submission(

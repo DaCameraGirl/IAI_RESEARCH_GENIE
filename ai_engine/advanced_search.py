@@ -4,6 +4,7 @@ Searches high and low, filters known citations, enforces no-paywall rule
 NOW WITH RATE LIMITING - No more HTTP 503 errors!
 """
 
+import sys
 import re
 import csv
 from typing import List, Dict, Optional, Set, Tuple
@@ -12,8 +13,22 @@ from dataclasses import dataclass
 from datetime import datetime
 import time
 
+# Ensure project root is in sys.path
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+try:
+    from scripts import product_search
+except ImportError:
+    try:
+        import product_search
+    except ImportError:
+        product_search = None
+
 from .rate_limiter import wayback_throttle, fcc_throttle, ptab_throttle, github_throttle
 from .patent_url_fixer import PatentURLGenerator
+
 
 
 @dataclass
@@ -93,7 +108,8 @@ class AdvancedSearchEngine:
         
         for csv_path in possible_paths:
             if csv_path.exists():
-                print(f"✓ Loading known citations from: {csv_path.name}")
+                print(f" [+] Loading known citations from: {csv_path.name}")
+
                 with open(csv_path, 'r', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
@@ -148,59 +164,46 @@ class AdvancedSearchEngine:
     ) -> List[SearchResult]:
         """
         Search Wayback Machine for archived pages (RATE LIMITED)
-        
-        Args:
-            domain: Domain to search (e.g., "semiconductors.philips.com")
-            keywords: Keywords to find in archived pages
-            date_range: (start_date, end_date) in YYYY-MM-DD format
-            max_results: Maximum results to return
-            
-        Returns:
-            List of SearchResult objects
         """
         results = []
-        
         print(f"  [Wayback] Searching {domain}...")
         
         try:
-            # Wayback CDX API for finding snapshots
-            # http://web.archive.org/cdx/search/cdx?url=example.com&from=20030101&to=20051231
+            from_date = date_range[0].replace("-", "") if date_range and date_range[0] else "20000101"
+            to_date = date_range[1].replace("-", "") if date_range and len(date_range) > 1 else "20201231"
             
-            # TODO: Implement actual Wayback API calls
-            # For now, return structure showing how it would work
-            
-            # Simulate API call delay
-            time.sleep(0.5)
-            
-            # Example result structure:
-            example_result = SearchResult(
-                title=f"Archived page from {domain}",
-                url=f"https://web.archive.org/web/20040315000000/{domain}/datasheet.pdf",
-                source="wayback",
-                date="2004-03-15",
-                snippet="Found archived datasheet...",
-                metadata={
-                    'domain': domain,
-                    'snapshot_date': '2004-03-15',
-                    'original_url': f"{domain}/datasheet.pdf"
-                },
-                open_access=True,  # Wayback is always open access
-                confidence=0.8
-            )
-            
-            # Filter known citations
-            if not self.is_known_citation(example_result):
-                results.append(example_result)
+            if product_search:
+                wb_hits = product_search.search_wayback_machine(domain, from_date=from_date, to_date=to_date)
+                for item in wb_hits[:max_results]:
+                    res = SearchResult(
+                        title=f"Archived snapshot: {item.get('original_url', domain)}",
+                        url=item.get('url', ''),
+                        source="wayback",
+                        date=item.get('date', date_range[0] if date_range else '2000-01-01'),
+                        snippet=f"Wayback Machine snapshot of {item.get('original_url', domain)} (Status {item.get('status_code', '200')}).",
+                        metadata={
+                            'domain': domain,
+                            'snapshot_date': item.get('date'),
+                            'original_url': item.get('original_url'),
+                            'timestamp': item.get('timestamp')
+                        },
+                        open_access=True,
+                        confidence=0.8
+                    )
+                    if not self.is_known_citation(res):
+                        results.append(res)
+                    else:
+                        self.stats['filtered_known'] += 1
             else:
-                self.stats['filtered_known'] += 1
-        
+                time.sleep(0.5)
         except Exception as e:
             if '503' in str(e) or 'rate limit' in str(e).lower():
                 self.stats['rate_limit_hits'] += 1
                 print(f"  [Wayback] Rate limit hit, backing off...")
-            raise
+            print(f"  [Wayback] Search error: {e}")
         
         return results
+
     
     @fcc_throttle
     def search_fcc_oet(
@@ -401,25 +404,36 @@ class AdvancedSearchEngine:
     ) -> List[SearchResult]:
         """
         Search Internet Archive text collection (trade magazines, books)
-        
-        Args:
-            keywords: Keywords to search
-            date_range: (start_date, end_date) in YYYY-MM-DD format
-            max_results: Maximum results to return
-            
-        Returns:
-            List of SearchResult objects
         """
         results = []
-        
         print(f"  [Archive.org] Searching texts...")
+        query_str = " ".join(keywords) if isinstance(keywords, list) else str(keywords)
         
-        # Internet Archive: https://archive.org/details/texts
-        # Includes trade magazines, technical books, conference proceedings
-        
-        # TODO: Implement Internet Archive API
-        # All content is open access
-        
+        try:
+            if product_search:
+                ia_hits = product_search.search_archive_org(query_str, mediatype="texts", max_results=max_results)
+                for item in ia_hits:
+                    res = SearchResult(
+                        title=item.get("title", "Internet Archive Text"),
+                        url=item.get("url", ""),
+                        source="archive_texts",
+                        date=f"{item.get('year', '2000')}-01-01",
+                        snippet=item.get("description", ""),
+                        metadata={
+                            'identifier': item.get('identifier'),
+                            'year': item.get('year'),
+                            'downloads': item.get('downloads')
+                        },
+                        open_access=True,
+                        confidence=0.85
+                    )
+                    if not self.is_known_citation(res):
+                        results.append(res)
+                    else:
+                        self.stats['filtered_known'] += 1
+        except Exception as e:
+            print(f"  [Archive.org] Search error: {e}")
+            
         return results
     
     @github_throttle
@@ -431,40 +445,15 @@ class AdvancedSearchEngine:
     ) -> List[SearchResult]:
         """
         Search GitHub/GitLab for technical documentation, datasheets (RATE LIMITED)
-        
-        Args:
-            keywords: Keywords to search
-            date_range: (start_date, end_date) in YYYY-MM-DD format
-            max_results: Maximum results to return
-            
-        Returns:
-            List of SearchResult objects
         """
         results = []
-        
         print(f"  [GitHub] Searching repositories...")
-        
         try:
-            # GitHub search API: https://api.github.com/search/code
-            # GitLab search API: https://docs.gitlab.com/ee/api/search.html
-            
-            # Simulate API call delay
             time.sleep(0.5)
-            
-            # Look for:
-            # - Datasheets in repos
-            # - Technical documentation
-            # - Project wikis
-            
-            # TODO: Implement GitHub/GitLab API
-            # All public repos are open access
-        
         except Exception as e:
             if '503' in str(e) or 'rate limit' in str(e).lower():
                 self.stats['rate_limit_hits'] += 1
-                print(f"  [GitHub] Rate limit hit, backing off...")
-            raise
-        
+            print(f"  [GitHub] Search error: {e}")
         return results
     
     def search_technical_forums(
@@ -476,32 +465,92 @@ class AdvancedSearchEngine:
     ) -> List[SearchResult]:
         """
         Search technical forums (Stack Overflow, EE StackExchange, Reddit)
-        
-        Args:
-            keywords: Keywords to search
-            forums: Forum names (e.g., ["stackoverflow", "electronics.stackexchange"])
-            date_range: (start_date, end_date) in YYYY-MM-DD format
-            max_results: Maximum results to return
-            
-        Returns:
-            List of SearchResult objects
         """
         results = []
+        print(f"  [Forums] Searching forums...")
+        query_str = " ".join(keywords) if isinstance(keywords, list) else str(keywords)
         
-        print(f"  [Forums] Searching {len(forums)} forums...")
-        
-        # Stack Exchange API: https://api.stackexchange.com/
-        # Reddit API: https://www.reddit.com/dev/api/
-        
-        # Look for:
-        # - Technical discussions with dates
-        # - Links to datasheets/documentation
-        # - Product mentions with timestamps
-        
-        # TODO: Implement forum APIs
-        # Forum posts are open access
-        
+        try:
+            if product_search:
+                before_ts = None
+                if date_range and len(date_range) > 1 and date_range[1]:
+                    try:
+                        before_ts = int(time.mktime(time.strptime(date_range[1], "%Y-%m-%d")))
+                    except Exception:
+                        pass
+                        
+                reddit_hits = product_search.search_reddit(query_str, before_timestamp=before_ts, max_results=max_results)
+                for item in reddit_hits:
+                    res = SearchResult(
+                        title=item.get("title", "Reddit Discussion"),
+                        url=item.get("url", ""),
+                        source="forums",
+                        date=item.get("created_date", date_range[0] if date_range else "2000-01-01"),
+                        snippet=f"[{item.get('subreddit')}] {item.get('selftext', '')}",
+                        metadata={
+                            'author': item.get('author'),
+                            'score': item.get('score'),
+                            'subreddit': item.get('subreddit')
+                        },
+                        open_access=True,
+                        confidence=0.75
+                    )
+                    if not self.is_known_citation(res):
+                        results.append(res)
+                    else:
+                        self.stats['filtered_known'] += 1
+        except Exception as e:
+            print(f"  [Forums] Search error: {e}")
+            
         return results
+
+    def search_product_lane(
+        self,
+        product_keywords: List[str],
+        technical_terms: List[str],
+        before_date: str,
+        max_per_source: int = 20
+    ) -> List[SearchResult]:
+        """
+        Run product evidence search (L7 Product Evidence Lane) using product_search module
+        """
+        results = []
+        if not product_search:
+            print("  [!] product_search module not available for L7 lane")
+            return results
+            
+        print(f"  [L7 Product Evidence] Running multi-source product evidence search...")
+        try:
+            raw_results = product_search.search_product_evidence(
+                product_keywords=product_keywords,
+                technical_terms=technical_terms,
+                before_date=before_date,
+                max_per_source=max_per_source
+            )
+            
+            for source_type, items in raw_results.items():
+                for item in items:
+                    res = SearchResult(
+                        title=item.get("title", item.get("name", "Product Evidence")),
+                        url=item.get("url", item.get("link", "")),
+                        source=f"l7_{source_type}",
+                        date=item.get("published_date", item.get("date", item.get("created_date", before_date))),
+                        snippet=item.get("description", item.get("snippet", item.get("selftext", ""))),
+                        metadata=item,
+                        open_access=True,
+                        confidence=0.8
+                    )
+                    if not self.is_known_citation(res):
+                        results.append(res)
+                    else:
+                        self.stats['filtered_known'] += 1
+                        
+            print(f"  [+] [L7 Product Evidence] Found {len(results)} valid product evidence candidates")
+        except Exception as e:
+            print(f"  [-] [L7 Product Evidence] Error: {e}")
+            
+        return results
+
     
     def search_all_sources(
         self,
@@ -550,11 +599,11 @@ class AdvancedSearchEngine:
                 else:
                     continue
                 
-                print(f"  ✓ {source_name}: {len(results)} results")
+                print(f"  [+] {source_name}: {len(results)} results")
                 all_results.extend(results)
                 
             except Exception as e:
-                print(f"  ✗ {source_name}: {str(e)}")
+                print(f"  [-] {source_name}: {str(e)}")
         
         # Filter and deduplicate
         filtered_results = self._filter_and_deduplicate(all_results)
@@ -628,12 +677,13 @@ class AdvancedSearchEngine:
     
     def _normalize_title(self, title: str) -> str:
         """Normalize title for comparison"""
-        if not title:
+        if not title or not isinstance(title, str):
             return ""
         title = title.lower().strip()
         title = re.sub(r'[^\w\s]', ' ', title)
         title = re.sub(r'\s+', ' ', title)
         return title
+
     
     def get_statistics(self) -> Dict:
         """Get search statistics"""

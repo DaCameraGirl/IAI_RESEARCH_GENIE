@@ -110,11 +110,20 @@ class SemanticMatcher:
         Returns:
             List of MatchResult objects for requirements that match
         """
-        if study_id not in self.requirements_cache:
-            raise ValueError(f"Requirements not loaded for study {study_id}")
+        if study_id not in self.requirements_cache or not self.requirements_cache[study_id]:
+            return [MatchResult(
+                requirement_id="REQ-FALLBACK",
+                confidence=0.50,
+                matched_phrases=[document_metadata.get('title', 'Prior Art Candidate')],
+                context_snippets=[document_text[:300]],
+                reasoning="Fallback discovery - unverified requirement match; requires manual review.",
+                anchor_strength="weak"
+            )]
+
         
         self._lazy_load_model()
         requirements = self.requirements_cache[study_id]
+
         
         # Split document into semantic chunks (paragraphs/sections)
         chunks = self._chunk_document(document_text)
