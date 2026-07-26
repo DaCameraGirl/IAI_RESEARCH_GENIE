@@ -39,7 +39,8 @@ from study_bot import (  # noqa: E402
 # patent_hunter may not export list_candidates - that's in rws_gui. I'll define here or import from rws_gui logic
 
 PORT = 7842
-BUILD_VERSION = "v1.0 | 2026-07-11-aia-researcher"
+BUILD_VERSION = "v1.1 | 2026-07-26-v2-fresh"
+
 
 _hunt_threads: dict[str, threading.Thread] = {}
 _hunt_engines: dict[str, object] = {}
@@ -1033,11 +1034,14 @@ $('huntBtn').onclick = startHunt;
 $('stopBtn').onclick = async () => {
   $('stopBtn').disabled = true;
   $('stopBtn').textContent = 'Stopping...';
+  setHuntUi(false, null);
   await api('/api/hunt/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study: selectedStudy})});
   huntLogsByStudy[selectedStudy] = huntLogsByStudy[selectedStudy] || [];
   huntLogsByStudy[selectedStudy].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: 'Stop requested', level: 'warn'});
   renderConsole();
+  await loadState();
 };
+
 $('roundBtn').onclick = () => { 
   $('roundBtn').style.display = 'none'; 
   $('roundBtn').classList.remove('blink'); 
