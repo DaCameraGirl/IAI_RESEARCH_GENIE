@@ -1,4 +1,4 @@
-# RWS_RESEARCHER
+AIA_RESEARCH_ASSISTANT
 
 Angela's project section for **RWS IP Research NPL submission work**.
 This is the canonical folder — all RWS-related agent prompts, study
