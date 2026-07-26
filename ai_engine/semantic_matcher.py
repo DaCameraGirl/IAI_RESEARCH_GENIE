@@ -18,6 +18,10 @@ class Requirement:
     keywords: List[str]
     embedding: Optional[np.ndarray] = None
     priority: int = 1  # 1=critical, 2=important, 3=nice-to-have
+    # Co-occurrence groups: each inner list is OR'd, groups are AND'd.
+    # e.g. [["thiamidol", "oximidol"], ["isopropyl lauroyl sarcosinate", "eldew sl-205"]]
+    # means: (thiamidol OR oximidol) AND (ILS OR Eldew SL-205) must both appear.
+    must_cooccur_groups: Optional[List[List[str]]] = None
 
 
 @dataclass
@@ -78,10 +82,11 @@ class SemanticMatcher:
         for req in requirements:
             req_obj = Requirement(
                 id=req['id'],
-                text=req['text'],
+                text=req.get('text', req.get('name', '')),
                 must_show_elements=req.get('must_show_elements', []),
                 keywords=req.get('keywords', []),
-                priority=req.get('priority', 1)
+                priority=req.get('priority', 1),
+                must_cooccur_groups=req.get('must_cooccur_groups')
             )
             
             if not self.fallback_mode and self.model is not None:
@@ -156,10 +161,16 @@ class SemanticMatcher:
             top_scores = [similarities[i] for i in top_indices]
             
             # Check for explicit keyword/element matches (anchor strength)
+            # must_show_elements are HARD requirements — ALL must be present
             anchor_matches = self._find_anchor_matches(
-                top_chunks, 
-                req.must_show_elements + req.keywords
+                top_chunks,
+                keywords=req.keywords,
+                must_show_elements=req.must_show_elements,
+                must_cooccur_groups=getattr(req, 'must_cooccur_groups', None)
             )
+            # Hard fail: if any must_show_element is missing, skip this requirement entirely
+            if anchor_matches.get('must_show_failed'):
+                continue
             
             # Calculate overall confidence
             confidence = self._calculate_confidence(
@@ -250,24 +261,91 @@ class SemanticMatcher:
     def _find_anchor_matches(
         self, 
         chunks: List[str], 
-        anchors: List[str]
+        keywords: List[str],
+        must_show_elements: Optional[List[str]] = None,
+        must_cooccur_groups: Optional[List[List[str]]] = None
     ) -> Dict:
         """
         Find explicit anchor matches (named entities, technical terms)
         
+        must_show_elements: HARD requirements — ALL must be present in the text,
+        otherwise anchor_strength="fail" and must_show_failed=True is returned.
+        
+        must_cooccur_groups: List of OR-groups, ALL groups must match ≥1 term.
+        e.g. [["thiamidol", "oximidol"], ["isopropyl lauroyl sarcosinate", "eldew sl-205"]]
+        means (thiamidol OR oximidol) AND (ILS OR Eldew) must both appear.
+        
+        Keywords are OR'd as before (for scoring/ranking).
+        
         Args:
             chunks: Text chunks to search
-            anchors: List of anchor terms/phrases to find
+            keywords: List of anchor terms/phrases to find (OR logic)
+            must_show_elements: List of terms that MUST ALL be present (AND logic)
+            must_cooccur_groups: List of OR-groups, ALL groups must match
             
         Returns:
-            Dict with matched phrases and strength assessment
+            Dict with matched_phrases, count, strength, must_show_failed
         """
         matched_phrases = []
         match_count = 0
         
         full_text = " ".join(chunks).lower()
         
-        for anchor in anchors:
+        # HARD GATE 1: check must_show_elements — ALL must be present
+        must_show_elements = must_show_elements or []
+        missing_required = []
+        for required in must_show_elements:
+            if required.lower() not in full_text:
+                missing_required.append(required)
+        
+        if missing_required:
+            # Hard fail — required element(s) missing, do not score this document
+            return {
+                'phrases': [],
+                'count': 0,
+                'strength': 'fail',
+                'must_show_failed': True,
+                'missing_required': missing_required
+            }
+        
+        # HARD GATE 2: check must_cooccur_groups — EACH group must have ≥1 match
+        # e.g. [["thiamidol", "oximidol"], ["isopropyl lauroyl sarcosinate", "eldew sl-205"]]
+        # → group 0 must match AND group 1 must match
+        must_cooccur_groups = must_cooccur_groups or []
+        failed_groups = []
+        cooccur_hits = []
+        for group_idx, group in enumerate(must_cooccur_groups):
+            group_matched = False
+            group_hit = None
+            for term in group:
+                if term.lower() in full_text:
+                    group_matched = True
+                    group_hit = term
+                    # Extract context
+                    pattern = re.compile(r'(.{0,50}' + re.escape(term) + r'.{0,50})', re.IGNORECASE)
+                    matches = pattern.findall(full_text)
+                    if matches:
+                        matched_phrases.extend(matches[:1])
+                    break
+            if not group_matched:
+                failed_groups.append(group_idx)
+            elif group_hit:
+                cooccur_hits.append(group_hit)
+        
+        if failed_groups:
+            return {
+                'phrases': [],
+                'count': 0,
+                'strength': 'fail',
+                'must_show_failed': True,
+                'missing_cooccur_groups': failed_groups
+            }
+        
+        # Count co-occur hits toward match_count for scoring
+        match_count += len(cooccur_hits)
+        
+        # OR matching for keywords (existing behavior, for scoring/ranking)
+        for anchor in keywords:
             # Try exact match first
             if anchor.lower() in full_text:
                 # Extract context around match
@@ -281,9 +359,12 @@ class SemanticMatcher:
                     match_count += 1
         
         # Assess anchor strength
-        if match_count >= 3:
+        # If we have must_show_elements, they already matched (hard gate above),
+        # so count them toward strength scoring
+        total_anchors = match_count + len(must_show_elements)
+        if total_anchors >= 3:
             strength = "strong"
-        elif match_count >= 1:
+        elif total_anchors >= 1:
             strength = "medium"
         else:
             strength = "weak"
@@ -291,7 +372,8 @@ class SemanticMatcher:
         return {
             'phrases': matched_phrases,
             'count': match_count,
-            'strength': strength
+            'strength': strength,
+            'must_show_failed': False
         }
     
     def _calculate_confidence(

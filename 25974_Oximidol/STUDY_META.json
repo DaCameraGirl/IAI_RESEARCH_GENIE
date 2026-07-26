@@ -14,9 +14,10 @@
     "skin lightening", "lightening the skin tone"
   ],
   "requirements": [
-    {"id": "1", "name": "Oximidol (exact structure)", "keywords": ["oximidol", "methyloxetanecarbamido", "thiazolyl resorcinol", "3081328-14-2", "kt-939", "kwhite 939", "nexawhite 939"]},
-    {"id": "2", "name": "Cosmetic/dermatological formulation with Oximidol or structurally similar", "keywords": ["cosmetic", "dermatological", "formulation", "tyrosinase inhibitor", "skin whitening", "skin brightening", "depigmenting agent", "resorcinol derivative", "phenylethyl resorcinol"]},
-    {"id": "3", "name": "Oximidol (or alkylamidothiazole) with Isopropyl Lauroyl Sarcosinate", "keywords": ["isopropyl lauroyl sarcosinate", "sarcosinate", "solvent", "solubilization", "solubilisation", "solubilizer", "solubiliser", "thiamidol", "alkylamidothiazole", "depigmenting agent", "resorcinol derivative", "phenylethyl resorcinol", "symwhite 377", "n-lauroylsarcosinate d'isopropyle"]}
+    {"id": "1", "name": "Oximidol (exact structure)", "must_show_elements": [], "keywords": ["oximidol", "methyloxetanecarbamido", "thiazolyl resorcinol", "3081328-14-2", "kt-939", "kwhite 939", "nexawhite 939"]},
+    {"id": "2", "name": "Cosmetic/dermatological formulation with Oximidol or structurally similar", "must_show_elements": [], "keywords": ["cosmetic", "dermatological", "formulation", "tyrosinase inhibitor", "skin whitening", "skin brightening"]},
+    {"id": "3", "name": "Oximidol (or alkylamidothiazole) with Isopropyl Lauroyl Sarcosinate", "must_show_elements": [], "must_cooccur_groups": [["thiamidol", "oximidol", "alkylamidothiazole", "thiazolyl resorcinol", "isobutylamido thiazolyl resorcinol", "kt-939", "kwhite", "nexawhite"], ["isopropyl lauroyl sarcosinate", "isopropyl n-lauroyl sarcosinate", "eldew sl-205", "eldew sl 205", "cas 230309-38-3", "evertouch lps-100"]], "keywords": ["solvent", "solubilize", "dissolve", "skin whitening", "skin brightening", "tyrosinase inhibitor", "beiersdorf"]}
+
   ],
   "priority_req_ids": ["1", "2", "3"],
   "synonym_queries": [
