@@ -932,23 +932,30 @@ async function loadState() {
   if (document.querySelector('.tab.active')?.dataset.tab === 'candidates') loadCandidates();
 }
 
+let candidateRequestSeq = 0;
 async function loadCandidates() {
+  const reqSeq = ++candidateRequestSeq;
+  const targetStudy = selectedStudy;
   await ensureFreshBuild();
-  const data = await api('/api/candidates?study=' + selectedStudy);
+  const data = await api('/api/candidates?study=' + targetStudy);
+  if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
   const list = $('candList');
   const prev = $('candPreview');
   // Client-side burn gate — never show known art even from stale files
   const clear = [];
   for (const c of data.candidates) {
-    const burn = await api('/api/burn-check', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study:selectedStudy, pub:c.publication})});
+    const burn = await api('/api/burn-check', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study:targetStudy, pub:c.publication})});
+    if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
     if (burn.clear) clear.push(c);
   }
+  if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
   data.candidates = clear;
   if (!data.candidates.length) {
     list.innerHTML = `<div class="empty">${currentMeta()?.empty_candidates || 'No research records yet.'}</div>`;
     prev.style.display = 'none';
     return;
   }
+
   list.innerHTML = '';
   data.candidates.forEach((c, i) => {
     const div = document.createElement('div');
