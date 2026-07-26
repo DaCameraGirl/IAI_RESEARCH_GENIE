@@ -413,24 +413,31 @@ class AdvancedSearchEngine:
             if product_search:
                 ia_hits = product_search.search_archive_org(query_str, mediatype="texts", max_results=max_results)
                 for item in ia_hits:
+                    raw_year = item.get("year")
+                    if raw_year and str(raw_year).lower() not in ["unknown", "none", ""]:
+                        date_str = f"{raw_year}-01-01"
+                        item["date_verified"] = True
+                    else:
+                        date_str = "unknown"
+                        item["date_verified"] = False
+                        item["requires_manual_review"] = True
+                        item["match_mode"] = "unknown_date"
+
                     res = SearchResult(
                         title=item.get("title", "Internet Archive Text"),
                         url=item.get("url", ""),
                         source="archive_texts",
-                        date=f"{item.get('year', '2000')}-01-01",
+                        date=date_str,
                         snippet=item.get("description", ""),
-                        metadata={
-                            'identifier': item.get('identifier'),
-                            'year': item.get('year'),
-                            'downloads': item.get('downloads')
-                        },
+                        metadata=item,
                         open_access=True,
-                        confidence=0.85
+                        confidence=0.85 if date_str != "unknown" else 0.5
                     )
                     if not self.is_known_citation(res):
                         results.append(res)
                     else:
                         self.stats['filtered_known'] += 1
+
         except Exception as e:
             print(f"  [Archive.org] Search error: {e}")
             

@@ -119,8 +119,10 @@ class HuntOrchestrator:
                                 }
                                 for req in raw_reqs
                             ]
-                            print(f" [+] Loaded {len(requirements)} study requirements from {config_path.name}")
+                            req_ids = [r.get('id', str(idx+1)) for idx, r in enumerate(requirements)]
+                            print(f" [+] Loaded {len(requirements)} study requirements for {self.config.study_id} from {config_path.name}: {', '.join(req_ids)}")
                             break
+
                 except Exception as e:
                     print(f"  [!] Error loading study config from {config_path}: {e}")
                     
