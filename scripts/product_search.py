@@ -19,15 +19,34 @@ USER_AGENT = (
 
 
 def _fetch_json(url: str, timeout: int = 20) -> dict[str, Any]:
-    """Fetch JSON from URL with rate limiting."""
-    time.sleep(1.0)  # Rate limit
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
-        print(f"Fetch error: {e}")
-        return {}
+    """Fetch JSON from URL with rate limiting and exponential backoff retry."""
+    for attempt in range(3):
+        time.sleep(1.2 * (attempt + 1))
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                "Accept": "application/json, text/plain, */*",
+                "Accept-Language": "en-US,en;q=0.9"
+            }
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 503, 403) and attempt < 2:
+                time.sleep(2.5 * (attempt + 1))
+                continue
+            print(f"Fetch HTTP error {e.code}: {url}")
+            return {}
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(2.0)
+                continue
+            print(f"Fetch error: {e}")
+            return {}
+    return {}
+
 
 
 def search_archive_org(
