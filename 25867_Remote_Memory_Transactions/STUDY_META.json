@@ -1,0 +1,14 @@
+{
+  "title": "Remote Memory Transactions",
+  "type": "patent",
+  "patent": "US9141549B2",
+  "critical_date": "2012-05-18",
+  "focus": "RDMA, remote direct memory access, atomic remote memory operations, hardware cache coherence",
+  "keywords": ["remote memory", "RDMA", "direct memory access", "atomic transaction", "cache coherence"],
+  "requirements": [],
+  "priority_req_ids": [],
+  "synonym_queries": [],
+  "cpc_queries": [],
+  "npl_queries": [],
+  "assignees": []
+}

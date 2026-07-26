@@ -18,9 +18,9 @@
   "studies": {
     "26052": {
       "folder": "26052_Rechargeable_Blender_Offset_Blades",
-      "status": "done",
+      "status": "queued",
       "rounds_completed": 3,
-      "candidates_found": 4,
+      "candidates_found": 3,
       "submissions_made": 0,
       "lanes_complete": []
     },

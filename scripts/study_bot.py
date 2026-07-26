@@ -86,7 +86,9 @@ def _build_study_meta(study_id: str) -> dict:
     meta = augment_meta_from_brief(meta, folder / "STUDY_BRIEF.md")
     meta["priority_req_ids"] = tuple(meta["priority_req_ids"])
     if not meta["title"]:
-        meta["title"] = study_id
+        clean_title = folder_name.partition("_")[2].replace("_", " ").strip()
+        meta["title"] = clean_title if clean_title else study_id
+
     return meta
 
 

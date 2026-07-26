@@ -892,10 +892,15 @@ function renderState(data) {
     const isDone = meta.status === 'done' || meta.status === 'completed';
     toggleBtn.textContent = isDone ? '↩ Move to Active' : '✓ Mark Completed';
     toggleBtn.onclick = async () => {
-      await api('/api/study/toggle-status', { study: selectedStudy, status: isDone ? 'queued' : 'done' });
+      await api('/api/study/toggle-status', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ study: selectedStudy, status: isDone ? 'queued' : 'done' })
+      });
       await loadState();
     };
   }
+
 
   const huntBtn = $('huntBtn');
   if (meta.blocked) {

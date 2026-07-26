@@ -1,0 +1,14 @@
+{
+  "title": "Semiconductor Wafer Laser Dividing",
+  "type": "patent",
+  "patent": "US8906782B2",
+  "critical_date": "2010-03-31",
+  "focus": "Laser dicing / wafer dividing, stealth dicing, modified layer formation",
+  "keywords": ["semiconductor wafer", "laser dicing", "stealth dicing", "wafer dividing", "modified layer"],
+  "requirements": [],
+  "priority_req_ids": [],
+  "synonym_queries": [],
+  "cpc_queries": [],
+  "npl_queries": [],
+  "assignees": ["Hamamatsu Photonics KK"]
+}
