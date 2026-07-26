@@ -3,25 +3,45 @@
   "type": "patent",
   "patent": "US11229891",
   "critical_date": "2019-10-28",
-  "focus": "RR 1.1-1.3: blade rotational axis offset 5-15% of blade diameter from container's longitudinal axis",
+  "focus": "RR 1.1-1.3: HANDHELD blender with blade rotational axis offset 5-15% of blade diameter from container's longitudinal axis, VERTICAL arrangement, with rationale for offset benefit",
   "keywords": [
     "blade", "blender", "rotor", "offset", "longitudinal axis", "container",
     "eccentric", "off-center", "off center", "tornado", "vortex", "mixing",
-    "chopping", "food processor", "rechargeable", "blending"
+    "chopping", "food processor", "rechargeable", "blending", "handheld",
+    "immersion", "stick blender", "vertical", "upright", "rationale",
+    "advantage", "benefit", "improved mixing", "better blending"
   ],
   "requirements": [
     {"id": "1.1", "name": "Blades rotate around rotational axis, blend contents", "keywords": ["blade", "rotor", "rotational axis", "blend", "container"]},
     {"id": "1.2", "name": "Blade rotational axis offset from container's longitudinal axis", "keywords": ["offset", "longitudinal axis", "container", "off-center", "off center", "eccentric"]},
-    {"id": "1.3", "name": "Offset is 5%-15% of blade diameter", "keywords": ["offset", "diameter", "percent", "5%", "15%", "eccentric"]}
+    {"id": "1.3", "name": "Offset is 5%-15% of blade diameter", "keywords": ["offset", "diameter", "percent", "5%", "15%", "eccentric", "ratio", "range"]},
+    {"id": "PREF-1", "name": "HANDHELD domestic blender (preferred)", "keywords": ["handheld", "immersion", "stick blender", "portable", "hand-held"]},
+    {"id": "PREF-2", "name": "Vertical/upright arrangement (preferred)", "keywords": ["vertical", "upright", "vertically-arranged", "not diagonal"]},
+    {"id": "PREF-3", "name": "Rationale for offset benefit explained", "keywords": ["tornado", "vortex", "improved", "better", "advantage", "rationale", "reason", "benefit"]}
   ],
   "priority_req_ids": ["1.1", "1.2", "1.3"],
+  "seed_patents": [
+    "US20050207270A1",
+    "US7217028B2",
+    "CA2450764A1",
+    "CN206565828U",
+    "CN206565826U"
+  ],
   "synonym_queries": [
-    "blender offset blade vortex mixing",
-    "eccentric blade rotor blending container",
-    "off-center rotor food processor design",
-    "blade rotational axis offset container longitudinal axis",
-    "tornado effect blending blade offset",
-    "rechargeable blender chopper offset blade diameter"
+    "handheld blender offset blade vortex mixing",
+    "immersion blender eccentric blade rotor",
+    "stick blender off-center rotor design",
+    "handheld blender blade rotational axis offset vertical",
+    "tornado effect blending blade offset handheld",
+    "rechargeable handheld blender offset blade diameter",
+    "vertical immersion blender eccentric blade advantage",
+    "handheld blender improved mixing offset blade",
+    "stick blender vortex effect blade offset rationale",
+    "portable blender off-center blade better blending",
+    "off-axis goblet food mixer blade offset",
+    "kitchen blender tool shaft offset from pitcher axis",
+    "blender container displaced blade assembly anti-air-pocket",
+    "eccentric distance cutter axis cup body blender"
   ],
   "cpc_queries": [
     "A47J43/046 blender blade arrangement",
