@@ -18,6 +18,7 @@ a time" into "review N pre-queried candidate sources per hymn."
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 import time
 import urllib.error
@@ -26,6 +27,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from typing import Callable
+from repo_paths import REPO_ROOT, SCRIPTS_DIR
 
 for _stream in (sys.stdout, sys.stderr):
     try:
@@ -33,8 +35,8 @@ for _stream in (sys.stdout, sys.stderr):
     except (AttributeError, ValueError):
         pass
 
-REPO = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO / "scripts"))
+REPO = REPO_ROOT
+sys.path.insert(0, str(SCRIPTS_DIR))
 from study_bot import STUDY_META  # noqa: E402
 
 LogFn = Callable[[str, str], None]
@@ -48,10 +50,34 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 REQUEST_PAUSE = 0.5
+REQUEST_TIMEOUT = 8
 MAX_HYMNS_PER_ROUND = 125
+LOW_SIGNAL_TITLE_PATTERNS = (
+    "rock pop folk songs",
+    "singer's library of song",
+    "liederprojekt",
+)
+HYMNAL_SIGNAL_TERMS = (
+    "hymn",
+    "hymnal",
+    "cantici",
+    "innario",
+    "laudario",
+    "gesangbuch",
+    "cantique",
+    "himnario",
+    "hinario",
+    "himny",
+)
+
+LANGUAGE_QUERY_TERMS = {
+    "Italian": '"Italian" OR italiano OR italiana',
+    "Russian": '"Russian" OR russkii OR русский',
+    "Cebuano": '"Cebuano" OR Binisaya OR Bisaya OR Sebwano OR Visayan',
+}
 
 
-def _get_json(url: str, timeout: int = 20) -> dict:
+def _get_json(url: str, timeout: int = REQUEST_TIMEOUT) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8", errors="replace"))
@@ -94,9 +120,10 @@ def search_hymnal_sources(language: str, rows: int = 8) -> list[dict]:
     """
     seen_urls: set[str] = set()
     out: list[dict] = []
+    lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
     queries = (
-        f'{language} AND hymnal AND mediatype:(texts)',
-        f'{language} AND "hymn book" AND mediatype:(texts)',
+        f'({lang_expr}) AND (hymnal OR hymnbook OR hymn book) AND mediatype:(texts)',
+        f'({lang_expr}) AND (awit OR himno OR canticle OR songs) AND mediatype:(texts)',
     )
     for q in queries:
         for hit in _ia_search(q, rows):
@@ -148,10 +175,11 @@ def search_internet_archive(hymn_title: str, language: str, rows: int = 5) -> li
         "Finnish": "laulu OR virsi"
     }
     extra = lang_keywords.get(language, "")
+    lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
     if extra:
-        query = f'"{hymn_title}" AND ({extra}) AND mediatype:(texts)'
+        query = f'"{hymn_title}" AND ({lang_expr}) AND ({extra}) AND mediatype:(texts)'
     else:
-        query = f'"{hymn_title}" AND {language} AND mediatype:(texts)'
+        query = f'"{hymn_title}" AND ({lang_expr}) AND mediatype:(texts)'
     return _ia_search(query, rows)
 
 
@@ -191,7 +219,8 @@ def search_google_books(hymn_title: str, language: str, language_code: str | Non
         "Finnish": "laulu OR virsi"
     }
     extra = lang_keywords.get(language, "hymnal")
-    query = f'"{hymn_title}" {language} {extra}'
+    lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
+    query = f'"{hymn_title}" {lang_expr} {extra}'
     params = {"q": query, "maxResults": str(rows)}
     if language_code:
         params["langRestrict"] = language_code
@@ -253,7 +282,8 @@ def search_hathitrust(hymn_title: str, language: str, rows: int = 5) -> list[dic
         "Finnish": "laulu virsi"
     }
     extra = lang_keywords.get(language, "hymnal")
-    query = f'"{hymn_title}" {extra}'
+    lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
+    query = f'"{hymn_title}" {lang_expr} {extra}'
     
     # HathiTrust catalog search (web scraping fallback since API requires auth)
     search_url = f"https://catalog.hathitrust.org/Search/Home?lookfor={urllib.parse.quote(query)}&type=all"
@@ -313,7 +343,8 @@ def search_worldcat(hymn_title: str, language: str, rows: int = 3) -> list[dict]
         "Finnish": "laulu"
     }
     extra = lang_keywords.get(language, "hymnal")
-    query = f'"{hymn_title}" {extra}'
+    lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
+    query = f'"{hymn_title}" {lang_expr} {extra}'
     
     search_url = f"https://www.worldcat.org/search?q={urllib.parse.quote(query)}&qt=results_page"
     
@@ -405,6 +436,53 @@ def search_discogs_hymn(hymn_title: str, language: str, rows: int = 5) -> list[d
         return []
 
 
+def _language_signal_terms(language: str) -> tuple[str, ...]:
+    terms = {
+        "Italian": ("italian", "italiano", "italiana", "salmi", "cantici", "inno", "innario"),
+        "Russian": ("russian", "russian empire", "russ", "гимн", "песн", "himny"),
+        "Cebuano": ("cebuano", "binisaya", "bisaya", "awit", "himno"),
+    }
+    return terms.get(language, (language.lower(),))
+
+
+def filter_hymn_hits(hits: list[dict], language: str) -> list[dict]:
+    """Suppress obvious generic anthology noise and prioritize language/hymnal signals."""
+    signal_terms = _language_signal_terms(language)
+    filtered: list[dict] = []
+    seen: set[tuple[str, str]] = set()
+    for hit in hits:
+        title = str(hit.get("title", ""))
+        url = str(hit.get("url", ""))
+        source = str(hit.get("source", ""))
+        key = (title.strip().lower(), url.strip().lower())
+        if key in seen:
+            continue
+        seen.add(key)
+
+        title_l = title.lower()
+        source_l = source.lower()
+        has_signal = any(term in title_l for term in signal_terms) or any(term in title_l for term in HYMNAL_SIGNAL_TERMS)
+        low_signal = any(term in title_l for term in LOW_SIGNAL_TITLE_PATTERNS)
+        if low_signal and not has_signal:
+            continue
+        if source_l in {"musicbrainz", "discogs"} and not has_signal:
+            continue
+        filtered.append(hit)
+    return filtered
+
+
+def _slug(text: str, limit: int = 60) -> str:
+    keep = "".join(c if c.isalnum() or c in " -_" else "" for c in text)
+    return "_".join(keep.split())[:limit] or "item"
+
+
+def _stable_lead_filename(prefix: str, *parts: str) -> str:
+    joined = " | ".join((part or "").strip() for part in parts)
+    digest = hashlib.sha1(joined.encode("utf-8", errors="replace")).hexdigest()[:10]
+    slug = _slug("_".join(part for part in parts if part), limit=70)
+    return f"{prefix}_{slug}_{digest}_hymn_lead.txt"
+
+
 class HymnHuntEngine:
     def __init__(self, study_id: str, on_log: LogFn | None = None) -> None:
         self.study_id = study_id
@@ -419,11 +497,49 @@ class HymnHuntEngine:
     def stop(self) -> None:
         self.stopped = True
 
+    def _pause(self, seconds: float = REQUEST_PAUSE) -> bool:
+        """Sleep in short slices so stop requests land quickly."""
+        remaining = max(seconds, 0.0)
+        while remaining > 0:
+            if self.stopped:
+                return False
+            step = min(0.05, remaining)
+            time.sleep(step)
+            remaining -= step
+        return not self.stopped
+
+    def _run_source_search(
+        self,
+        hymn: str,
+        label: str,
+        fn: Callable[..., list[dict]],
+        *args,
+    ) -> tuple[list[dict], bool]:
+        if self.stopped:
+            return [], False
+        self.log(f"  {hymn}: checking {label}", "info")
+        hits = fn(*args)
+        if not self._pause():
+            self.log("Hunt stopped by user", "warn")
+            return hits, False
+        return hits, True
+
     def _load_hymn_list(self, folder: Path) -> list[str]:
         path = folder / "HYMN_LIST.txt"
         if not path.exists():
             return []
         return [ln.strip() for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+
+    def _persist_progress(
+        self,
+        folder: Path,
+        language: str,
+        hymnal_sources: list[dict],
+        leads: list[dict],
+    ) -> None:
+        """Persist the current library state during the run so the UI updates live."""
+        self._write_candidate_files(folder, language, hymnal_sources, leads)
+        self._write_candidate_screen(folder, hymnal_sources, leads)
 
     def run(self) -> dict:
         meta = STUDY_META[self.study_id]
@@ -445,36 +561,60 @@ class HymnHuntEngine:
         self.log(f"Lane 1: searching for {language} hymnal sources (highest-signal query)", "lane")
         hymnal_sources = search_hymnal_sources(language)
         self.log(f"  Found {len(hymnal_sources)} candidate hymnal source(s)", "info")
-        time.sleep(REQUEST_PAUSE)
+        self._persist_progress(folder, language, hymnal_sources, [])
+        if not self._pause():
+            self.log("Hunt stopped by user", "warn")
+            return {"hymns_searched": 0, "leads_found": 0, "hymnal_sources": len(hymnal_sources)}
 
-        self.log(f"Lane 2: searching each of {len(hymns)} hymns individually (4 sources)", "lane")
+        self.log(f"Lane 2: searching each of {len(hymns)} hymns individually (6 sources)", "lane")
         leads: list[dict] = []
         for hymn in hymns[:MAX_HYMNS_PER_ROUND]:
             if self.stopped:
                 self.log("Hunt stopped by user", "warn")
                 break
+            self.log(f"  {hymn}: checking archive.org", "info")
             hits = search_internet_archive(hymn, language)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            self.log(f"  {hymn}: checking Google Books", "info")
             hits += search_google_books(hymn, language, language_code)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            self.log(f"  {hymn}: checking HathiTrust", "info")
             hits += search_hathitrust(hymn, language)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            self.log(f"  {hymn}: checking WorldCat", "info")
             hits += search_worldcat(hymn, language)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            self.log(f"  {hymn}: checking MusicBrainz", "info")
             hits += search_musicbrainz_hymn(hymn, language)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            self.log(f"  {hymn}: checking Discogs", "info")
             hits += search_discogs_hymn(hymn, language)
-            time.sleep(REQUEST_PAUSE)
+            if not self._pause():
+                self.log("Hunt stopped by user", "warn")
+                break
+            hits = filter_hymn_hits(hits, language)
             self.hymns_searched += 1
             if hits:
                 leads.append({"hymn": hymn, "hits": hits})
                 self.leads_found += len(hits)
                 self.log(f"  {hymn}: {len(hits)} candidate source(s)", "info")
+                self._persist_progress(folder, language, hymnal_sources, leads)
+            elif self.hymns_searched == 1 or self.hymns_searched % 10 == 0:
+                self._write_candidate_screen(folder, hymnal_sources, leads)
             if self.hymns_searched % 10 == 0:
                 self.log(f"Searched {self.hymns_searched}/{len(hymns)} hymns…", "info")
 
-        self._write_candidate_screen(folder, hymnal_sources, leads)
-        self._write_candidate_files(folder, language, hymnal_sources, leads)
+        self._persist_progress(folder, language, hymnal_sources, leads)
         self._update_hunt_log(folder, len(hymns))
 
         self.log(
@@ -492,11 +632,13 @@ class HymnHuntEngine:
 
     def _write_candidate_screen(self, folder: Path, hymnal_sources: list[dict], leads: list[dict]) -> None:
         today = datetime.now().strftime("%Y-%m-%d")
+        library_count = len(list((folder / "candidates").glob("*_hymn_lead.txt")))
         lines = [
             f"# Candidate Screen — updated {today}",
             "",
             f"Inspected: {self.hymns_searched} · Hymns with leads: {len(leads)} · "
-            f"Total per-hymn candidates: {self.leads_found} · Hymnal sources: {len(hymnal_sources)}",
+            f"Total per-hymn candidates: {self.leads_found} · Hymnal sources: {len(hymnal_sources)} · "
+            f"Library lead files: {library_count}",
             "",
             "## Candidate hymnal sources (search WITHIN these for the full hymn list — "
             "highest-value lead type, verified to beat per-hymn search)",
@@ -533,15 +675,15 @@ class HymnHuntEngine:
         """
         cand_dir = folder / "candidates"
         cand_dir.mkdir(parents=True, exist_ok=True)
-        for old in cand_dir.glob("*_hymn_lead.txt"):
-            old.unlink(missing_ok=True)
-
-        def _slug(text: str, limit: int = 60) -> str:
-            keep = "".join(c if c.isalnum() or c in " -_" else "" for c in text)
-            return "_".join(keep.split())[:limit] or "item"
 
         for hit in hymnal_sources:
-            fname = f"HYMNAL_SOURCE_{_slug(hit['title'])}_hymn_lead.txt"
+            fname = _stable_lead_filename(
+                "HYMNAL_SOURCE",
+                language,
+                str(hit.get("source", "")),
+                str(hit.get("title", "")),
+                str(hit.get("url", "")),
+            )
             (cand_dir / fname).write_text(
                 "Type: Candidate hymnal source (search within for the full hymn list)\n"
                 f"Language: {language}\n"
@@ -553,8 +695,15 @@ class HymnHuntEngine:
             )
 
         for lead in leads:
-            for i, hit in enumerate(lead["hits"]):
-                fname = f"{_slug(lead['hymn'])}_{i}_hymn_lead.txt"
+            for hit in lead["hits"]:
+                fname = _stable_lead_filename(
+                    _slug(lead["hymn"], limit=32),
+                    lead["hymn"],
+                    language,
+                    str(hit.get("source", "")),
+                    str(hit.get("title", "")),
+                    str(hit.get("url", "")),
+                )
                 (cand_dir / fname).write_text(
                     "Type: Hymn translation lead\n"
                     f"Hymn: {lead['hymn']}\n"

@@ -24,6 +24,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
+from repo_paths import REPO_ROOT, SCRIPTS_DIR
 
 for _stream in (sys.stdout, sys.stderr):
     try:
@@ -31,10 +32,11 @@ for _stream in (sys.stdout, sys.stderr):
     except (AttributeError, ValueError):
         pass
 
-REPO = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO / "scripts"))
+REPO = REPO_ROOT
+sys.path.insert(0, str(SCRIPTS_DIR))
 
 from study_bot import BLOCKED_SENTINEL, load_state, save_state  # noqa: E402
+from brief_signals import augment_meta_from_brief, extract_requirements_from_brief_text  # noqa: E402
 
 _DATE_FORMATS = ("%d %B %Y", "%B %d, %Y", "%B %d %Y", "%Y-%m-%d")
 _PATENT_TOKEN = re.compile(r"\b([A-Z]{2}\d[\dA-Z]{4,})\b")
@@ -231,6 +233,7 @@ def add_study(
             encoding="utf-8",
         )
 
+    extracted_requirements = extract_requirements_from_brief_text(brief_text)
     meta_json = {
         "title": resolved_title,
         "type": "patent" if is_patent else "copyright",
@@ -238,13 +241,14 @@ def add_study(
         "critical_date": critical_date,
         "focus": "" if blocked else f"See STUDY_BRIEF.md — Research Requirements",
         "keywords": [],
-        "requirements": [],
-        "priority_req_ids": [],
+        "requirements": extracted_requirements,
+        "priority_req_ids": [req["id"] for req in extracted_requirements],
         "synonym_queries": [],
         "cpc_queries": [],
         "npl_queries": [],
         "assignees": [],
     }
+    meta_json = augment_meta_from_brief(meta_json, folder / "STUDY_BRIEF.md")
     (folder / "STUDY_META.json").write_text(json.dumps(meta_json, indent=2) + "\n", encoding="utf-8")
 
     # --- wire into bot_state.json ---
@@ -317,7 +321,7 @@ def main() -> None:
         print("  BLOCKED — needs review:")
         for w in result["warnings"]:
             print(f"    - {w}")
-    print("  Keywords/requirements are empty — tell Claude to fill them in for smart auto-scoring.")
+    print("  Seeded metadata from the brief — review STUDY_META.json for study-specific cleanup.")
     print(f"\nRun: python scripts/study_bot.py status")
 
 

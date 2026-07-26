@@ -1,0 +1,9 @@
+{
+  "ready": {
+    "min_rank": 2,
+    "allowed_confidence": ["high", "med"]
+  },
+  "hold": {
+    "min_rank": 1
+  }
+}

@@ -8,12 +8,16 @@
     "oximidol", "tyrosinase inhibitor", "thiamidol", "isopropyl lauroyl sarcosinate",
     "melanin", "skin whitening", "skin brightening", "hydroquinone", "kojic acid",
     "niacinamide", "arbutin", "resorcinol", "thiazolyl", "alkylamidothiazole",
-    "beiersdorf", "sarcosinate"
+    "beiersdorf", "sarcosinate", "depigmenting agent", "depigmenting", "depigmentant",
+    "solubilization", "solubilisation", "solubilizer", "solubiliser", "resorcinol derivative",
+    "phenylethyl resorcinol", "symwhite 377", "n-lauroylsarcosinate d'isopropyle",
+    "skin lightening", "lightening the skin tone"
   ],
   "requirements": [
     {"id": "1", "name": "Oximidol (exact structure)", "must_show_elements": [], "keywords": ["oximidol", "methyloxetanecarbamido", "thiazolyl resorcinol", "3081328-14-2", "kt-939", "kwhite 939", "nexawhite 939"]},
     {"id": "2", "name": "Cosmetic/dermatological formulation with Oximidol or structurally similar", "must_show_elements": [], "keywords": ["cosmetic", "dermatological", "formulation", "tyrosinase inhibitor", "skin whitening", "skin brightening"]},
     {"id": "3", "name": "Oximidol (or alkylamidothiazole) with Isopropyl Lauroyl Sarcosinate", "must_show_elements": [], "must_cooccur_groups": [["thiamidol", "oximidol", "alkylamidothiazole", "thiazolyl resorcinol", "isobutylamido thiazolyl resorcinol", "kt-939", "kwhite", "nexawhite"], ["isopropyl lauroyl sarcosinate", "isopropyl n-lauroyl sarcosinate", "eldew sl-205", "eldew sl 205", "cas 230309-38-3", "evertouch lps-100"]], "keywords": ["solvent", "solubilize", "dissolve", "skin whitening", "skin brightening", "tyrosinase inhibitor", "beiersdorf"]}
+
   ],
   "priority_req_ids": ["1", "2", "3"],
   "synonym_queries": [
@@ -22,17 +26,24 @@
     "alkylamidothiazole resorcinol skin brightening formulation",
     "KT-939 KWhite 939 NexaWhite 939 cosmetic",
     "thiazolyl resorcinol melanin inhibitor",
-    "Beiersdorf thiamidol product literature solvent"
+    "Beiersdorf thiamidol product literature solvent",
+    "\"isopropyl lauroyl sarcosinate\" depigmenting agent resorcinol derivative",
+    "\"isopropyl lauroyl sarcosinate\" phenylethyl resorcinol",
+    "\"isopropyl lauroyl sarcosinate\" solubilization depigmenting agent",
+    "\"n-lauroylsarcosinate d'isopropyle\" agent depigmentant resorcinol"
   ],
   "cpc_queries": [
     "A61K8/44 cosmetic compositions nitrogen organic compounds",
     "A61Q19/02 skin whitening preparations",
-    "A61K31/425 thiazole compounds"
+    "A61K31/425 thiazole compounds",
+    "A61Q19/02 isopropyl lauroyl sarcosinate resorcinol derivative"
   ],
   "npl_queries": [
     "thiamidol isopropyl lauroyl sarcosinate solubility dissertation",
     "tyrosinase inhibitor thiazolyl resorcinol conference abstract",
-    "Beiersdorf thiamidol product literature solvent"
+    "Beiersdorf thiamidol product literature solvent",
+    "phenylethyl resorcinol isopropyl lauroyl sarcosinate poster",
+    "depigmenting agent isopropyl lauroyl sarcosinate conference abstract"
   ],
   "assignees": ["Beiersdorf"]
 }

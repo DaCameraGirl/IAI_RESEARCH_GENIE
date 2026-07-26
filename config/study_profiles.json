@@ -1,0 +1,86 @@
+{
+  "patent_invalidity": {
+    "enabled_lanes": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L3_LITIGATION_PTAB", "L4_SCHOLARLY_NPL", "L5_STANDARDS_GOV_REGULATORY", "L6_PRODUCT_COMMERCIAL", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L8_SOFTWARE_DATA_COMMUNITY"],
+    "lane_priority": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L6_PRODUCT_COMMERCIAL", "L5_STANDARDS_GOV_REGULATORY", "L3_LITIGATION_PTAB", "L4_SCHOLARLY_NPL", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "maximum_cost_class": "HIGH",
+    "preferred_evidence_types": ["PATENT", "PATENT_PROSECUTION", "PRODUCT_MANUAL", "REGULATORY", "SCHOLARLY_NPL"],
+    "required_hard_gates": ["verified_date", "no_known_art", "no_family_duplicate", "explicit_requirement_support", "accessible_document", "verbatim_highlight", "requirement_mapping"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": true,
+    "patent_family_normalization_enabled": true
+  },
+  "product_evidence": {
+    "enabled_lanes": ["L1_PATENT_FAMILIES", "L5_STANDARDS_GOV_REGULATORY", "L6_PRODUCT_COMMERCIAL", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L3_LITIGATION_PTAB"],
+    "lane_priority": ["L6_PRODUCT_COMMERCIAL", "L7_ARCHIVES_DOMAINS", "L5_STANDARDS_GOV_REGULATORY", "L1_PATENT_FAMILIES", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "maximum_cost_class": "HIGH",
+    "preferred_evidence_types": ["PRODUCT_MANUAL", "REGULATORY", "DISTRIBUTOR", "ARCHIVED_WEB"],
+    "required_hard_gates": ["verified_date", "no_known_art", "accessible_document"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": true,
+    "patent_family_normalization_enabled": true
+  },
+  "copyright_hymn": {
+    "enabled_lanes": ["L4_SCHOLARLY_NPL", "L7_ARCHIVES_DOMAINS", "L8_SOFTWARE_DATA_COMMUNITY", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L3_LITIGATION_PTAB"],
+    "lane_priority": ["L4_SCHOLARLY_NPL", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY", "L8_SOFTWARE_DATA_COMMUNITY"],
+    "maximum_cost_class": "MEDIUM",
+    "preferred_evidence_types": ["BOOK", "THESIS", "SCHOLARLY_NPL", "ARCHIVED_WEB"],
+    "required_hard_gates": ["verified_date", "accessible_document", "verbatim_highlight"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": false,
+    "patent_family_normalization_enabled": false
+  },
+  "software_artifact": {
+    "enabled_lanes": ["L4_SCHOLARLY_NPL", "L7_ARCHIVES_DOMAINS", "L8_SOFTWARE_DATA_COMMUNITY", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L3_LITIGATION_PTAB"],
+    "lane_priority": ["L8_SOFTWARE_DATA_COMMUNITY", "L7_ARCHIVES_DOMAINS", "L4_SCHOLARLY_NPL", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "maximum_cost_class": "HIGH",
+    "preferred_evidence_types": ["SOFTWARE_ARTIFACT", "ARCHIVED_WEB", "SCHOLARLY_NPL"],
+    "required_hard_gates": ["verified_date", "accessible_document"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": false,
+    "patent_family_normalization_enabled": false
+  },
+  "medical_device": {
+    "enabled_lanes": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L4_SCHOLARLY_NPL", "L5_STANDARDS_GOV_REGULATORY", "L6_PRODUCT_COMMERCIAL", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": [],
+    "lane_priority": ["L5_STANDARDS_GOV_REGULATORY", "L1_PATENT_FAMILIES", "L6_PRODUCT_COMMERCIAL", "L4_SCHOLARLY_NPL", "L2_PATENT_CITATIONS_PROSECUTION", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "maximum_cost_class": "HIGH",
+    "preferred_evidence_types": ["REGULATORY", "PATENT", "PRODUCT_MANUAL", "SCHOLARLY_NPL"],
+    "required_hard_gates": ["verified_date", "no_family_duplicate", "accessible_document", "verbatim_highlight"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": true,
+    "patent_family_normalization_enabled": true
+  },
+  "chemical_compound": {
+    "enabled_lanes": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L3_LITIGATION_PTAB", "L4_SCHOLARLY_NPL", "L5_STANDARDS_GOV_REGULATORY", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L6_PRODUCT_COMMERCIAL", "L8_SOFTWARE_DATA_COMMUNITY"],
+    "lane_priority": ["L1_PATENT_FAMILIES", "L4_SCHOLARLY_NPL", "L2_PATENT_CITATIONS_PROSECUTION", "L5_STANDARDS_GOV_REGULATORY", "L3_LITIGATION_PTAB", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "maximum_cost_class": "HIGH",
+    "preferred_evidence_types": ["PATENT", "SCHOLARLY_NPL", "GOVERNMENT_REPORT"],
+    "required_hard_gates": ["verified_date", "no_known_art", "no_family_duplicate", "explicit_requirement_support", "accessible_document"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": true,
+    "patent_family_normalization_enabled": true
+  },
+  "general_npl": {
+    "enabled_lanes": ["L4_SCHOLARLY_NPL", "L5_STANDARDS_GOV_REGULATORY", "L7_ARCHIVES_DOMAINS", "L8_SOFTWARE_DATA_COMMUNITY", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY"],
+    "disabled_lanes": ["L1_PATENT_FAMILIES", "L2_PATENT_CITATIONS_PROSECUTION", "L3_LITIGATION_PTAB"],
+    "lane_priority": ["L4_SCHOLARLY_NPL", "L5_STANDARDS_GOV_REGULATORY", "L7_ARCHIVES_DOMAINS", "L9_MULTILINGUAL_CLASSIFICATION_ENTITY", "L8_SOFTWARE_DATA_COMMUNITY"],
+    "maximum_cost_class": "MEDIUM",
+    "preferred_evidence_types": ["SCHOLARLY_NPL", "GOVERNMENT_REPORT", "BOOK", "THESIS"],
+    "required_hard_gates": ["verified_date", "accessible_document", "verbatim_highlight"],
+    "language_expansion_enabled": true,
+    "archive_search_enabled": true,
+    "regulatory_search_enabled": true,
+    "patent_family_normalization_enabled": false
+  }
+}

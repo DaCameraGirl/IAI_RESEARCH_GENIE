@@ -299,7 +299,7 @@ def search_product_evidence(
             queries.append(f"{product} {term}")
     
     # Archive.org search
-    _log("  → Searching Archive.org for product manuals...")
+    _log("  -> Searching Archive.org for product manuals...")
     for query in queries[:5]:  # Limit queries
         hits = search_archive_org(
             f"{query} manual catalog datasheet",
@@ -311,7 +311,7 @@ def search_product_evidence(
             break
     
     # YouTube search (if API key available)
-    _log("  → Searching YouTube for teardown videos...")
+    _log("  -> Searching YouTube for teardown videos...")
     for query in queries[:3]:
         hits = search_youtube(
             f"{query} teardown repair disassembly",
@@ -321,10 +321,10 @@ def search_product_evidence(
         results["youtube"].extend(hits)
         if len(results["youtube"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['youtube'])} YouTube results")
+    _log(f"  [+] Found {len(results['youtube'])} YouTube results")
     
     # Reddit search
-    _log("  → Searching Reddit for product discussions...")
+    _log("  -> Searching Reddit for product discussions...")
     before_ts = int(time.mktime(time.strptime(before_date, "%Y-%m-%d")))
     for query in queries[:3]:
         hits = search_reddit(
@@ -338,7 +338,7 @@ def search_product_evidence(
             break
     
     # Wayback Machine search for manufacturer sites
-    _log("  → Searching Wayback Machine for archived product pages...")
+    _log("  -> Searching Wayback Machine for archived product pages...")
     manufacturer_domains = [
         "vitamix.com",
         "blendtec.com",
@@ -361,19 +361,19 @@ def search_product_evidence(
             break
     
     # Wikipedia search
-    _log("  → Searching Wikipedia for technical articles...")
+    _log("  -> Searching Wikipedia for technical articles...")
     for query in queries[:3]:
         hits = search_wikipedia(query, max_results=max_per_source)
         results["wikipedia"].extend(hits)
         if len(results["wikipedia"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['wikipedia'])} Wikipedia results")
+    _log(f"  [+] Found {len(results['wikipedia'])} Wikipedia results")
     
     # Google Custom Search (if API key available)
     google_api_key = os.environ.get("GOOGLE_API_KEY")
     google_search_id = os.environ.get("GOOGLE_SEARCH_ENGINE_ID")
     if google_api_key and google_search_id:
-        _log("  → Searching Google Custom Search...")
+        _log("  -> Searching Google Custom Search...")
         # Half queries for web-wide search
         for query in queries[:2]:
             hits = search_google_custom(
@@ -400,62 +400,63 @@ def search_product_evidence(
     # Bing Search (if API key available)
     bing_api_key = os.environ.get("BING_API_KEY")
     if bing_api_key:
-        _log("  → Searching Bing...")
+        _log("  -> Searching Bing...")
         for query in queries[:3]:
             hits = search_bing(query, api_key=bing_api_key, max_results=max_per_source)
             results["bing"].extend(hits)
             if len(results["bing"]) >= max_per_source * 2:
                 break
-        _log(f"  ✓ Found {len(results['bing'])} Bing results")
+        _log(f"  [+] Found {len(results['bing'])} Bing results")
     
     # DuckDuckGo search (no API key needed)
-    _log("  → Searching DuckDuckGo...")
+    _log("  -> Searching DuckDuckGo...")
     for query in queries[:3]:
         hits = search_duckduckgo(query, max_results=max_per_source)
         results["duckduckgo"].extend(hits)
         if len(results["duckduckgo"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['duckduckgo'])} DuckDuckGo results")
+    _log(f"  [+] Found {len(results['duckduckgo'])} DuckDuckGo results")
     
     # Semantic Scholar (academic papers)
-    _log("  → Searching Semantic Scholar for academic papers...")
+    _log("  -> Searching Semantic Scholar for academic papers...")
     before_year = int(before_date[:4])
     for query in queries[:3]:
         hits = search_semantic_scholar(query, before_year=before_year, max_results=max_per_source)
         results["semantic_scholar"].extend(hits)
         if len(results["semantic_scholar"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['semantic_scholar'])} Semantic Scholar results")
+    _log(f"  [+] Found {len(results['semantic_scholar'])} Semantic Scholar results")
     
     # OpenAlex (academic papers - better coverage)
-    _log("  → Searching OpenAlex for academic papers...")
+    _log("  -> Searching OpenAlex for academic papers...")
     for query in queries[:3]:
         hits = search_openalex(query, before_date=before_date, max_results=max_per_source)
         results["openalex"].extend(hits)
         if len(results["openalex"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['openalex'])} OpenAlex results")
+    _log(f"  [+] Found {len(results['openalex'])} OpenAlex results")
     
     # MusicBrainz (recordings - perfect for hymns, no API key needed)
-    _log("  → Searching MusicBrainz for recordings...")
+    _log("  -> Searching MusicBrainz for recordings...")
     for query in queries[:3]:
         hits = search_musicbrainz(query, before_date=before_date, max_results=max_per_source)
         results["musicbrainz"].extend(hits)
         if len(results["musicbrainz"]) >= max_per_source * 2:
             break
-    _log(f"  ✓ Found {len(results['musicbrainz'])} MusicBrainz results")
+    _log(f"  [+] Found {len(results['musicbrainz'])} MusicBrainz results")
     
     # Discogs (album releases - if API key available)
     discogs_api_key = os.environ.get("DISCOGS_API_KEY")
     if discogs_api_key:
-        _log("  → Searching Discogs for album releases...")
+        _log("  -> Searching Discogs for album releases...")
         before_year = int(before_date[:4])
         for query in queries[:3]:
             hits = search_discogs(query, before_year=before_year, max_results=max_per_source)
             results["discogs"].extend(hits)
             if len(results["discogs"]) >= max_per_source * 2:
                 break
-        _log(f"  ✓ Found {len(results['discogs'])} Discogs results")
+        _log(f"  [+] Found {len(results['discogs'])} Discogs results")
+
     
     return results
 
@@ -744,7 +745,8 @@ def search_openalex(
             authors += " et al."
         
         results.append({
-            "title": work.get("title", "Unknown"),
+            "title": work.get("title") or "Unknown",
+
             "url": work.get("doi", "") or work.get("id", ""),
             "authors": authors,
             "date": work.get("publication_date", "unknown"),

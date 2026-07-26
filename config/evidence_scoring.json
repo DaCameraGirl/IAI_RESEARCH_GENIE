@@ -1,0 +1,17 @@
+{
+  "positive": {
+    "exact_requirement_language": 30,
+    "verified_precritical_date": 20,
+    "primary_technical_source": 15,
+    "downloadable_original_pdf": 10,
+    "exact_model_or_part_number": 10,
+    "independent_corroboration": 5
+  },
+  "penalties": {
+    "inferred_relationship": -20,
+    "uncertain_date": -25
+  },
+  "hard_reject": {
+    "known_family_duplicate": true
+  }
+}

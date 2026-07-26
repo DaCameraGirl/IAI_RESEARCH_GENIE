@@ -25,7 +25,7 @@ class DuplicateDetector:
     
     def __init__(
         self,
-        workspace_root: Path,
+        workspace_root: Optional[Path] = None,
         title_similarity_threshold: float = 0.85,
         content_similarity_threshold: float = 0.90
     ):
@@ -37,7 +37,10 @@ class DuplicateDetector:
             title_similarity_threshold: Minimum similarity for title match (0-1)
             content_similarity_threshold: Minimum similarity for content match (0-1)
         """
+        if workspace_root is None:
+            workspace_root = Path.cwd()
         self.workspace_root = Path(workspace_root)
+
         self.title_threshold = title_similarity_threshold
         self.content_threshold = content_similarity_threshold
         
@@ -74,8 +77,22 @@ class DuplicateDetector:
             'last_updated': datetime.now().isoformat()
         }
     
+    def load_known_art(self, study_id: str, known_art_rows: List[Dict]):
+        """Load known art into tracking index"""
+        for row in known_art_rows:
+            url = row.get('url')
+            if url:
+                self.duplicate_db.setdefault('url_index', {}).setdefault(url.lower().strip(), []).append(study_id)
+            patent = row.get('patent_number')
+            if patent:
+                self.duplicate_db.setdefault('patent_index', {}).setdefault(patent.upper().strip(), []).append(study_id)
+            doi = row.get('doi')
+            if doi:
+                self.duplicate_db.setdefault('doi_index', {}).setdefault(doi.lower().strip(), []).append(study_id)
+
     def _save_database(self):
         """Save duplicate tracking database"""
+
         self.duplicate_db['last_updated'] = datetime.now().isoformat()
         
         with open(self.db_path, 'w', encoding='utf-8') as f:

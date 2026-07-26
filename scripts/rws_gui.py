@@ -10,9 +10,11 @@ import sys
 from pathlib import Path
 
 import customtkinter as ctk
+from repo_paths import REPO_ROOT, SCRIPTS_DIR
+from research_policy import is_ready
 
-REPO = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO / "scripts"))
+REPO = REPO_ROOT
+sys.path.insert(0, str(SCRIPTS_DIR))
 
 from check_burned import is_burned, load_burned  # noqa: E402
 from study_bot import (  # noqa: E402
@@ -77,7 +79,7 @@ def parse_candidate(path: Path) -> dict:
 
     rank = int(rank_m.group(1)) if rank_m else 0
     conf = conf_m.group(1).lower() if conf_m else "low"
-    ready = rank >= 2 and conf in ("high", "med")
+    ready = is_ready(rank, conf)
 
     return {
         "file": path.name,

@@ -13,12 +13,24 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Callable
+from evidence_schema import EvidenceRecord, EvidenceTier, EvidenceType
+from evidence_scoring import classify_evidence_record, ready_decision
+from lanes.registry import get_lane_runner, lane_for_source_label
+from normalizers.entities import normalize_entity_name, normalize_inventor_name
+from normalizers.patent_family import normalize_publication_number
+from normalizers.titles import normalize_title
+from repo_paths import REPO_ROOT, SCRIPTS_DIR
+from proof_bundle import write_ready_proof_bundle
+from research_policy import (
+    is_hold,
+)
+from study_profiles import resolve_profile_from_meta
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = REPO_ROOT
 
 import sys
 
-sys.path.insert(0, str(REPO / "scripts"))
+sys.path.insert(0, str(SCRIPTS_DIR))
 from check_burned import is_burned, load_burned, load_citation_seeds, patent_key  # noqa: E402
 from link_builder import crossref_lookup, patent_links  # noqa: E402
 from patent_search import search_queries  # noqa: E402
@@ -67,6 +79,8 @@ class PatentRecord:
     doi: str = "n/a"
     cpc: str = ""
     source_lane: str = ""
+    source_snapshot_html: str = ""
+    search_text: str = ""
     req_rows: list[dict] = field(default_factory=list)
     citations: list[str] = field(default_factory=list)
     score: int = 0
@@ -76,6 +90,15 @@ class PatentRecord:
     self_rank: int = 0
     confidence: str = "low"
     ready: bool = False
+    rank_reason: str = ""
+    evidence_record: EvidenceRecord | None = None
+    evidence_score: int = 0
+    score_breakdown: dict = field(default_factory=dict)
+    hard_gate_failures: list[str] = field(default_factory=list)
+    evidence_tier: str = EvidenceTier.LEAD.value
+    normalization_results: dict = field(default_factory=dict)
+    query_plan_provenance: list[dict] = field(default_factory=list)
+    citation_provenance: list[dict] = field(default_factory=list)
 
 
 def _fetch_html(url: str) -> str:
@@ -98,6 +121,19 @@ def _extract_patent_ids(html: str) -> list[str]:
     return list(dict.fromkeys(ids))
 
 
+def _clean_patent_text(html: str) -> str:
+    text = re.sub(r"(?is)<script[^>]*>.*?</script>", " ", html)
+    text = re.sub(r"(?is)<style[^>]*>.*?</style>", " ", text)
+    text = re.sub(r"(?is)<[^>]+>", " ", text)
+    text = html_module.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:120000]
+
+
+def _record_signal_text(rec: PatentRecord) -> str:
+    return " ".join(part for part in [rec.title, rec.abstract, rec.search_text] if part).strip()
+
+
 def fetch_patent(pub_id: str) -> PatentRecord:
     pub_id = _normalize_pub(pub_id)
     with _cache_lock:
@@ -111,6 +147,8 @@ def fetch_patent(pub_id: str) -> PatentRecord:
     except (urllib.error.URLError, TimeoutError) as exc:
         rec.title = f"(fetch failed: {exc})"
         return rec
+    rec.source_snapshot_html = html
+    rec.search_text = _clean_patent_text(html)
 
     title_m = re.search(r'<meta name="DC.title" content="([^"]+)"', html)
     if title_m:
@@ -176,9 +214,127 @@ def _parse_critical_date(study_id: str) -> str | None:
     return m.group(1) if m else None
 
 
+_NPL_QUERY_STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "article",
+    "be",
+    "book",
+    "conference",
+    "dissertation",
+    "for",
+    "in",
+    "is",
+    "lead",
+    "literature",
+    "of",
+    "on",
+    "or",
+    "paper",
+    "phd",
+    "poster",
+    "product",
+    "query",
+    "solubility",
+    "study",
+    "the",
+    "thesis",
+    "to",
+    "with",
+}
+
+
+def _crossref_type_to_dropdown(meta: dict[str, str]) -> str:
+    raw_type = (meta.get("type") or "").lower()
+    title = (meta.get("title") or "").lower()
+    if raw_type in {"book", "book-set", "monograph", "book-track", "edited-book"}:
+        return "NPL -> Book"
+    if raw_type in {"dissertation"} or "thesis" in title or "dissertation" in title:
+        return "NPL -> Masters or PhD thesis"
+    if raw_type in {"journal-article", "proceedings-article", "posted-content", "report-component"}:
+        return "NPL -> Article"
+    return "NPL -> Other"
+
+
+def _npl_access_fields(meta: dict[str, str]) -> tuple[str, str]:
+    pdf_url = meta.get("pdf_url") or ""
+    resolver_url = meta.get("url") or ""
+    if pdf_url:
+        return f"yes + {pdf_url}", "open PDF link from Crossref metadata"
+    if resolver_url:
+        return f"unknown + {resolver_url}", "resolver only - verify open vs school/library"
+    return "unknown + not found", "not verified"
+
+
+def _query_concepts(query: str, study_id: str) -> list[str]:
+    study_keywords = sorted(
+        {
+            keyword.strip().lower()
+            for keyword in STUDY_META[study_id].get("keywords", [])
+            if keyword and len(keyword.strip()) > 3
+        },
+        key=len,
+        reverse=True,
+    )
+    query_lower = query.lower()
+    concepts: list[str] = []
+    consumed: list[tuple[int, int]] = []
+
+    for keyword in study_keywords:
+        idx = query_lower.find(keyword)
+        if idx == -1:
+            continue
+        end = idx + len(keyword)
+        if any(not (end <= left or idx >= right) for left, right in consumed):
+            continue
+        concepts.append(keyword)
+        consumed.append((idx, end))
+
+    stripped = query_lower
+    for keyword in concepts:
+        stripped = stripped.replace(keyword, " ")
+    for token in re.findall(r"[a-z0-9]+", stripped):
+        if len(token) <= 3 or token in _NPL_QUERY_STOPWORDS:
+            continue
+        concepts.append(token)
+    return list(dict.fromkeys(concepts))
+
+
+def _npl_match_summary(query: str, meta: dict[str, str], study_id: str) -> tuple[list[str], str]:
+    concepts = _query_concepts(query, study_id)
+    combined = " ".join(
+        filter(
+            None,
+            [
+                meta.get("title", ""),
+                meta.get("journal", ""),
+                meta.get("publisher", ""),
+                meta.get("type", ""),
+            ],
+        )
+    ).lower()
+    matched = [concept for concept in concepts if concept in combined]
+    return matched, combined
+
+
+def _npl_confidence_and_reason(query: str, meta: dict[str, str], study_id: str) -> tuple[str, str, list[str]]:
+    matched, combined = _npl_match_summary(query, meta, study_id)
+    title = (meta.get("title") or "").lower()
+    if len(matched) >= 3:
+        return "med", f"title/metadata match {len(matched)} query concepts", matched
+    if len(matched) >= 2 and title:
+        return "med", f"title/metadata match {len(matched)} query concepts", matched
+    if len(matched) == 1:
+        return "low", f"only one query concept matched ({matched[0]})", matched
+    if combined:
+        return "low", "no specific study concepts matched resolved metadata", matched
+    return "low", "Crossref metadata too thin to verify scope", matched
+
+
 def score_record(rec: PatentRecord, study_id: str) -> PatentRecord:
     keywords = STUDY_META[study_id]["keywords"]
-    text = f"{rec.title} {rec.abstract}"
+    text = _record_signal_text(rec)
     text_l = text.lower()
     matched = [k for k in keywords if k.lower() in text_l]
     rec.matched_keywords = matched
@@ -208,12 +364,22 @@ def score_record(rec: PatentRecord, study_id: str) -> PatentRecord:
     else:
         rec.confidence = "low"
 
-    rec.ready = (
-        not rec.burned
-        and rec.self_rank >= 1
-        and (yes_count >= 1 or maybe_count >= 2)
-        and rec.confidence in ("high", "med")
+    rec.rank_reason = (
+        f"priority_yes={priority_yes}, req_yes={yes_count}, req_maybe={maybe_count}, "
+        f"matched_keywords={len(matched)}; rank follows requirement coverage across patent full text, not keyword count alone"
     )
+    evidence = _build_patent_evidence_record(rec, study_id)
+    rec.evidence_record = evidence
+    rec.evidence_score = evidence.score
+    rec.score_breakdown = evidence.score_breakdown
+    rec.hard_gate_failures = evidence.hard_gate_failures
+    rec.evidence_tier = evidence.tier.value
+    rec.ready, reasoning = ready_decision(
+        evidence,
+        self_rank=rec.self_rank,
+        confidence=rec.confidence,
+    )
+    rec.rank_reason = f"{rec.rank_reason}; {reasoning}"
     return rec
 
 
@@ -231,7 +397,10 @@ def burn_check(rec: PatentRecord, study_id: str, burned: dict[str, str]) -> Pate
 
 
 def is_study_patent(rec: PatentRecord, study_id: str) -> bool:
-    study_pub = patent_key(STUDY_META[study_id]["patent"])
+    study_patent = STUDY_META[study_id].get("patent", "")
+    if not study_patent:
+        return False
+    study_pub = patent_key(study_patent)
     return patent_key(rec.pub_id) == study_pub
 
 
@@ -244,6 +413,163 @@ def date_ok(rec: PatentRecord, critical: str | None) -> bool:
     return d <= critical
 
 
+def _candidate_access_status(rec: PatentRecord) -> str:
+    if rec.pdf_url or rec.uspto_pdf_url:
+        return "downloadable-pdf"
+    if rec.url:
+        return "landing-page-only"
+    return "unknown"
+
+
+def _build_patent_evidence_record(rec: PatentRecord, study_id: str) -> EvidenceRecord:
+    profile = resolve_profile_from_meta(STUDY_META[study_id])
+    critical = _parse_critical_date(study_id) or ""
+    document_date = rec.priority_date or rec.publication_date or ""
+    phrases = ctrl_f_phrases(_record_signal_text(rec), rec.matched_keywords, limit=1)
+    lane = lane_for_source_label(rec.source_lane or "L1")
+    patent_norm = normalize_publication_number(rec.pub_id)
+    entity_norm = normalize_entity_name(rec.assignee)
+    highlight = phrases[0] if phrases else ""
+    requirement_mapping = rec.req_rows
+    duplicate_status = "clear"
+    if rec.burned:
+        duplicate_status = "known-art"
+    elif is_study_patent(rec, study_id):
+        duplicate_status = "known-family-duplicate"
+
+    base = EvidenceRecord(
+        record_id=f"{study_id}:{patent_norm.normalized_publication or rec.pub_id}",
+        study_id=study_id,
+        lane_id=lane.id,
+        tier=EvidenceTier.CANDIDATE,
+        evidence_type=EvidenceType.PATENT,
+        raw_title=rec.title,
+        normalized_title=normalize_title(rec.title),
+        source_url=rec.url,
+        archived_url="",
+        document_url=rec.pdf_url or rec.uspto_pdf_url or rec.url,
+        local_copy_path="",
+        source_snapshot_path="",
+        document_date=document_date,
+        date_kind="priority_date" if rec.priority_date else ("publication_date" if rec.publication_date else ""),
+        date_confidence="verified" if document_date else "",
+        critical_date=critical,
+        language="en",
+        publisher="Google Patents" if rec.url else "",
+        authors=[],
+        assignee=rec.assignee,
+        inventor_names=[normalize_inventor_name(name) for name in rec.inventors.split(",") if name.strip()],
+        publication_number=patent_norm.normalized_publication,
+        patent_family_key=patent_norm.family_key,
+        entity_key=entity_norm.canonical,
+        model_numbers=[],
+        part_numbers=[patent_norm.normalized_publication] if patent_norm.normalized_publication else [],
+        cpc_codes=[part.strip() for part in rec.cpc.split("/") if part.strip()],
+        ipc_codes=[],
+        requirement_mapping=requirement_mapping,
+        shortest_verbatim_highlight=highlight,
+        page_number=None,
+        timestamp_or_location="abstract",
+        access_status=_candidate_access_status(rec),
+        source_reliability="patent-office",
+        duplicate_status=duplicate_status,
+        duplicate_relation=rec.burn_relation,
+        inference_burden="direct" if any(row.get("select") == "yes" for row in requirement_mapping) else "inferred-only",
+        metadata_uncertainty="" if document_date else "missing-date",
+        corroboration_keys=[rec.url] if rec.url else [],
+        content_sha256="",
+        provenance={
+            "source_lane": rec.source_lane,
+            "citation_provenance": rec.citation_provenance,
+        },
+        citation_graph=rec.citation_provenance[0] if rec.citation_provenance else {},
+        rank_reason=rec.rank_reason,
+        notes=[f"source_lane={rec.source_lane}", f"lane_name={lane.name}", f"study_profile={profile.name}"],
+    )
+    scored = classify_evidence_record(base)
+
+    rec.evidence_record = scored
+    rec.evidence_score = scored.score
+    rec.score_breakdown = scored.score_breakdown
+    rec.hard_gate_failures = scored.hard_gate_failures
+    rec.evidence_tier = scored.tier.value
+    rec.normalization_results = {
+        "patent": {
+            "normalized_publication": patent_norm.normalized_publication,
+            "family_key": patent_norm.family_key,
+            "number_type": patent_norm.number_type,
+            "evidence_basis": patent_norm.evidence_basis,
+        },
+        "entity": {
+            "canonical": entity_norm.canonical,
+            "matched_alias": entity_norm.matched_alias,
+            "aliases": entity_norm.aliases,
+            "predecessors": entity_norm.predecessors,
+            "subsidiaries": entity_norm.subsidiaries,
+        },
+        "title": {
+            "normalized_title": scored.normalized_title,
+        },
+    }
+    rec.query_plan_provenance = [
+        {
+            "lane_id": lane.id,
+            "lane_name": lane.name,
+            "source_lane": rec.source_lane,
+            "study_profile": profile.name,
+        }
+    ]
+    if rec.citation_provenance:
+        rec.query_plan_provenance.extend(rec.citation_provenance)
+    return scored
+
+
+def _proof_bundle_metadata(rec: PatentRecord, study_id: str) -> dict:
+    evidence = rec.evidence_record or _build_patent_evidence_record(rec, study_id)
+    critical = _parse_critical_date(study_id)
+    document_date = rec.priority_date or rec.publication_date or ""
+    phrases = ctrl_f_phrases(_record_signal_text(rec), rec.matched_keywords, limit=1)
+    return {
+        "publication": rec.pub_id,
+        "title": rec.title,
+        "original_document": rec.url,
+        "source_url": rec.url,
+        "archived_url": "",
+        "retrieval_timestamp": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "publication_date_evidence": {
+            "priority_date": rec.priority_date,
+            "publication_date": rec.publication_date,
+        },
+        "critical_date_comparison": {
+            "critical_date": critical,
+            "document_date_used": document_date,
+            "passes": date_ok(rec, critical),
+        },
+        "shortest_verbatim_highlight": phrases[0] if phrases else "",
+        "page_number": None,
+        "requirement_mapping": rec.req_rows,
+        "duplicate_check_result": {
+            "status": "BURNED" if rec.burned else "CLEAR",
+            "relation": rec.burn_relation,
+        },
+        "family_normalization_result": patent_key(rec.pub_id),
+        "access_status": _candidate_access_status(rec),
+        "reason_for_rank": rec.rank_reason,
+        "source_lane": rec.source_lane,
+        "doi": rec.doi,
+        "pdf_url": rec.pdf_url,
+        "uspto_pdf_url": rec.uspto_pdf_url,
+        "evidence_record": evidence.to_dict(),
+        "evidence_tier": evidence.tier.value,
+        "evidence_score": evidence.score,
+        "score_breakdown": evidence.score_breakdown,
+        "hard_gate_failures": evidence.hard_gate_failures,
+        "query_plan_provenance": rec.query_plan_provenance,
+        "normalization_results": rec.normalization_results,
+        "citation_provenance": rec.citation_provenance,
+    }
+
+
 def _req_table(rows: list[dict]) -> str:
     lines = ["| Requirement | Select? | Why |", "|---|---|---|"]
     for r in rows:
@@ -253,7 +579,7 @@ def _req_table(rows: list[dict]) -> str:
 
 def draft_candidate(rec: PatentRecord, study_id: str) -> str:
     pdf_line = rec.pdf_url or rec.uspto_pdf_url or rec.url
-    phrases = ctrl_f_phrases(rec.abstract or rec.title, rec.matched_keywords, limit=6)
+    phrases = ctrl_f_phrases(_record_signal_text(rec), rec.matched_keywords, limit=6)
     yes_reqs = [r for r in rec.req_rows if r["select"] == "yes"]
     no_reqs = [r for r in rec.req_rows if r["select"] == "no"][:5]
     highlights = yes_reqs[:3] if yes_reqs else rec.req_rows[:2]
@@ -274,7 +600,7 @@ def draft_candidate(rec: PatentRecord, study_id: str) -> str:
 
     adversarial = (
         f"Verify verbatim anchors in PDF before submit. "
-        f"{len(yes_reqs)} requirements auto-yes from abstract keywords."
+        f"{len(yes_reqs)} requirements auto-yes from document signals."
     )
 
     return f"""Dropdown: Patent
@@ -311,7 +637,7 @@ Highlight only this:
 Do NOT select:
 {dont_block}
 
-Coverage score: {len(yes_reqs)} of {len(rec.req_rows)} reqs auto-yes from abstract (verify claims)
+Coverage score: {len(yes_reqs)} of {len(rec.req_rows)} reqs auto-yes from document signals (verify claims)
 Adversarial note: {adversarial}
 Notes:
   - Burn check: python scripts/check_burned.py {study_id} {rec.pub_id} → {'BURNED' if rec.burned else 'CLEAR'}
@@ -363,6 +689,7 @@ class HuntEngine:
         self.results: list[PatentRecord] = []
         self.inspected = 0
         self.lanes_done: list[str] = []
+        self.citation_provenance_by_pub: dict[str, list[dict]] = {}
 
     def log(self, msg: str, level: str = "info") -> None:
         self.on_log(msg, level)
@@ -377,9 +704,12 @@ class HuntEngine:
         pub: str,
         source: str,
         burned: dict[str, str],
+        provenance: dict | None = None,
     ) -> bool:
         """Add to inspect queue only if NOT already known art."""
         key = patent_key(pub)
+        if provenance:
+            self.citation_provenance_by_pub.setdefault(key, []).append(dict(provenance))
         if key in seen:
             return False
         hit, _rel = is_burned(pub, burned)
@@ -388,6 +718,63 @@ class HuntEngine:
         seen.add(key)
         queue.append((pub, source))
         return True
+
+    def _write_lane_lead(self, folder: Path, record: EvidenceRecord) -> None:
+        cand_dir = folder / "candidates"
+        cand_dir.mkdir(exist_ok=True)
+        safe = re.sub(r"[^A-Za-z0-9]+", "_", record.publication_number or record.normalized_title or record.record_id)[:80]
+        path = cand_dir / f"LEAD_{safe}_RWS_format.txt"
+        citation = record.citation_graph or {}
+        lines = [
+            f"publication: {record.publication_number or citation.get('target_publication', '') or record.record_id}",
+            f"title: {record.raw_title or record.publication_number or record.record_id}",
+            f"Dropdown: {record.evidence_type.value} lead",
+            "Self-rank: 0/3",
+            "In-scope confidence: low",
+            f"  URL: {record.source_url}",
+            f"  PDF URL: {record.document_url}",
+            f"Source publication: {citation.get('source_publication', '')}",
+            f"Target publication: {citation.get('target_publication', '')}",
+            f"Hop count: {citation.get('hop_count', '')}",
+            f"Relation confidence: {citation.get('relation_confidence', '')}",
+            f"Duplicate status: {record.duplicate_status}",
+            "Status: LEAD ONLY — retrieve and validate the underlying source document before surfacing",
+        ]
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    def _write_patent_lead(
+        self, folder: Path, rec: PatentRecord, burned: dict[str, str] | None = None
+    ) -> None:
+        if not self._safe_to_surface(rec, burned):
+            self.log(f"BLOCKED lead {rec.pub_id} — known art (hard gate)", "skip")
+            return
+        cand_dir = folder / "candidates"
+        cand_dir.mkdir(exist_ok=True)
+        safe = patent_key(rec.pub_id)
+        path = cand_dir / f"LEAD_{safe}_RWS_format.txt"
+        yes_count = sum(1 for r in rec.req_rows if r["select"] == "yes")
+        maybe_count = sum(1 for r in rec.req_rows if r["select"] == "maybe")
+        lines = [
+            f"publication: {rec.pub_id}",
+            f"title: {rec.title}",
+            "Dropdown: Patent lead",
+            f"Self-rank: {rec.self_rank}/3",
+            f"In-scope confidence: {rec.confidence}",
+            f"  URL: {rec.url}",
+            f"  PDF URL: {rec.pdf_url}",
+            f"Priority date: {rec.priority_date}",
+            f"Publication date: {rec.publication_date}",
+            f"Assignee: {rec.assignee}",
+            f"Source lane: {rec.source_lane}",
+            f"Requirement yes count: {yes_count}",
+            f"Requirement maybe count: {maybe_count}",
+            f"Duplicate status: {'burned' if rec.burned else 'clear'}",
+            "Status: LEAD ONLY — needs stronger requirement support or validation before HOLD/READY",
+            "",
+            "Notes:",
+            f"  - {rec.rank_reason or 'Partial technical match only.'}",
+        ]
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     def run_deep(self) -> dict:
         meta = STUDY_META[self.study_id]
@@ -412,7 +799,7 @@ class HuntEngine:
         self.log(f"Starting DEEP hunt for {self.study_id} — {meta['title']}", "phase")
         self.log(
             f"Critical date ≤ {critical or 'unknown'} · {len(burned)} burned keys · "
-            f"max inspect {MAX_INSPECT} · burn gate ON · READY (rank ≥1, med/high conf, ≥1 yes OR ≥2 maybe)",
+            f"max inspect {MAX_INSPECT} · burn gate ON · READY (rank ≥2, med/high conf, PROOF, hard gates clear)",
             "info",
         )
 
@@ -431,8 +818,47 @@ class HuntEngine:
                 burned_skipped += 1
         self.lanes_done.append("L1")
 
-        # L2 — 2-hop citation expansion
-        self.log("L2: Citation graph 2-hop", "lane")
+        # L2 — citation, prosecution, and PTAB lead discovery
+        self.log("L2: Citation, prosecution, and PTAB lead discovery", "lane")
+        l2_runner = get_lane_runner("L2_PATENT_CITATIONS_PROSECUTION")
+        l2_result = l2_runner.run(
+            self.study_id,
+            publication_number=study_patent,
+            critical_date=critical,
+            known_art_set=burned,
+            citation_depth=1,
+            root_record=root,
+            fetch_patent_record=fetch_patent,
+        )
+        l2_queue_count = 0
+        l2_lead_files = 0
+        for evidence in l2_result.records:
+            citation = evidence.citation_graph or {}
+            target_pub = citation.get("target_publication") or evidence.publication_number
+            if evidence.evidence_type is EvidenceType.PATENT and target_pub:
+                added = self._queue_add(
+                    queue,
+                    seen,
+                    target_pub,
+                    f"L2-{citation.get('direction', 'citation')}",
+                    burned,
+                    provenance=citation,
+                )
+                if added:
+                    l2_queue_count += 1
+                continue
+            if evidence.tier is EvidenceTier.LEAD:
+                self._write_lane_lead(folder, evidence)
+                l2_lead_files += 1
+                self._update_candidate_screen(folder, ready, hold)
+        self.log(
+            f"  L2 leads: {len(l2_result.records)} records · {l2_queue_count} patent targets queued · {l2_lead_files} lead files",
+            "info",
+        )
+        self.lanes_done.append("L2")
+
+        # L2b — 2-hop citation expansion
+        self.log("L2b: Citation graph 2-hop", "lane")
         hop1 = [p for p, s in queue if s.startswith("L1")][:L2_HOP1_LIMIT]
         hop2: list[str] = []
         for pub in hop1:
@@ -441,21 +867,21 @@ class HuntEngine:
             rec = fetch_patent(pub)
             time.sleep(0.25)
             for cite in rec.citations[:L2_CITES_PER]:
-                if self._queue_add(queue, seen, cite, f"L2-via-{pub}", burned):
+                if self._queue_add(queue, seen, cite, f"L2b-via-{pub}", burned):
                     hop2.append(cite)
-        self.log(f"  L2 hop-1: {len(hop1)} parents · {len(hop2)} new cites queued", "info")
-        self.lanes_done.append("L2")
+        self.log(f"  L2b hop-1: {len(hop1)} parents · {len(hop2)} new cites queued", "info")
+        self.lanes_done.append("L2b")
 
-        # L2b — 3-hop citation graph (deeper backward expansion)
-        self.log("L2b: Citation graph 3-hop", "lane")
+        # L2c — 3-hop citation graph (deeper backward expansion)
+        self.log("L2c: Citation graph 3-hop", "lane")
         for pub in hop2[:L2_HOP3_LIMIT]:
             if self.stopped:
                 break
             rec = fetch_patent(pub)
             time.sleep(0.2)
             for cite in rec.citations[:12]:
-                self._queue_add(queue, seen, cite, f"L2b-via-{pub}", burned)
-        self.lanes_done.append("L2b")
+                self._queue_add(queue, seen, cite, f"L2c-via-{pub}", burned)
+        self.lanes_done.append("L2c")
 
         # L3 — assignee pre-date search
         self.log("L3: Assignee sweep (Google Patents search)", "lane")
@@ -525,6 +951,7 @@ class HuntEngine:
             rec = fetch_patent(pub)
             time.sleep(0.2)
             rec.source_lane = source
+            rec.citation_provenance = list(self.citation_provenance_by_pub.get(patent_key(pub), []))
             rec = burn_check(rec, self.study_id, burned)
             self.inspected += 1
             if self.inspected % 25 == 0:
@@ -558,15 +985,19 @@ class HuntEngine:
                 if self._safe_to_surface(rec, burned):
                     ready.append(rec)
                     self._write_candidate(folder, rec, ready=True, burned=burned)
+                    self._update_candidate_screen(folder, ready, hold)
                 else:
                     self.log(f"BLOCKED write {pub} — known art (hard gate)", "skip")
-            elif rec.self_rank >= HOLD_MIN_RANK or (rec.confidence == "med" and rec.self_rank >= 1):
+            elif is_hold(rec.self_rank, rec.confidence):
                 if self._safe_to_surface(rec, burned):
                     hold.append(rec)
                     self._write_candidate(folder, rec, ready=False, burned=burned)
+                    self._update_candidate_screen(folder, ready, hold)
                 else:
                     self.log(f"BLOCKED hold {pub} — known art (hard gate)", "skip")
             elif rec.score > 0:
+                self._write_patent_lead(folder, rec, burned=burned)
+                self._update_candidate_screen(folder, ready, hold)
                 self.log(
                     f"  ↳ {pub} — weak ({rec.self_rank}/{rec.confidence}, "
                     f"yes={sum(1 for r in rec.req_rows if r['select']=='yes')})",
@@ -647,23 +1078,31 @@ class HuntEngine:
                 continue
             if is_burned(q, burned)[0]:
                 continue
+            confidence, confidence_reason, matched_concepts = _npl_confidence_and_reason(q, meta, self.study_id)
+            if confidence == "low" and len(matched_concepts) < 2:
+                self.log(f"  SKIP NPL metadata mismatch: {doi} ({confidence_reason})", "skip")
+                continue
+            dropdown = _crossref_type_to_dropdown(meta)
+            pdf_line, access_line = _npl_access_fields(meta)
+            title = meta.get("title") or f"(Crossref lead for query: {q})"
+            date_value = meta.get("publication_date") or f"<= {critical or 'critical date'}"
             safe = re.sub(r"[^A-Za-z0-9]+", "_", q)[:40]
             path = cand_dir / f"NPL_{safe}_RWS_format.txt"
-            text = f"""Dropdown: NPL -> Article
-Downloadable PDF: yes + {meta.get('url') or 'check Unpaywall / school login'}
-Access: open | school
+            text = f"""Dropdown: {dropdown}
+Downloadable PDF: {pdf_line}
+Access: {access_line}
 
 Self-rank: 1/3
-In-scope confidence: med
+In-scope confidence: {confidence}
 (Bot: NPL lead — verify PDF + in-scope before surfacing to Angela.)
 
 Form fields:
-  title: (Crossref lead for query: {q})
-  authors: not found
+  title: {title}
+  authors: {meta.get('authors') or 'not found'}
   journal: {meta.get('journal') or 'not found'}
   DOI: {meta.get('doi')}
   ISSN: not found
-  publisher: not found
+  publisher: {meta.get('publisher') or 'not found'}
   date: ≤ {critical or 'critical date'}
   URL: {meta.get('url') or 'not found'}
 
@@ -683,6 +1122,9 @@ Do NOT select:
 
 Notes:
   - NPL adjacent lead from Crossref query: {q}
+  - Crossref type: {meta.get('type') or 'unknown'}
+  - Scope check: {confidence_reason}
+  - Matched concepts: {', '.join(matched_concepts) if matched_concepts else 'none'}
   - Hunt engine {datetime.now().strftime('%Y-%m-%d %H:%M')}
 """
             path.write_text(text, encoding="utf-8")
@@ -891,6 +1333,10 @@ Notes:
             "ready": rec.ready,
             "burned": rec.burned,
             "keywords": rec.matched_keywords,
+            "rank_reason": rec.rank_reason,
+            "evidence_tier": rec.evidence_tier,
+            "evidence_score": rec.evidence_score,
+            "hard_gate_failures": rec.hard_gate_failures,
             "url": rec.url,
         }
 
@@ -905,19 +1351,49 @@ Notes:
         safe = patent_key(rec.pub_id)
         prefix = "" if ready else "HOLD_"
         path = cand_dir / f"{prefix}{safe}_RWS_format.txt"
-        path.write_text(draft_candidate(rec, self.study_id), encoding="utf-8")
+        candidate_text = draft_candidate(rec, self.study_id)
+        path.write_text(candidate_text, encoding="utf-8")
+        if ready:
+            bundle_dir = cand_dir / "proof_bundles" / safe
+            write_ready_proof_bundle(
+                bundle_dir,
+                candidate_text=candidate_text,
+                source_snapshot_html=rec.source_snapshot_html,
+                metadata=_proof_bundle_metadata(rec, self.study_id),
+            )
         tier = "READY" if ready else "HOLD"
         self.log(f"Wrote {tier} → {path.name}", "success")
+
+    def _library_counts(self, folder: Path) -> dict[str, int]:
+        cand_dir = folder / "candidates"
+        counts = {"ready": 0, "hold": 0, "lead": 0}
+        if not cand_dir.exists():
+            return counts
+        for path in cand_dir.glob("*_RWS_format.txt"):
+            name = path.name
+            if name.startswith("HOLD_"):
+                counts["hold"] += 1
+            elif name.startswith(("NPL_", "PRODUCT_", "MUSIC_", "LEAD_")):
+                counts["lead"] += 1
+            else:
+                counts["ready"] += 1
+        return counts
 
     def _update_candidate_screen(
         self, folder: Path, ready: list[PatentRecord], hold: list[PatentRecord]
     ) -> None:
         screen = folder / "CANDIDATE_SCREEN.md"
         today = datetime.now().strftime("%Y-%m-%d %H:%M")
+        library = self._library_counts(folder)
         lines = [
             f"# Candidate Screen — updated {today}",
             "",
-            f"Inspected: {self.inspected} · READY: {len(ready)} · HOLD: {len(hold)}",
+            (
+                f"Inspected: {self.inspected} · READY this run: {len(ready)} · HOLD this run: {len(hold)}"
+            ),
+            (
+                f"Library: {library['lead']} LEAD · {library['hold']} HOLD · {library['ready']} READY"
+            ),
             "",
             "## READY (Self-rank ≥2, high/med)",
             "",

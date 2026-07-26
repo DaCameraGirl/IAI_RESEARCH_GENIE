@@ -16,6 +16,8 @@ import json
 import sys
 from collections.abc import Mapping
 from pathlib import Path
+from repo_paths import REPO_ROOT
+from brief_signals import augment_meta_from_brief
 
 for _stream in (sys.stdout, sys.stderr):
     try:
@@ -23,7 +25,7 @@ for _stream in (sys.stdout, sys.stderr):
     except (AttributeError, ValueError):
         pass
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = REPO_ROOT
 STATE_PATH = REPO / "bot_state.json"
 
 # Written into STUDY_BRIEF.md by add_study.py when it couldn't confidently
@@ -81,6 +83,7 @@ def _build_study_meta(study_id: str) -> dict:
     meta = dict(_META_DEFAULTS)
     meta.update(data)
     meta["folder"] = folder_name
+    meta = augment_meta_from_brief(meta, folder / "STUDY_BRIEF.md")
     meta["priority_req_ids"] = tuple(meta["priority_req_ids"])
     if not meta["title"]:
         meta["title"] = study_id

@@ -1,4 +1,9 @@
-AIA_RESEARCH_ASSISTANT
+# IAI Research Bot
+
+Specialized prior-art, NPL, product-evidence, and copyright research assistant.
+RWS is the current primary workflow, but the repo is structured as a reusable
+research operations system rather than an official RWS tool.
+
 
 Angela's project section for **RWS IP Research NPL submission work**.
 This is the canonical folder — all RWS-related agent prompts, study
@@ -16,6 +21,66 @@ Acceptable/Unacceptable).
 `system_prompt.md` contains the tuned agent system prompt that runs the
 research workflow — drop it into Claude Code, Claude.ai Projects, a
 Custom GPT, or any other LLM tool to spin up the RWS Researcher agent.
+
+## Research framework
+
+This repo now includes a reusable evidence framework layered under the
+existing RWS workflow.
+
+- **Evidence tiers**: every result is classified as exactly one of `LEAD`,
+  `CANDIDATE`, or `PROOF`.
+- **Lane architecture**: reusable lane definitions live under `scripts/lanes/`
+  and are activated by study profiles from `config/study_profiles.json`.
+- **Study profiles**: lane selection varies by study type instead of running
+  every lane for every study.
+- **Evidence scoring**: deterministic scoring lives in
+  `config/evidence_scoring.json` and `scripts/evidence_scoring.py`.
+- **Hard gates**: score does not override hard failures.
+- **READY policy**: canonical rank/confidence gating still applies on top of
+  evidence gating.
+
+### Evidence tiers
+
+- `LEAD`: useful for finding a better source, not submission-ready.
+- `CANDIDATE`: potentially usable evidence still missing one or more proof
+  requirements.
+- `PROOF`: auditable evidence with a stable proof bundle and no hard-gate
+  failures. Human review is still required before submission.
+
+### Hard gates
+
+READY requires all of the following:
+
+- existing READY policy passes (`Self-rank >= 2`, confidence `high|med`)
+- evidence tier is `PROOF`
+- pre-critical date is sufficiently verified
+- no known-art match
+- no known-family duplicate
+- explicit requirement support
+- accessible source document
+- verbatim highlight
+- requirement mapping
+
+### Lane framework
+
+Currently connected:
+
+- patent evidence conversion in `scripts/patent_hunter.py`
+- lane lookup from existing patent source labels
+- proof bundles enriched with evidence records, score breakdowns, hard gates,
+  query provenance, and normalization results
+
+Framework implemented for future lane expansion:
+
+- evidence schema
+- lane registry and lane-result contract
+- study profiles
+- patent/entity/title normalizers
+- ranked query-matrix planner
+- deterministic evidence scoring
+
+This system is research assistance for human review. It does **not** perform
+automatic RWS submissions, login automation, or platform scraping.
 
 ## Folder layout
 

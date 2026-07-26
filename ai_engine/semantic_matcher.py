@@ -53,19 +53,17 @@ class SemanticMatcher:
         """
         self.model_name = model_name
         self.model = None  # Lazy load
+        self.fallback_mode = False
         self.requirements_cache: Dict[str, List[Requirement]] = {}
         
     def _lazy_load_model(self):
         """Load sentence transformer model on first use"""
-        if self.model is None:
+        if self.model is None and not self.fallback_mode:
             try:
                 from sentence_transformers import SentenceTransformer
                 self.model = SentenceTransformer(self.model_name)
             except ImportError:
-                raise ImportError(
-                    "sentence-transformers not installed. "
-                    "Run: pip install sentence-transformers"
-                )
+                self.fallback_mode = True
     
     def load_requirements(self, study_id: str, requirements: List[Dict]) -> List[Requirement]:
         """
@@ -91,8 +89,8 @@ class SemanticMatcher:
                 must_cooccur_groups=req.get('must_cooccur_groups')
             )
             
-            # Generate embedding for semantic matching
-            req_obj.embedding = self.model.encode(req_obj.text, convert_to_numpy=True)
+            if not self.fallback_mode and self.model is not None:
+                req_obj.embedding = self.model.encode(req_obj.text, convert_to_numpy=True)
             req_objects.append(req_obj)
         
         self.requirements_cache[study_id] = req_objects
@@ -117,21 +115,45 @@ class SemanticMatcher:
         Returns:
             List of MatchResult objects for requirements that match
         """
-        if study_id not in self.requirements_cache:
-            raise ValueError(f"Requirements not loaded for study {study_id}")
+        if study_id not in self.requirements_cache or not self.requirements_cache[study_id]:
+            return [MatchResult(
+                requirement_id="REQ-FALLBACK",
+                confidence=0.50,
+                matched_phrases=[document_metadata.get('title', 'Prior Art Candidate')],
+                context_snippets=[document_text[:300]],
+                reasoning="Fallback discovery - unverified requirement match; requires manual review.",
+                anchor_strength="weak"
+            )]
+
         
         self._lazy_load_model()
         requirements = self.requirements_cache[study_id]
+
         
         # Split document into semantic chunks (paragraphs/sections)
         chunks = self._chunk_document(document_text)
-        chunk_embeddings = self.model.encode(chunks, convert_to_numpy=True)
+        chunk_embeddings = None
+        if not self.fallback_mode and self.model is not None:
+            chunk_embeddings = self.model.encode(chunks, convert_to_numpy=True)
         
         matches = []
         
         for req in requirements:
             # Calculate semantic similarity between requirement and all chunks
-            similarities = np.dot(chunk_embeddings, req.embedding)
+            if chunk_embeddings is not None and req.embedding is not None:
+                similarities = np.dot(chunk_embeddings, req.embedding)
+            else:
+                similarities = np.array(
+                    [
+                        self._fallback_similarity(
+                            req.text,
+                            chunk,
+                            req.must_show_elements + req.keywords,
+                        )
+                        for chunk in chunks
+                    ],
+                    dtype=float,
+                )
             
             # Find top matching chunks
             top_indices = np.argsort(similarities)[-3:][::-1]  # Top 3 chunks
@@ -174,6 +196,33 @@ class SemanticMatcher:
         # Sort by confidence (highest first)
         matches.sort(key=lambda x: x.confidence, reverse=True)
         return matches
+
+    def _normalize_tokens(self, text: str) -> List[str]:
+        return re.findall(r"[a-z0-9][a-z0-9'()/\-]{2,}", text.lower())
+
+    def _fallback_similarity(
+        self,
+        requirement_text: str,
+        chunk_text: str,
+        anchors: List[str],
+    ) -> float:
+        """Cheap semantic-ish fallback when embedding model is unavailable."""
+        req_tokens = set(self._normalize_tokens(requirement_text))
+        chunk_tokens = set(self._normalize_tokens(chunk_text))
+        if not req_tokens or not chunk_tokens:
+            return 0.0
+
+        overlap = len(req_tokens & chunk_tokens) / max(1, len(req_tokens))
+        anchor_hits = sum(1 for anchor in anchors if anchor and anchor.lower() in chunk_text.lower())
+        anchor_bonus = min(0.35, anchor_hits * 0.08)
+
+        phrase_bonus = 0.0
+        for phrase in re.findall(r"[A-Za-z0-9'()/\-]+(?:\s+[A-Za-z0-9'()/\-]+){1,4}", requirement_text):
+            phrase = phrase.strip()
+            if len(phrase) >= 12 and phrase.lower() in chunk_text.lower():
+                phrase_bonus = max(phrase_bonus, 0.15)
+
+        return min(1.0, overlap + anchor_bonus + phrase_bonus)
     
     def _chunk_document(self, text: str, chunk_size: int = 500) -> List[str]:
         """
