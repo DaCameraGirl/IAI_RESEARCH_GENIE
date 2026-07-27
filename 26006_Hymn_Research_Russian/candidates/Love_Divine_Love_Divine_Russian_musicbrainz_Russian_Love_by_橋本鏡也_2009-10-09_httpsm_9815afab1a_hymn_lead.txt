@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Love Divine
+Language: Russian
+Source: musicbrainz
+Title: Russian Love by 橋本鏡也 (2009-10-09)
+URL: https://musicbrainz.org/recording/edf94c57-d440-4363-af95-7e958039e812
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

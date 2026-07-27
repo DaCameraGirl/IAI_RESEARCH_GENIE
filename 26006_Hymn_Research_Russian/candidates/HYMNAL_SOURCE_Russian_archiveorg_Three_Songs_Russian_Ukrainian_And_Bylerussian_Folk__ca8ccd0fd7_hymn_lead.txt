@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Three Songs – Russian, Ukrainian And Bylerussian Folk Songs
+URL: https://archive.org/details/three-songs-russian-ukrainian-and-bylerussian-folk-songs-dnipro-1986
+Status: UNVERIFIED — open and search within before submitting anything from it

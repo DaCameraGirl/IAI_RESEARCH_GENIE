@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: archive.org
+Title: An annotated anthology of hymns
+URL: https://archive.org/details/annotatedantholo0000unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

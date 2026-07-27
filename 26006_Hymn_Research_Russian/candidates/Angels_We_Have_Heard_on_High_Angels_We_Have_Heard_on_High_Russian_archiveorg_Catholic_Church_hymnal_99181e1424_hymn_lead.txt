@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Angels We Have Heard on High
+Language: Russian
+Source: archive.org
+Title: Catholic Church hymnal with music
+URL: https://archive.org/details/CatholicChurchHymnalWithMusic
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

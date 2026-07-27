@@ -39,7 +39,7 @@ from study_bot import (  # noqa: E402
 # patent_hunter may not export list_candidates - that's in rws_gui. I'll define here or import from rws_gui logic
 
 PORT = 7842
-BUILD_VERSION = "v1.1 | 2026-07-26-v2-fresh"
+BUILD_VERSION = "v1.3 | 2026-07-26-poll-leak-fix"
 
 
 _hunt_threads: dict[str, threading.Thread] = {}
@@ -314,7 +314,8 @@ def _start_hunt(study_id: str) -> dict:
                 state = load_state()
                 if study_id in state["studies"]:
                     state["studies"][study_id]["candidates_found"] = _hunt_results[study_id].get("leads_found", 0)
-                    state["studies"][study_id]["rounds_completed"] = state["studies"][study_id].get("rounds_completed", 0) + 1
+                    if not _hunt_results[study_id].get("stopped"):
+                        state["studies"][study_id]["rounds_completed"] = state["studies"][study_id].get("rounds_completed", 0) + 1
                 save_state(state)
             except Exception as exc:
                 on_log(f"Hunt error: {exc}", "error")
@@ -945,16 +946,7 @@ async function loadCandidates() {
   const data = await api('/api/candidates?study=' + targetStudy);
   if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
 
-  // Client-side burn gate — never show known art even from stale files
-
-  const clear = [];
-  for (const c of data.candidates) {
-    const burn = await api('/api/burn-check', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study:targetStudy, pub:c.publication})});
-    if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
-    if (burn.clear) clear.push(c);
-  }
-  if (reqSeq !== candidateRequestSeq || targetStudy !== selectedStudy) return;
-  data.candidates = clear;
+  // Server already purges/flags burned candidates in _parse_candidates — no client re-check needed.
   if (!data.candidates.length) {
     list.innerHTML = `<div class="empty">${currentMeta()?.empty_candidates || 'No research records yet.'}</div>`;
     prev.style.display = 'none';
@@ -1026,6 +1018,10 @@ function pollLogs() {
       $('roundBtn').classList.add('blink');
       loadState();
       loadCandidates();
+    }
+    if (!state?.hunt_running) {
+      clearInterval(pollTimer);
+      pollTimer = null;
     }
   }, 600);
 }

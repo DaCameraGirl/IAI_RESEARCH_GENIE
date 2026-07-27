@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Angels We Have Heard of High
+Language: Russian
+Source: archive.org
+Title: Modern music and musicians for vocalists
+URL: https://archive.org/details/modernmusicmusic03newy
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

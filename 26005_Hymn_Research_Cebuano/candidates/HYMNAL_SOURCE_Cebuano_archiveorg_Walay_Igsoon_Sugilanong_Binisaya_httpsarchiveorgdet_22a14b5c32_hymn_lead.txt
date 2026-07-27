@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Cebuano
+Source: archive.org
+Title: Wala'y Igsoon.... (Sugilanon'g Binisaya)
+URL: https://archive.org/details/walayigsoonsugil47869gut
+Status: UNVERIFIED — open and search within before submitting anything from it

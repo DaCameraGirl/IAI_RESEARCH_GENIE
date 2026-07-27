@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Child Is This
+Language: Russian
+Source: archive.org
+Title: 140 Folk-Songs For Grades I, II, And III
+URL: https://archive.org/details/140folksongsrote00unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

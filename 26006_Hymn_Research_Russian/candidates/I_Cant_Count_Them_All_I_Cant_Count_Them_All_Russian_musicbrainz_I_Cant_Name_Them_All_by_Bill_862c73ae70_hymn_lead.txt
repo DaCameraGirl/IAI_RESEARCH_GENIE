@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: I Can't Count Them All
+Language: Russian
+Source: musicbrainz
+Title: I Can't Name Them All by Billy Bremner (2005)
+URL: https://musicbrainz.org/recording/6bb915a0-a444-4d9b-b606-fc142554382e
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

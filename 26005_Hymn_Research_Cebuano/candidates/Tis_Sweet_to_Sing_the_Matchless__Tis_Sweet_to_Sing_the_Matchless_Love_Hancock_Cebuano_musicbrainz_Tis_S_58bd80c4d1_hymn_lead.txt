@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Cebuano
+Source: musicbrainz
+Title: ’Tis Sweet to Sing the Matchless Love by Garth Smith (2014-03-06)
+URL: https://musicbrainz.org/recording/1e7c6bca-fe08-45c2-95e4-9b27d4399d03
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

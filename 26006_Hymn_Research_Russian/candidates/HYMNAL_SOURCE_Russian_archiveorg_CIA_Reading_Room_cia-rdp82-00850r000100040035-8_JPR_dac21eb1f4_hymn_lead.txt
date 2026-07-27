@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room cia-rdp82-00850r000100040035-8: JPRS ID: 8399 TRANSLATIONS ON USSR POLITICAL AND SOCIOLOGICAL AFFAIRS
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000100040035-8
+Status: UNVERIFIED — open and search within before submitting anything from it

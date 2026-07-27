@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The King of Love My Shepherd Is
+Language: Cebuano
+Source: musicbrainz
+Title: The King of Love My Shepherd Is by Brigham Young University Men's Chorus (2009)
+URL: https://musicbrainz.org/recording/a1dd9337-9a01-46a7-9048-d7f8882eb7ab
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

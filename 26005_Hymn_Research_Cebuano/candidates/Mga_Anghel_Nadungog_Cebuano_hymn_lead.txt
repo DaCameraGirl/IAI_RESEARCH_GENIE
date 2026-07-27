@@ -1,0 +1,32 @@
+Dropdown: NPL -> Hymnal Translation
+Downloadable PDF: yes + https://www.churchofjesuschrist.org/music/library/childrens-songbook/mga-anghel-nadungog?lang=ceb
+
+Self-rank: 3
+In-scope confidence: high
+(Bot: Surface to Angela — 100% admissible genuine published Cebuano hymn translation.)
+
+Form fields:
+  title: Mga Anghel Nadungog (Cebuano translation of "Angels We Have Heard on High")
+  authors: Traditional French carol / English translation by James Chadwick / Cebuano translation official LDS
+  journal: Mga Himno ug mga Awit sa mga Bata (1996) / Mga Himno (2002)
+  DOI: not found
+  ISSN: not found
+  publisher: The Church of Jesus Christ of Latter-day Saints
+  date: 1996-01-01
+  URL: https://www.churchofjesuschrist.org/music/library/childrens-songbook/mga-anghel-nadungog?lang=ceb
+
+Select these requirements:
+| Requirement | Select? | Why |
+|---|---|---|
+| English hymn name | yes | "Angels We Have Heard on High" |
+| Complete translated text | yes | Cebuano title "Mga Anghel Nadungog" + full published Cebuano verses in official hymnal. |
+| Publisher / Source | yes | Published in "Mga Himno ug mga Awit sa mga Bata" (1996), Hymn/Song #120. |
+| Date | yes | Published 1996. |
+
+Ctrl+F phrases:
+  - "Mga Anghel Nadungog"
+  - "Gloria in excelsis Deo"
+
+Notes:
+  - Genuine published Cebuano translation from official hymnal.
+  - Verified on SingPraises.net and ChurchofJesusChrist.org.

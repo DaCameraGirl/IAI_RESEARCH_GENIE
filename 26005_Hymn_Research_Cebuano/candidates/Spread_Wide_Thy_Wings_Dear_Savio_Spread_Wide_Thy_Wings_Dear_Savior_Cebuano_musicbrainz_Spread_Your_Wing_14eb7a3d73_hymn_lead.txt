@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Spread Wide Thy Wings, Dear Savior
+Language: Cebuano
+Source: musicbrainz
+Title: Spread Your Wings Wide by Anne Sofie von Otter (2001)
+URL: https://musicbrainz.org/recording/6660c983-7aca-41bf-8ea9-fd1d50793132
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

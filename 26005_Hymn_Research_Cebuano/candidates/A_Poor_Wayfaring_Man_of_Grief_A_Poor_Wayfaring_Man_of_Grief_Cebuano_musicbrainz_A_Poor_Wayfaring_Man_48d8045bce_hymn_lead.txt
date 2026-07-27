@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: A Poor Wayfaring Man of Grief
+Language: Cebuano
+Source: musicbrainz
+Title: A Poor Wayfaring Man of Grief by The Small - Clemente Duo (2006)
+URL: https://musicbrainz.org/recording/a78f603e-4894-4de7-bd18-82e9bacde806
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

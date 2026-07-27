@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: archive.org
+Title: The Beacon Song Collection - For Schools, Colleges and Choral Societies - Number One
+URL: https://archive.org/details/the-beacon-song-collection
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

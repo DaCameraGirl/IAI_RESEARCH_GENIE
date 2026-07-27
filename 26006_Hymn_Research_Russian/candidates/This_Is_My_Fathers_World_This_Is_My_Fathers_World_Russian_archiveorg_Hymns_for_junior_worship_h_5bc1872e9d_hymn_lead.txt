@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Russian
+Source: archive.org
+Title: Hymns for junior worship
+URL: https://archive.org/details/hymnsforjuniorwo1940unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

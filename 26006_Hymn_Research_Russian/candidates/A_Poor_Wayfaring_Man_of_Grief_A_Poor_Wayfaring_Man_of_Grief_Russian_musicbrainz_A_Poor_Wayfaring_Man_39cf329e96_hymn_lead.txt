@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: A Poor Wayfaring Man of Grief
+Language: Russian
+Source: musicbrainz
+Title: A Poor Wayfaring Man of Grief by Mark Geslison & Geoff Groberg (unknown)
+URL: https://musicbrainz.org/recording/93613e15-d0ea-44b1-afeb-a5701cb817ae
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

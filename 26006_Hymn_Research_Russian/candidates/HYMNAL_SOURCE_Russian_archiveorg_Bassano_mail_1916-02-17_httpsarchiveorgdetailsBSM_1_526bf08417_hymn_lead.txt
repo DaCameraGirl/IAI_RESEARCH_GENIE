@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Bassano mail (1916-02-17)
+URL: https://archive.org/details/BSM_1916021701
+Status: UNVERIFIED — open and search within before submitting anything from it

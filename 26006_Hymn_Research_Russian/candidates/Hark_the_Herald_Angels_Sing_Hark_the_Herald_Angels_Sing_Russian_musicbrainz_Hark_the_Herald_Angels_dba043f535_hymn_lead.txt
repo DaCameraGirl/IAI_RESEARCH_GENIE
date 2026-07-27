@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: musicbrainz
+Title: Hark the Herald Angels Sing by Bing Crosby (unknown)
+URL: https://musicbrainz.org/recording/d3b04c2b-40b8-43ba-a71d-f3076285fb48
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

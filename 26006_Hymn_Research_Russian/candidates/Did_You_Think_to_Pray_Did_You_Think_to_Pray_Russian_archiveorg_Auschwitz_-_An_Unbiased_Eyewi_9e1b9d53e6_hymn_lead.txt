@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Did You Think to Pray
+Language: Russian
+Source: archive.org
+Title: Auschwitz - An Unbiased Eyewitness Report
+URL: https://archive.org/details/1979auschwitzanunbiasedeyewitnessreportthieschristophersen
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: I Can't Count Them All
+Language: Russian
+Source: archive.org
+Title: The Blairmore enterprise (1914-03-20)
+URL: https://archive.org/details/BME_1914032001
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

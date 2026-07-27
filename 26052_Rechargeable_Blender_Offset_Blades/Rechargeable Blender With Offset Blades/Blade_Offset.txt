@@ -1,0 +1,66 @@
+Study ID
+26052
+Category
+Consumer Goods
+Research Type
+Invalidity
+Expiration Date
+04 August 2026
+Rewards Available
+$7,000
+This Study is directed to a device with offset blades to provide improved blending.
+
+ 
+Engineering Physics Food Technology General Engineering Machinery Mechanical Engineering Industrial & Product Design
+ Description
+This Study is directed to previously unidentified prior art references, including patent and non-patent literature.
+
+For this Study, we want to see a device with blades used for blending, mixing, and/or chopping the contents of a container, preferably for blending foodstuffs.  We are interested in rechargeable devices for the home, such as blenders or food processors, as well as industrial devices.  The main points we need to see are as follows:
+
+a set of blades or a rotor;
+a container;
+wherein the blades rotate around a rotational axis and blend the contents of the container
+wherein the  rotational axis of the blade is offset from the longitudinal axis of the container body (Please note the offset is from the longitudinal axis of the container, not the longitudinal axis of the base of the device);
+wherein the offset is between 5% and 15% of the diameter of the blades.
+ 
+
+Screenshot_2026-07-02_at_10.57.18_AM
+https://azuksaopblb01.blob.core.windows.net/studydocs/a79cb0136acfa2c25117b8c8f64647b0_26052-Screenshot_2026-07-02_at_10.57.18_AM.png
+
+
+https://azuksaopblb01.blob.core.windows.net/studydocs/96ade771d9d34215a9e63785839f2f91_26052-Screenshot_2026-07-02_at_10.57.54_AM.png
+
+      figure 9
+
+This provides a tornado effect for better blending.
+
+Please see Study patent for additional details.
+
+ Study Patents
+US11229891
+CPC Class: A47J
+Download
+ Research Requirements 
+Latest Date for Responses
+28 October 2019 
+Relevant Patent Dates:
+US Patent Date
+Priority Date
+US Application Date
+Priority Date
+EP Date
+Publication Date
+Other Patent Authorities
+Publication Date
+1 
+To satisfy, complete 3 priority 
+A blender configured to blend foodstuffs, the blender comprising: a base assembly, a container assembly, and control circuitry, further including:
+
+1.1 
+a set of blades configured to rotate around a rotational axis and blend foodstuffs, wherein the set of blades has a blade diameter during blending by the blender;
+
+1.2 
+wherein the rotational axis of the blade is offset from the longitudinal axis of the container body;
+
+1.3 
+wherein the offset is between 5% and 15% of the diameter of the blade.

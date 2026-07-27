@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: HYMNAL FOR EVANGELIC LUTHERAN CONGREGATIONS IN THE RUSSIAN EMPIRE
+URL: https://archive.org/details/hymnalforevangel0000vari
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Избранные малороссийские и галицкие песни и думы
+URL: https://archive.org/details/bandurista-1
+Status: UNVERIFIED — open and search within before submitting anything from it

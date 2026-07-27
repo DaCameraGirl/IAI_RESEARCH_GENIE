@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Do As I'm Doing
+Language: Russian
+Source: archive.org
+Title: Napoleon`s Ambition To Destroy Russia`s Destructive Influence
+URL: https://archive.org/details/napoleons-ambition-to-destroy-russias-destructive-influence
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

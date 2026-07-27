@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Only One Day, One Moment at a Time
+Language: Russian
+Source: musicbrainz
+Title: One Moment at a Time by Stephen Stills (unknown)
+URL: https://musicbrainz.org/recording/508a0645-d6a4-4847-91f1-408e00c41261
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

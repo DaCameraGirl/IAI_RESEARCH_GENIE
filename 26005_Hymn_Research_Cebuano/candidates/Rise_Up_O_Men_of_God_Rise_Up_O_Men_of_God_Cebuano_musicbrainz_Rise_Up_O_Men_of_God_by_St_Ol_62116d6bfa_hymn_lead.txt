@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rise Up, O Men of God
+Language: Cebuano
+Source: musicbrainz
+Title: Rise Up, O Men of God by St. Olaf Choir (1999)
+URL: https://musicbrainz.org/recording/5cdc6a89-0a4f-4f46-a79b-d05f83b507cd
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Cebuano
+Source: musicbrainz
+Title: This Is My Father's World by 2nd Chapter of Acts (1993)
+URL: https://musicbrainz.org/recording/c8b49495-03f6-4fdc-b66f-a79ae4e9484f
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

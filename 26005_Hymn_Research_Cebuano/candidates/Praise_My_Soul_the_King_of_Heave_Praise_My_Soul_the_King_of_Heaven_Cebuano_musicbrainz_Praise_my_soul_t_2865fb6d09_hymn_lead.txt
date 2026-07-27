@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise, my soul, the king of heaven! (Praise, my soul) by Wells Cathedral Choir (2024-02-16)
+URL: https://musicbrainz.org/recording/d4c7d4ca-c419-4b5d-9549-0b35456dfc19
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

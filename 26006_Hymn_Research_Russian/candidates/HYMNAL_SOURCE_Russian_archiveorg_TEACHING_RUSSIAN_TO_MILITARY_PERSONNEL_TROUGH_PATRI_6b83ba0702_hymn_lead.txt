@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: TEACHING RUSSIAN TO MILITARY PERSONNEL TROUGH PATRIOTIC SONGS LYRICS
+URL: https://archive.org/details/hosj-2025-vol-6-issue-1-serial-19-pp-62-70
+Status: UNVERIFIED — open and search within before submitting anything from it

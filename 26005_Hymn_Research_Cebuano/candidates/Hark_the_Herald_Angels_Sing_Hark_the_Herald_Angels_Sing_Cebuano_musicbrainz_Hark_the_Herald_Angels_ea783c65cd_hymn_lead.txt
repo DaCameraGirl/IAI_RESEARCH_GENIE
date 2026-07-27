@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: musicbrainz
+Title: Hark the Herald Angels Sing by Manhattan Strings (unknown)
+URL: https://musicbrainz.org/recording/06702a88-15c0-4684-86df-8bbd47b3e03d
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

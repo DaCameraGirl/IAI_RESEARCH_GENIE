@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: musicbrainz
+Title: Hark the Herald Angels Sing by Scarlet Rivera (1996)
+URL: https://musicbrainz.org/recording/c7f8e599-3271-4a58-9348-c2442c8266e5
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Wondrous Love Is This
+Language: Cebuano
+Source: musicbrainz
+Title: Wondrous Love (What Wondrous Love Is This) by William Appling Singers (2001)
+URL: https://musicbrainz.org/recording/880e8917-a2c0-404e-9688-13d17f44274c
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

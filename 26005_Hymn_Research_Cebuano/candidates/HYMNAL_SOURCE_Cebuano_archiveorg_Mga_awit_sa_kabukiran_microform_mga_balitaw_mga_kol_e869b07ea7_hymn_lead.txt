@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Cebuano
+Source: archive.org
+Title: Mga awit sa kabukiran [microform] : mga balitaw, mga kolilisi, mga garay ug mga balak
+URL: https://archive.org/details/aqr7923.0001.001.umich.edu
+Status: UNVERIFIED — open and search within before submitting anything from it

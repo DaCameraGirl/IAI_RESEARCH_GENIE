@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Organ 123. 2 Stave Miscellaneous
+URL: https://archive.org/details/birch_123up
+Status: UNVERIFIED — open and search within before submitting anything from it

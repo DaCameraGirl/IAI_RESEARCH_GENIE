@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Анна Марли: "Унесённая вдохновением..." / Веста (журнал) №12 Декабрь 2014
+URL: https://archive.org/details/B-001-052-472-2014-12-pp-52-53
+Status: UNVERIFIED — open and search within before submitting anything from it

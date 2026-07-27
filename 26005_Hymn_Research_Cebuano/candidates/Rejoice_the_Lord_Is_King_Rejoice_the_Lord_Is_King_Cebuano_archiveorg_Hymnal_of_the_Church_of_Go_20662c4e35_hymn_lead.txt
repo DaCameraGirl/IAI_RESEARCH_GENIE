@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Cebuano
+Source: archive.org
+Title: Hymnal of the Church of God
+URL: https://archive.org/details/hymnalofchurchof0000unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

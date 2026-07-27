@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Wondrous Love Is This
+Language: Cebuano
+Source: musicbrainz
+Title: What Wondrous Love Is This by Jack Jezzro (unknown)
+URL: https://musicbrainz.org/recording/88903ee5-cdfd-43ba-829d-b53459aef9c1
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

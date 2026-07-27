@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Child Is This
+Language: Russian
+Source: singpraises.net
+Title: Что за Дитя? (Дуэт или двухголосный хор) - Музыка из журнала Лиахона, Dec 2019, p. 8
+URL: https://singpraises.net/collections/ru/liahona-1967-2020/96405/2019-12-what-child-is-this
+Status: UNVERIFIED - public page includes Russian title, lyrics/PDF tabs, and source date/page details. This is a strong per-hymn lead but uses the 2019 Liahona music source rather than the 2005 hymnal.

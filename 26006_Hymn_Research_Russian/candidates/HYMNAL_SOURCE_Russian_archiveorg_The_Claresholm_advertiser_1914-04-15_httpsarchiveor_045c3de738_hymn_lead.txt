@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Claresholm advertiser (1914-04-15)
+URL: https://archive.org/details/CHA_1914041501
+Status: UNVERIFIED — open and search within before submitting anything from it

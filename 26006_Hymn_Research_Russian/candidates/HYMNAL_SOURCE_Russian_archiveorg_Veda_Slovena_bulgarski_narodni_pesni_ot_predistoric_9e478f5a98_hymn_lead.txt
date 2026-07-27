@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Veda Slovena : bŭlgarski narodni pesni ot predistorichno i predkhristii͡ansko doba
+URL: https://archive.org/details/vedaslovenablga01verkgoog
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Angels We Have Heard on High
+Language: Russian
+Source: musicbrainz
+Title: Angels We Have Heard on High by Chris Rice (2001)
+URL: https://musicbrainz.org/recording/d9fcf31b-92a0-4a0a-a193-acec9feaf92d
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

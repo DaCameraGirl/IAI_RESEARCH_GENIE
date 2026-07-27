@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Russian
+Source: musicbrainz
+Title: 'Tis Sweet to Sing the Matchless Love by Mark Geslison & Geoff Groberg (2015)
+URL: https://musicbrainz.org/recording/4559a53d-357d-48df-87b4-7609000f42d1
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

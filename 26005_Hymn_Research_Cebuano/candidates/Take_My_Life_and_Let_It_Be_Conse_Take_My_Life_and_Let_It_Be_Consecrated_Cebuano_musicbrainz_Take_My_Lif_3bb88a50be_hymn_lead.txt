@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Take My Life and Let It Be Consecrated
+Language: Cebuano
+Source: musicbrainz
+Title: Take My Life and Let It Be by Wayne Brassel (unknown)
+URL: https://musicbrainz.org/recording/b3fe81c0-954d-45fb-9dbb-2764a29c8e64
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

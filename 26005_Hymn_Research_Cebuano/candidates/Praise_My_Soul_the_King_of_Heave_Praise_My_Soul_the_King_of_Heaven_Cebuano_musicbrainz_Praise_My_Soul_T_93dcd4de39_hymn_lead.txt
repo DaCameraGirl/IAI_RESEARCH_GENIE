@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise My Soul (The King of Heaven) by The St. Philips Boy's Choir (2010)
+URL: https://musicbrainz.org/recording/3438726c-96cd-4bfa-b205-885853bc0774
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

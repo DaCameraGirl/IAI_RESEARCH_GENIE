@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Russian
+Source: musicbrainz
+Title: ’Tis Sweet to Sing the Matchless Love by The Church of Jesus Christ of Latter-day Saints (2022-05-10)
+URL: https://musicbrainz.org/recording/29dcb49b-f05d-4515-bdea-965986a99283
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

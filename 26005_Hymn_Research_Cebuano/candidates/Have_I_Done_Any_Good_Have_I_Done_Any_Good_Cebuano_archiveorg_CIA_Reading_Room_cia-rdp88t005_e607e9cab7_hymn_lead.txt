@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Have I Done Any Good
+Language: Cebuano
+Source: archive.org
+Title: CIA Reading Room cia-rdp88t00539r000300400002-2: PHILIPPINE COUNTERINSURGENCY: PROSPECTS FOR IMPROVEMENT UNDER THE AQUINO GOVERNMENT
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp88t00539r000300400002-2
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

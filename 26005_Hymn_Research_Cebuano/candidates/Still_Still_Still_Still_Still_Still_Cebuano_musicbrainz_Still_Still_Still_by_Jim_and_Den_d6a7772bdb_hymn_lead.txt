@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Still, Still, Still
+Language: Cebuano
+Source: musicbrainz
+Title: Still, Still, Still by Jim and Denise Beyer (unknown)
+URL: https://musicbrainz.org/recording/1ea4182a-5330-4dd9-b092-f7d95fb26711
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

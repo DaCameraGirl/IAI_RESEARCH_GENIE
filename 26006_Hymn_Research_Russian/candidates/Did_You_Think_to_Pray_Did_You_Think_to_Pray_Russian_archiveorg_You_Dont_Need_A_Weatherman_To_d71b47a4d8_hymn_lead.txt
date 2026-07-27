@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Did You Think to Pray
+Language: Russian
+Source: archive.org
+Title: You Don't Need A Weatherman To Know Which Way The Wind Blows
+URL: https://archive.org/details/YouDontNeedAWeathermanToKnowWhichWayTheWindBlows_925
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

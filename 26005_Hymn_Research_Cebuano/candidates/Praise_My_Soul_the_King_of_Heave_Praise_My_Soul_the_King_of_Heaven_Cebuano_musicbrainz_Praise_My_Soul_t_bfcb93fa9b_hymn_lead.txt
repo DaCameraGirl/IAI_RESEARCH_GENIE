@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise My Soul the King of Heaven by The Royal Choral Society (2001)
+URL: https://musicbrainz.org/recording/0edb6d1b-9b49-47ad-b226-dd22a85a00be
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

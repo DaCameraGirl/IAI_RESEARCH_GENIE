@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: musicbrainz
+Title: Hark the Herald Angels Sing by Neil Diamond (1992)
+URL: https://musicbrainz.org/recording/7abeff55-56fc-438d-b1ed-e81f35bfe7be
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

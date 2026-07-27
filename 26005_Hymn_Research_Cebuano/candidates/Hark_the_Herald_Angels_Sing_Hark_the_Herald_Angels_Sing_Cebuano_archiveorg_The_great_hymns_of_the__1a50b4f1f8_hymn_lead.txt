@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: archive.org
+Title: The great hymns of the church : their origin and authorship
+URL: https://archive.org/details/TheGreatHymnsOfTheChurch
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

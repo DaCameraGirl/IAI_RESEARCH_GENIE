@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: archive.org
+Title: The Scottish hymnal (appendix incorporated) : with tunes for use in churches
+URL: https://archive.org/details/scottishhymnala00scotgoog
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

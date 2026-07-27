@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Do As I'm Doing
+Language: Russian
+Source: musicbrainz
+Title: Do As I'm Doing by [unknown] (unknown)
+URL: https://musicbrainz.org/recording/e5d49497-67cc-4a80-9b0f-24dd39264b7f
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

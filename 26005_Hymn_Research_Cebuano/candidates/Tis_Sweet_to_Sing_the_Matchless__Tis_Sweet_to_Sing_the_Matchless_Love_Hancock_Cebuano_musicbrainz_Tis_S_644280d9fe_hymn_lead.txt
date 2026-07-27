@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Cebuano
+Source: musicbrainz
+Title: 'Tis Sweet To Sing The Matchless Love by Michael Dowdle (2001-10-01)
+URL: https://musicbrainz.org/recording/f754e5b1-4cd2-4d00-86fd-fadf56affdab
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

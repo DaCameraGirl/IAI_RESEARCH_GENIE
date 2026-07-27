@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Wondrous Love Is This
+Language: Russian
+Source: musicbrainz
+Title: What Wondrous Love Is This (Wondrous Love) by The Sunflower Trio (2015)
+URL: https://musicbrainz.org/recording/cb68e4ac-5814-4c79-bfd8-eb5bfb4318c8
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

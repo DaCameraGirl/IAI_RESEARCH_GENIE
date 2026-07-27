@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Wondrous Love Is This
+Language: Cebuano
+Source: musicbrainz
+Title: Wondrous Love. What wondrous love is this! by Anonymous 4 (unknown)
+URL: https://musicbrainz.org/recording/d06e5cc0-1bb2-406a-848e-180ce4b80fcc
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

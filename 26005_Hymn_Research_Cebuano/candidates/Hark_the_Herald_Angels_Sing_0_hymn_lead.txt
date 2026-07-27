@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: singpraises.net
+Title: Ang Anghel Paminawa! - Mga Himno, no. 128
+URL: https://singpraises.net/texts/ceb/209/hark-the-herald-angels-sing
+Status: UNVERIFIED - text page identifies Cebuano title, first line, and indexed source as Mga Himno (2002?), no. 128, with scanned page support indicated. Open the linked collection page/PDF before submitting.

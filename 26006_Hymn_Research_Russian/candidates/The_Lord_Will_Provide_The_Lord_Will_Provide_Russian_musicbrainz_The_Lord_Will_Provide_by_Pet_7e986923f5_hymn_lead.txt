@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Russian
+Source: musicbrainz
+Title: The Lord Will Provide by Peter Bellamy (1979)
+URL: https://musicbrainz.org/recording/e49348af-b9ad-4d05-96d5-82d28e95e23a
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

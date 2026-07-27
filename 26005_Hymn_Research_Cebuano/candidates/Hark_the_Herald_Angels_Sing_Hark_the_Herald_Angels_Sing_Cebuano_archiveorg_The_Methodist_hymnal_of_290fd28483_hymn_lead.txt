@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: archive.org
+Title: The Methodist hymnal : official hymnal of the Methodist Episcopal Church and the Methodist Episcopal Church, South
+URL: https://archive.org/details/methodisthymnal00churgoog
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

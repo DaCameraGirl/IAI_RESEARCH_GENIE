@@ -1,0 +1,96 @@
+26052 QUICK HANDOFF
+Date: 2026-07-26 (supersedes 2026-07-24 entries below)
+
+Current status
+- 0 READY (submission-ready), 3 PARTIAL, 1 REJECT, 0 entered/submitted to RWS yet
+- Do not submit the two NPL leads
+- Study remains HOLD / manual review only
+- Extensive additional searching (Rounds 7-8) completed: 4 partial candidates, all with RR1.3 gap
+
+Burn check re-run 2026-07-24 (Angela) — status changes since last handoff:
+- US20070297281A1 / US7766540B2 -> now BURNED (Manual). Previously listed
+  below as "best current hold #2" — that entry is stale, do not use.
+- US8800905 -> BURNED (Manual). Not previously analyzed, no loss.
+- CA2450764 -> confirmed BURNED (already known, consistent).
+- US11229891 family / US10792630 / US10702837 -> BURNED (study patent
+  family itself, expected).
+
+Do not surface
+- NPL_blender_offset_blade_vortex_mixing_produ_RWS_format
+  Reason: industrial helical ribbon blender paper, wrong device class
+- NPL_food_processor_eccentric_rotor_design_ma_RWS_format
+  Reason: Crossref mismatch to Nutrition Today, wrong subject matter
+
+Updated 2026-07-26 — NEW candidates added:
+4. Lacor 69194/69581/69587 — Spanish countertop blender with offset blade axis
+   Why it matters: ONLY reference found outside the study patent family that
+   documents BOTH a numeric offset (5mm in catalog diagram) AND explicit
+   rationale ("Creates uneven vortices, avoid blockages and make deeper cuts")
+   AND a "Patentado" label. Replacement blade diameter found: 135mm.
+   Gap: ratio = 5/135 = 3.7% (below 5-15% threshold). Countertop, not
+   handheld/rechargeable. Lacor patent itself never found — "Patentado" unlinked.
+   Alternate models 69581/69587 have different blades but no diameters available.
+   Product page published 2019-10-02 — pre-critical-date.
+   Source: sanhotel.com.mx catalog page 501, eunasa.com replacement blade no.126225
+
+5. Habitex SC29SS — Spanish brand countertop blender
+   Why it matters: "Cuchillas acero inoxidable descentradas" (offset SS blades)
+   confirmed in product listings. 1000W, 1.5L.
+   Gap: NO offset distance or blade diameter found anywhere (manual PDF checked).
+   No patent found for Habitex or parent Cadena 88. Not added as formal candidate.
+
+Best current holds (updated 2026-07-26)
+1. US20050207270A1 / US7217028B2 - Off-axis goblet for food mixer
+   Why it matters: explicit offset / non-collinear container axis vs mixing axis, plus vortex / turbulence rationale
+   Gap: no explicit 5%-15% offset-to-blade-diameter ratio; not handheld portable; transverse axes
+   URL: https://patents.google.com/patent/US20050207270
+   Note: WO2005089335 confirmed same PCT family, no new information.
+   Status: REJECT (transverse axes, not parallel-offset per RR1.2)
+
+2. CN206565828U / CN206565826U family
+   Why it matters: explicit eccentric distance L2 from cutter axis to cup-body axis (0-50mm), strong swirling / crushing rationale
+   Gap: not handheld portable blender; no blade diameter anywhere in specification
+   URLs:
+   - https://patents.google.com/patent/CN206565828U/en
+   - https://patents.google.com/patent/CN206565826U/en
+   Note: EP3476262 (CLEAR per burn check, Midea applicant, priority
+   2016-10-28) is same Midea family — redundant, not independent.
+   Status: PARTIAL (RR1.2 YES, RR1.3 NO — blade diameter missing)
+
+3. WO2014071994A1 / US9877612 / EP2916702 (Electrolux) - Blender with tilted rotary axis
+   Why it matters: Confirmed genuinely HANDHELD ("manually handleable by a user",
+   removable from base) — rare in this study.
+   Vortex/mixing rationale explicitly stated.
+   Gap: offset is angular TILT (5-20°), not lateral/parallel displacement.
+   No numeric lateral offset or blade diameter.
+   Status: PARTIAL (lateral offset is unquantified variant only; no dimensions)
+
+4. Lacor 69194/69581/69587 — Spanish countertop blender with offset blade axis (NEW)
+   Why it matters: 5mm offset documented in catalog with explicit rationale.
+   Blade diameter 135mm found in replacement parts. Pre-critical-date.
+   Gap: ratio = 3.7% below threshold. Countertop. Patent not found.
+   Status: PARTIAL (RR1.2 YES, RR1.3 NO — ratio too low)
+
+Checked and NOT added as candidates (2026-07-24):
+- GB2501499 -- CLEAR but weak: not handheld, offset is a dynamic
+  ball-and-socket wobble (not a fixed ratio), no numeric offset given.
+- EP3476262 -- Midea family duplicate of CN206565828/CN206565826.
+Checked and NOT added as candidates (2026-07-26):
+- Habitex SC29SS — "cuchillas descentradas" confirmed but NO dimensions available
+  anywhere (manual PDF inspected); no patent found
+
+Best next move
+- Tight manual claim map for US20050207270A1 / US7217028B2 (already REJECT —
+  transverse axes, not parallel offset)
+- Tight manual claim map for WO2014071994A1 (Electrolux) to resolve the
+  tilt-vs-lateral-offset question — still the strongest handheld candidate
+- Explore whether Lacor's blade diameter for models 69581/69587 differs from
+  69194's 135mm (could change ratio calculation)
+- Search for the actual Lacor patent via OEPM (Spanish Patent Office) direct
+  database search or Chinese OEM patent owned by Lacor's manufacturer
+- Do not let the app's 2 LEAD NPL items drive a submission
+
+Repo note
+- CANDIDATE_SCREEN.md updated 2026-07-26: Lacor added as 3rd PARTIAL
+- HUNT_LOG.md updated 2026-07-26: Rounds 7-8 added (Lacor + Habitex findings)
+- Not yet committed

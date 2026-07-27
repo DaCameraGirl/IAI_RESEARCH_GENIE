@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Still, Still, Still
+Language: Cebuano
+Source: musicbrainz
+Title: Still, Still, Still by Bruce Kurnow (unknown)
+URL: https://musicbrainz.org/recording/4726c5e9-ed84-4334-8a27-98e23269eab9
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Wondrous Love Is This
+Language: Cebuano
+Source: archive.org
+Title: Hymnal supplement 98
+URL: https://archive.org/details/hymnalsupplement0000luth
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

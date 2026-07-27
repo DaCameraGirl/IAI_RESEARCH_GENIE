@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: musicbrainz
+Title: Hark! The Herald Angels Sing by Lee Golding (unknown)
+URL: https://musicbrainz.org/recording/c04b4a05-1e20-4d5d-aa65-0dd6978b03f0
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

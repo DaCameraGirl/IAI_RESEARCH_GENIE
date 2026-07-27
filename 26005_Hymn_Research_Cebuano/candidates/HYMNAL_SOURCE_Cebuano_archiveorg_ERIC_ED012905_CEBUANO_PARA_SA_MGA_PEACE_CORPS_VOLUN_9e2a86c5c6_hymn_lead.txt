@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Cebuano
+Source: archive.org
+Title: ERIC ED012905: CEBUANO PARA SA MGA PEACE CORPS VOLUNTEERS. (CEBUANO FOR THE PEACE CORPS VOLUNTEERS).
+URL: https://archive.org/details/ERIC_ED012905
+Status: UNVERIFIED — open and search within before submitting anything from it

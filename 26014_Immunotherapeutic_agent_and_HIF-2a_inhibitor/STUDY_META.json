@@ -1,78 +1,44 @@
 {
-  "title": "Immunotherapeutic_agent_and_HIF-2a_inhibitor",
+  "title": "Immunotherapeutic Agent and HIF-2a Inhibitor",
   "type": "patent",
   "patent": "US10335388",
   "critical_date": "2015-04-17",
-  "focus": "See STUDY_BRIEF.md \u2014 Research Requirements",
+  "focus": "Combination therapy of HIF-2α inhibitor (belzutifan/PT2977/PT2385/MK-6482) with immunotherapeutic agent (pembrolizumab/nivolumab/ipilimumab/tremelimumab) for RCC, melanoma, or colorectal cancer",
   "keywords": [
-    "especially conference",
-    "conference abstracts",
-    "trials especially conference",
-    "especially conference abstracts",
-    "conference abstracts Please",
-    "clinical trials especially conference",
-    "trials especially conference abstracts",
-    "especially conference abstracts Please",
-    "conference abstracts Please see",
-    "early clinical trials especially conference",
-    "clinical trials especially conference abstracts",
-    "trials especially conference abstracts Please",
-    "especially conference abstracts Please see",
-    "conference abstracts Please see the",
-    "concerning early clinical trials especially conference",
-    "early clinical trials especially conference abstracts",
-    "clinical trials especially conference abstracts Please",
-    "trials especially conference abstracts Please see",
-    "especially conference abstracts Please see the",
-    "conference abstracts Please see the Study",
-    ") inhibitor in combination",
-    "an immunotherapeutic agent",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated",
-    "poor patient prognoses",
-    "Belzutifan is a small-molecule drug",
-    "the chemical formula C17H12F3NO4S",
-    "inhibitor can be administered in combination",
-    "an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
-    "conference"
+    "HIF-2a", "HIF-2alpha", "HIF2A", "hypoxia inducible factor 2", "belzutifan",
+    "PT2977", "PT2385", "MK-6482", "Peloton", "C17H12F3NO4S", "PD-1", "PD-L1",
+    "CTLA-4", "pembrolizumab", "nivolumab", "ipilimumab", "tremelimumab",
+    "renal cell carcinoma", "melanoma", "colorectal cancer", "combination therapy",
+    "clinical trial", "phase I", "phase 1", "conference abstract", "ASCO", "AACR"
   ],
   "requirements": [
-    {
-      "id": "1",
-      "name": "To satisfy, complete 4 priority there is also 1 optional A method of treating cancer comprising the steps of: 1.1 administering a HIF-2\u03b1 inhibitor; 1.2 administering an immunotherapeutic agent, specifically, a PD-1 inhibitor or a CTLA-4 inhibitor; 1.3 wherein the immunotherapeutic agent is pembrolizumab, nivolumab, tremelimumab, or ipilimumab; 1.4 wherein the HIF-2\u03b1 inhibitor is belzutifan; 1.5 wherein the cancer is one of the following: melanoma, renal cell carcinoma, or colorectal cancer.",
-      "keywords": []
-    }
+    {"id": "1.1", "name": "Administering a HIF-2α inhibitor (belzutifan / PT2385 / PT2977 / MK-6482)", "keywords": ["HIF-2a", "HIF-2alpha", "HIF2A", "belzutifan", "PT2977", "PT2385", "MK-6482", "Peloton", "EPAS1"]},
+    {"id": "1.2", "name": "Administering an immunotherapeutic agent (PD-1 or CTLA-4 inhibitor)", "keywords": ["PD-1", "PD-L1", "CTLA-4", "checkpoint inhibitor", "immunotherapeutic"]},
+    {"id": "1.3", "name": "Immunotherapeutic agent is pembrolizumab, nivolumab, tremelimumab, or ipilimumab", "keywords": ["pembrolizumab", "nivolumab", "tremelimumab", "ipilimumab", "Keytruda", "Opdivo", "Yervoy"]},
+    {"id": "1.4", "name": "HIF-2α inhibitor is belzutifan or PT2977/PT2385", "keywords": ["belzutifan", "PT2977", "PT2385", "MK-6482"]},
+    {"id": "1.5", "name": "Cancer is melanoma, renal cell carcinoma, or colorectal cancer", "keywords": ["melanoma", "renal cell carcinoma", "RCC", "colorectal cancer"]}
   ],
-  "priority_req_ids": [
-    "1"
-  ],
+  "priority_req_ids": ["1.1", "1.2", "1.3", "1.4", "1.5"],
   "synonym_queries": [
-    ") inhibitor in combination\" \"an immunotherapeutic agent",
-    ") inhibitor in combination\" solvent \"an immunotherapeutic agent",
-    ") inhibitor in combination\" solubilization \"an immunotherapeutic agent",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" \"poor patient prognoses",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solvent \"poor patient prognoses",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solubilization \"poor patient prognoses",
-    "Belzutifan is a small-molecule drug\" \"the chemical formula C17H12F3NO4S",
-    "Belzutifan is a small-molecule drug\" solvent \"the chemical formula C17H12F3NO4S",
-    "Belzutifan is a small-molecule drug\" solubilization \"the chemical formula C17H12F3NO4S",
-    "inhibitor can be administered in combination\" \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
-    "inhibitor can be administered in combination\" solvent \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma",
-    "inhibitor can be administered in combination\" solubilization \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma"
+    "PT2385 pembrolizumab combination renal cell carcinoma 2014",
+    "PT2977 nivolumab combination renal cell carcinoma 2014",
+    "HIF-2a inhibitor pembrolizumab combination clinical trial 2014",
+    "Peloton Therapeutics PT2385 PD-1 inhibitor combination 2014",
+    "PT2385 ipilimumab combination melanoma clinical trial 2014",
+    "belzutifan pembrolizumab combination therapy pre-2015",
+    "HIF-2alpha inhibitor CTLA-4 inhibitor combination pre-2015",
+    "PT2385 AACR 2014 abstract combination immunotherapy",
+    "PT2385 ASCO 2014 abstract renal cell carcinoma combination",
+    "WO2015095368 Peloton Therapeutics HIF-2a inhibitor combination"
   ],
-  "cpc_queries": [],
+  "cpc_queries": [
+    "A61K31/00 HIF-2a inhibitor combination",
+    "A61K39/395 anti-PD-1 antibody combination",
+    "A61P35/00 anti-cancer combination therapy"
+  ],
   "npl_queries": [
-    ") inhibitor in combination\" \"an immunotherapeutic agent\" conference abstract",
-    ") inhibitor in combination\" solvent \"an immunotherapeutic agent\" conference abstract",
-    ") inhibitor in combination\" solubilization \"an immunotherapeutic agent\" conference abstract",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" \"poor patient prognoses\" conference abstract",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solvent \"poor patient prognoses\" conference abstract",
-    "But HIFs are dysregulated in many cancers, and the expression of HIFs are associated\" solubilization \"poor patient prognoses\" conference abstract",
-    "Belzutifan is a small-molecule drug\" \"the chemical formula C17H12F3NO4S\" conference abstract",
-    "Belzutifan is a small-molecule drug\" solvent \"the chemical formula C17H12F3NO4S\" conference abstract",
-    "Belzutifan is a small-molecule drug\" solubilization \"the chemical formula C17H12F3NO4S\" conference abstract",
-    "inhibitor can be administered in combination\" \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract",
-    "inhibitor can be administered in combination\" solvent \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract",
-    "inhibitor can be administered in combination\" solubilization \"an immunotherapeutic agent to treat certain cancers including melanoma, renal cell carcinoma\" conference abstract"
+    "PT2385 pembrolizumab nivolumab combination ASCO AACR 2014 2015 abstract",
+    "Peloton Therapeutics HIF-2a inhibitor PD-1 CTLA-4 clinical trial protocol 2014"
   ],
-  "assignees": []
+  "assignees": ["Peloton Therapeutics Inc", "Merck Sharp & Dohme"]
 }

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Russian
+Source: musicbrainz
+Title: Rejoice, the Lord is King by Choir of St Mary’s, Fishponds (2015-11-22)
+URL: https://musicbrainz.org/recording/3547e328-abb6-4893-a80c-437df028d17d
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

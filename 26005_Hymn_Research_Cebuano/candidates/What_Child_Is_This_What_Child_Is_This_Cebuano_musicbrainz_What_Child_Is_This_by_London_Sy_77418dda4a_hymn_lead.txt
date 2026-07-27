@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Child Is This
+Language: Cebuano
+Source: musicbrainz
+Title: What Child Is This by London Symphony Orchestra (unknown)
+URL: https://musicbrainz.org/recording/9684e8b8-2368-49cc-b5d0-282fc7b1a4f7
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

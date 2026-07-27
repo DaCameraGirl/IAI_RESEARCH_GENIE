@@ -19,8 +19,8 @@
     "26052": {
       "folder": "26052_Rechargeable_Blender_Offset_Blades",
       "status": "queued",
-      "rounds_completed": 3,
-      "candidates_found": 3,
+      "rounds_completed": 5,
+      "candidates_found": 1,
       "submissions_made": 0,
       "lanes_complete": []
     },
@@ -34,9 +34,9 @@
     },
     "26005": {
       "folder": "26005_Hymn_Research_Cebuano",
-      "status": "queued",
-      "rounds_completed": 1,
-      "candidates_found": 0,
+      "status": "active",
+      "rounds_completed": 6,
+      "candidates_found": 30,
       "submissions_made": 0,
       "lanes_complete": []
     },
@@ -107,7 +107,7 @@
     "26014": {
       "folder": "26014_Immunotherapeutic_agent_and_HIF-2a_inhibitor",
       "status": "queued",
-      "rounds_completed": 1,
+      "rounds_completed": 2,
       "candidates_found": 0,
       "submissions_made": 0,
       "lanes_complete": []

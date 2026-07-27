@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: We Love Thy House, O God
+Language: Cebuano
+Source: musicbrainz
+Title: We Love Thy House, O God by Leroy J. Robertson (2008-05-16)
+URL: https://musicbrainz.org/recording/9285f198-157a-40ce-97f1-cf08ae3d6ff6
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

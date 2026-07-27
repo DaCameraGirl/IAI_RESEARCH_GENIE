@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Hong Kong Daily Press 1909-01-15
+URL: https://archive.org/details/NPDP19090115
+Status: UNVERIFIED — open and search within before submitting anything from it

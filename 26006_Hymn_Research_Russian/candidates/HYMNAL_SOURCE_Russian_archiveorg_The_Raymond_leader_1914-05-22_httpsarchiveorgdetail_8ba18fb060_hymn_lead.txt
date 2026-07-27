@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Raymond leader (1914-05-22)
+URL: https://archive.org/details/RML_1914052201
+Status: UNVERIFIED — open and search within before submitting anything from it

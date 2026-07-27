@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Take My Life and Let It Be Consecrated
+Language: Russian
+Source: musicbrainz
+Title: Take My Life and Let It Be by The Maranatha! Singers (unknown)
+URL: https://musicbrainz.org/recording/608e29db-9ba7-4610-bbe0-d48df6f67a82
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

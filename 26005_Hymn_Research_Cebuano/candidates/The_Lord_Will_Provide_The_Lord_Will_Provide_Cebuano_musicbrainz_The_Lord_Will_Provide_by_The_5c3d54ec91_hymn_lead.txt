@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Cebuano
+Source: musicbrainz
+Title: The Lord Will Provide by TheWorshiperS (unknown)
+URL: https://musicbrainz.org/recording/284d6e3c-92e8-48fb-9be0-0caf13b16029
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

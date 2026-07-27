@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Gateway (1940-03-01)
+URL: https://archive.org/details/GAT_1940030101
+Status: UNVERIFIED — open and search within before submitting anything from it

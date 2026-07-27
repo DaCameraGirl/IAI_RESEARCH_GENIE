@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise, my soul, the King of Heaven by Choir of St. George’s Chapel, Windsor (2011-04-09)
+URL: https://musicbrainz.org/recording/584a0428-cb52-4b5e-9215-e18287556a49
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

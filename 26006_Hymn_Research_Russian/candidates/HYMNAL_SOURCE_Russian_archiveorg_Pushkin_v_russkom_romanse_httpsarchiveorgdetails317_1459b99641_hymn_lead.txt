@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Pushkin v russkom romanse
+URL: https://archive.org/details/31761122693898
+Status: UNVERIFIED — open and search within before submitting anything from it

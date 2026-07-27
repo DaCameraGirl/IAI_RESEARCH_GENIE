@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: In Hymns of Praise
+Language: Russian
+Source: musicbrainz
+Title: In Hymns of Praise by Alfred Beirly (2008-05-16)
+URL: https://musicbrainz.org/recording/4367cd33-5d95-4075-b8c7-66fee4e10a0b
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

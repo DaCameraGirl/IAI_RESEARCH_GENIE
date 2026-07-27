@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: True to the Faith
+Language: Russian
+Source: archive.org
+Title: Theological study in the Russian and Bulgarian orthodox churches under Communist rule
+URL: https://archive.org/details/theologicalstudy0000joha
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rise Up, O Men of God
+Language: Cebuano
+Source: musicbrainz
+Title: Rise Up o Men of God by Alasdair Trotter (unknown)
+URL: https://musicbrainz.org/recording/461c79df-b416-485b-b806-9d652372ac41
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

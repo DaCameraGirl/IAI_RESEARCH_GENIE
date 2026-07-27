@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Oh, Come, All Ye Faithful
+Language: Russian
+Source: singpraises.net
+Title: Придите, кто верен - Гимны, no. 117
+URL: https://singpraises.net/collections/ru/hymns/oh-come-all-ye-faithful
+Status: UNVERIFIED - collection page exposes Russian title and first line; confirm the scanned page/PDF and bibliographic screenshot before submitting. Indexed in Гимны (2005, 2005?), no. 117.

@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Fifty Christmas carols of all nations / selected, harmonized and edited by Eduardo Marzo.
+URL: https://archive.org/details/uclamusic_9921601523606533
+Status: UNVERIFIED — open and search within before submitting anything from it

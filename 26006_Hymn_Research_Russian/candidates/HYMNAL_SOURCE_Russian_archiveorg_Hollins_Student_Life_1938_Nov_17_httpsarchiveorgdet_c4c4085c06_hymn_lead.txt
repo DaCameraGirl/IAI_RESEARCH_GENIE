@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Hollins Student Life (1938 Nov 17)
+URL: https://archive.org/details/digitalcommons.hollins.edu_newspapers-1127
+Status: UNVERIFIED — open and search within before submitting anything from it

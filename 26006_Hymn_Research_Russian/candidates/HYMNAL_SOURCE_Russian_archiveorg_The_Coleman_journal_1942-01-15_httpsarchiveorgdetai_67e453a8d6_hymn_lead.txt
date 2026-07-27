@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Coleman journal (1942-01-15)
+URL: https://archive.org/details/CMJ_1942011501
+Status: UNVERIFIED — open and search within before submitting anything from it

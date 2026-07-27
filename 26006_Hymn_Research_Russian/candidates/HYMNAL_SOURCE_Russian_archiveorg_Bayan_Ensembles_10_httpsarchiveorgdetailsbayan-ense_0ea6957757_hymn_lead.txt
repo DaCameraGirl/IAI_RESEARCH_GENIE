@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Bayan Ensembles 10
+URL: https://archive.org/details/bayan-ensembles-10
+Status: UNVERIFIED — open and search within before submitting anything from it

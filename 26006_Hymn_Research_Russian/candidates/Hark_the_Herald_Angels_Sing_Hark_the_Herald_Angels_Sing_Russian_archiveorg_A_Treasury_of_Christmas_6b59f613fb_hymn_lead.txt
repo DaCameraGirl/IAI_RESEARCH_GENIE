@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: archive.org
+Title: A Treasury of Christmas classics
+URL: https://archive.org/details/treasuryofchrist0000unse_x6o6
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

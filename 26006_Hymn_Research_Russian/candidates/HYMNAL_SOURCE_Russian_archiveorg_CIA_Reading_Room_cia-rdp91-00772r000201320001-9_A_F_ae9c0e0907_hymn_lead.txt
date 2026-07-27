@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room cia-rdp91-00772r000201320001-9: A FR: L.A. SALTOVSKAYA TO: FRANTISEK SAMALIK
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp91-00772r000201320001-9
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Cebuano
+Source: musicbrainz
+Title: The Lord Will Provide by Chris Murphy (unknown)
+URL: https://musicbrainz.org/recording/5e91be88-c06c-484a-86ea-915d99a6e353
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

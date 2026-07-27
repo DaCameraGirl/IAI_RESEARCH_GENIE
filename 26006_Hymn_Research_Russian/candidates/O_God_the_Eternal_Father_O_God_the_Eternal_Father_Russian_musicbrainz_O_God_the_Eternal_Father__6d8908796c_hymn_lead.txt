@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: O God, the Eternal Father
+Language: Russian
+Source: musicbrainz
+Title: O God, the Eternal Father by Felix Mendelssohn (2008-05-16)
+URL: https://musicbrainz.org/recording/b3e98caf-af5f-4e9e-bf64-6f2b3f46d0da
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

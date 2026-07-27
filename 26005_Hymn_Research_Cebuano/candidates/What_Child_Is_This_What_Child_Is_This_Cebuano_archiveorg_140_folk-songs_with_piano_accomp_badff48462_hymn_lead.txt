@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Child Is This
+Language: Cebuano
+Source: archive.org
+Title: 140 folk-songs with piano accompaniment : rote songs for grades I, II and III
+URL: https://archive.org/details/140folksongswith00davi
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

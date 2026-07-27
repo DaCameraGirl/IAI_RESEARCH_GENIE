@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: singpraises.net
+Title: Внемли Ангельским вестям - Гимны, no. 124
+URL: https://singpraises.net/texts/ru/209/hark-the-herald-angels-sing
+Status: UNVERIFIED - text page identifies Russian title, first line, and indexed source as Гимны (2005?), no. 124, with scanned page support indicated. Open source page and capture the linked collection page/PDF before submitting.

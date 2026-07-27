@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Russian
+Source: musicbrainz
+Title: This Is My Father's World by Annie Moses Band (2006)
+URL: https://musicbrainz.org/recording/256360ad-825d-4c51-951c-e2f3d6c02ba3
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

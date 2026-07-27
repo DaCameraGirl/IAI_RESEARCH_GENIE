@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Did You Think to Pray
+Language: Cebuano
+Source: musicbrainz
+Title: Did You Think to Pray? by George Beverly Shea (1994)
+URL: https://musicbrainz.org/recording/a529bd66-4166-4457-b35f-ea6edeea8303
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment
