@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: O God, the Eternal Father
-Language: Russian
-Source: musicbrainz
-Title: O God, The Eternal Father by The Church of Jesus Christ of Latter-day Saints (1992)
-URL: https://musicbrainz.org/recording/ccf7664c-6b62-45d8-98d5-f3e389ac8837
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

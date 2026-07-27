@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Love Divine
-Language: Russian
-Source: musicbrainz
-Title: Russian Love by Bert Blackmont and The Bucks (2016)
-URL: https://musicbrainz.org/recording/6e8b67c2-7d14-4efc-824c-18686957b70b
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Russian
-Source: musicbrainz
-Title: True to the Faith by Allan Zavod (2006)
-URL: https://musicbrainz.org/recording/1f6de2d4-78cf-484b-a3a4-d8c489615d55
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

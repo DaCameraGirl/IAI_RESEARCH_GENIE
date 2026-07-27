@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Jesus Calls Us
-Language: Russian
-Source: musicbrainz
-Title: RUSSIAN JESUS by McLoud (2024-09-01)
-URL: https://musicbrainz.org/recording/de26086d-2fc0-443f-8f20-188413a69309
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

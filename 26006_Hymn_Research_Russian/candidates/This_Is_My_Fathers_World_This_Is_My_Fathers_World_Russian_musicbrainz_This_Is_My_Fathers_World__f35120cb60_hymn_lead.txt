@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: This Is My Father's World
-Language: Russian
-Source: musicbrainz
-Title: This Is My Father's World by The Heaven's Sake Kids (unknown)
-URL: https://musicbrainz.org/recording/114dbb56-2f6d-4055-9dd7-1b90b5b4cb63
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

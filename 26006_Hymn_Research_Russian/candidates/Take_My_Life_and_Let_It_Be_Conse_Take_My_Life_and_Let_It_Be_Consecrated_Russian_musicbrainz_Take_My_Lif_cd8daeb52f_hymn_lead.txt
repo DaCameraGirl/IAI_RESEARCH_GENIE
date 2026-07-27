@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Take My Life and Let It Be Consecrated
-Language: Russian
-Source: musicbrainz
-Title: Take My Life, and Let It Be Consecrated by Bob Jones University Brass Choirs and Ensembles (unknown)
-URL: https://musicbrainz.org/recording/b45abfca-a548-4ef6-b6af-c2da10e2dea4
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

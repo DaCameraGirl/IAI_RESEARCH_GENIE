@@ -116,6 +116,12 @@ def _parse_hymn_lead(path: Path, text: str) -> dict:
 
     hymn = field("Hymn")
     title = field("Title")
+    source = field("Source").lower()
+    
+    # Quarantine MusicBrainz and Discogs leads - these are music recordings
+    # (rock bands, pop songs) not published hymnals with translator info
+    quarantined = source in {"musicbrainz", "discogs"}
+    
     return {
         "file": path.name,
         "publication": hymn or title or path.stem,
@@ -126,10 +132,11 @@ def _parse_hymn_lead(path: Path, text: str) -> dict:
         "rank": 0,
         "confidence": "low",
         "ready": False,
-        "tier": "LEAD",
+        "tier": "LEGACY_QUARANTINED" if quarantined else "LEAD",
         "burned": False,
-        "burn_relation": "",
+        "burn_relation": "Inappropriate source (music recording API)" if quarantined else "",
         "text": text,
+        "quarantined": quarantined,
     }
 
 
@@ -155,10 +162,19 @@ def _parse_candidates(study_id: str, burned: dict[str, str] | None = None) -> li
     if not folder.exists():
         return []
     out = []
+    quarantined_count = 0
     seen_files = set()
     for path in sorted(folder.glob("*_hymn_lead.txt")):
         seen_files.add(path.name)
-        out.append(_parse_hymn_lead(path, path.read_text(encoding="utf-8", errors="replace")))
+        lead = _parse_hymn_lead(path, path.read_text(encoding="utf-8", errors="replace"))
+        if lead.get("quarantined"):
+            quarantined_count += 1
+            continue  # Skip quarantined leads - don't show in dashboard
+        out.append(lead)
+    
+    # Log quarantine count for audit trail
+    if quarantined_count > 0:
+        print(f"[AUDIT] {study_id}: {quarantined_count} legacy MusicBrainz/Discogs leads quarantined")
     for path in sorted(list(folder.glob("*.txt")) + list(folder.glob("*.md"))):
         if path.name in seen_files:
             continue

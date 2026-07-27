@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: What Wondrous Love Is This
-Language: Russian
-Source: musicbrainz
-Title: What Wondrous Love Is This by Tony Guerrero (unknown)
-URL: https://musicbrainz.org/recording/9d00dcfa-bf58-4736-96a1-dc810481d2df
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

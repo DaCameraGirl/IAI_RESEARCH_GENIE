@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Awake, My Heart
-Language: Russian
-Source: musicbrainz
-Title: My Russian Heart by Daphna Sadeh and the Voyagers (2007)
-URL: https://musicbrainz.org/recording/9ff5b114-662a-489a-b6e5-3375eaa1902a
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

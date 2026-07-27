@@ -27,7 +27,6 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from typing import Callable
-from repo_paths import REPO_ROOT, SCRIPTS_DIR
 
 for _stream in (sys.stdout, sys.stderr):
     try:
@@ -35,11 +34,37 @@ for _stream in (sys.stdout, sys.stderr):
     except (AttributeError, ValueError):
         pass
 
-REPO = REPO_ROOT
-sys.path.insert(0, str(SCRIPTS_DIR))
+# Set up paths
+REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO / "scripts"))
 from study_bot import STUDY_META  # noqa: E402
 
 LogFn = Callable[[str, str], None]
+
+
+def _load_title_mappings(study_folder: Path, language: str) -> dict[str, str]:
+    """Load hymn title mappings from HYMN_TITLES_{LANGUAGE}.txt if it exists.
+    Returns dict mapping English title -> translated title.
+    """
+    mapping_file = study_folder / f"HYMN_TITLES_{language.upper()}.txt"
+    if not mapping_file.exists():
+        return {}
+    
+    mappings = {}
+    for line in mapping_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if "|" not in line:
+            continue
+        parts = line.split("|", 1)
+        if len(parts) == 2:
+            english = parts[0].strip()
+            translated = parts[1].strip()
+            if english and translated:
+                mappings[english] = translated
+    return mappings
+
 
 IA_SEARCH_URL = "https://archive.org/advancedsearch.php"
 GB_SEARCH_URL = "https://www.googleapis.com/books/v1/volumes"
@@ -133,13 +158,15 @@ def search_hymnal_sources(language: str, rows: int = 8) -> list[dict]:
     return out
 
 
-def search_internet_archive(hymn_title: str, language: str, rows: int = 5) -> list[dict]:
+def search_internet_archive(hymn_title: str, language: str, rows: int = 5, translated_title: str | None = None) -> list[dict]:
     """Per-hymn search — lower yield than search_hymnal_sources() since a
     foreign hymnal's own metadata rarely contains the English title, but
     occasionally surfaces a direct hit (verified live against real hymn
     titles). mediatype:(texts) is required — without it, results are
     dominated by radio broadcast / sermon audio transcripts that merely
     co-mention the title and the language name.
+    
+    If translated_title is provided, searches for that instead of the English title.
     """
     # Add language-specific keywords to filter out English sources
     lang_keywords = {
@@ -174,17 +201,22 @@ def search_internet_archive(hymn_title: str, language: str, rows: int = 5) -> li
         "Danish": "sang OR salme",
         "Finnish": "laulu OR virsi"
     }
+    # Use translated title if provided, otherwise fall back to English
+    search_title = translated_title if translated_title else hymn_title
     extra = lang_keywords.get(language, "")
     lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
     if extra:
-        query = f'"{hymn_title}" AND ({lang_expr}) AND ({extra}) AND mediatype:(texts)'
+        query = f'"{search_title}" AND ({lang_expr}) AND ({extra}) AND mediatype:(texts)'
     else:
-        query = f'"{hymn_title}" AND ({lang_expr}) AND mediatype:(texts)'
+        query = f'"{search_title}" AND ({lang_expr}) AND mediatype:(texts)'
     return _ia_search(query, rows)
 
 
-def search_google_books(hymn_title: str, language: str, language_code: str | None, rows: int = 5) -> list[dict]:
-    """Real, keyless (free-tier) search against the Google Books API."""
+def search_google_books(hymn_title: str, language: str, language_code: str | None, rows: int = 5, translated_title: str | None = None) -> list[dict]:
+    """Real, keyless (free-tier) search against the Google Books API.
+    
+    If translated_title is provided, searches for that instead of the English title.
+    """
     # Add language-specific keywords to improve relevance
     lang_keywords = {
         "Italian": "inno OR innario",
@@ -218,9 +250,11 @@ def search_google_books(hymn_title: str, language: str, language_code: str | Non
         "Danish": "sang OR salme",
         "Finnish": "laulu OR virsi"
     }
+    # Use translated title if provided, otherwise fall back to English
+    search_title = translated_title if translated_title else hymn_title
     extra = lang_keywords.get(language, "hymnal")
     lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
-    query = f'"{hymn_title}" {lang_expr} {extra}'
+    query = f'"{search_title}" {lang_expr} {extra}'
     params = {"q": query, "maxResults": str(rows)}
     if language_code:
         params["langRestrict"] = language_code
@@ -247,7 +281,7 @@ def search_google_books(hymn_title: str, language: str, language_code: str | Non
     return out
 
 
-def search_hathitrust(hymn_title: str, language: str, rows: int = 5) -> list[dict]:
+def search_hathitrust(hymn_title: str, language: str, rows: int = 5, translated_title: str | None = None) -> list[dict]:
     """Search HathiTrust Digital Library catalog."""
     lang_keywords = {
         "Italian": "inno innario",
@@ -281,9 +315,11 @@ def search_hathitrust(hymn_title: str, language: str, rows: int = 5) -> list[dic
         "Danish": "sang salme",
         "Finnish": "laulu virsi"
     }
+    # Use translated title if provided, otherwise fall back to English
+    search_title = translated_title if translated_title else hymn_title
     extra = lang_keywords.get(language, "hymnal")
     lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
-    query = f'"{hymn_title}" {lang_expr} {extra}'
+    query = f'"{search_title}" {lang_expr} {extra}'
     
     # HathiTrust catalog search (web scraping fallback since API requires auth)
     search_url = f"https://catalog.hathitrust.org/Search/Home?lookfor={urllib.parse.quote(query)}&type=all"
@@ -308,8 +344,11 @@ def search_hathitrust(hymn_title: str, language: str, rows: int = 5) -> list[dic
         return []
 
 
-def search_worldcat(hymn_title: str, language: str, rows: int = 3) -> list[dict]:
-    """Search WorldCat library catalog."""
+def search_worldcat(hymn_title: str, language: str, rows: int = 3, translated_title: str | None = None) -> list[dict]:
+    """Search WorldCat library catalog.
+    
+    If translated_title is provided, searches for that instead of the English title.
+    """
     lang_keywords = {
         "Italian": "inno",
         "Russian": "гимн",
@@ -342,9 +381,11 @@ def search_worldcat(hymn_title: str, language: str, rows: int = 3) -> list[dict]
         "Danish": "sang",
         "Finnish": "laulu"
     }
+    # Use translated title if provided, otherwise fall back to English
+    search_title = translated_title if translated_title else hymn_title
     extra = lang_keywords.get(language, "hymnal")
     lang_expr = LANGUAGE_QUERY_TERMS.get(language, f'"{language}"')
-    query = f'"{hymn_title}" {lang_expr} {extra}'
+    query = f'"{search_title}" {lang_expr} {extra}'
     
     search_url = f"https://www.worldcat.org/search?q={urllib.parse.quote(query)}&qt=results_page"
     
@@ -547,6 +588,11 @@ class HymnHuntEngine:
         language = meta.get("language") or meta["title"]
         language_code = meta.get("language_code")
 
+        # Load title mappings if available
+        title_mappings = _load_title_mappings(folder, language)
+        if title_mappings:
+            self.log(f"Loaded {len(title_mappings)} title mappings for {language}", "info")
+
         hymns = self._load_hymn_list(folder)
         if not hymns:
             self.log(
@@ -572,36 +618,35 @@ class HymnHuntEngine:
             if self.stopped:
                 self.log("Hunt stopped by user", "warn")
                 break
+            
+            # Get translated title if available
+            translated = title_mappings.get(hymn)
+            if translated:
+                self.log(f"  {hymn} → {translated}", "info")
+            
             self.log(f"  {hymn}: checking archive.org", "info")
-            hits = search_internet_archive(hymn, language)
+            hits = search_internet_archive(hymn, language, translated_title=translated)
             if not self._pause():
                 self.log("Hunt stopped by user", "warn")
                 break
             self.log(f"  {hymn}: checking Google Books", "info")
-            hits += search_google_books(hymn, language, language_code)
+            hits += search_google_books(hymn, language, language_code, translated_title=translated)
             if not self._pause():
                 self.log("Hunt stopped by user", "warn")
                 break
             self.log(f"  {hymn}: checking HathiTrust", "info")
-            hits += search_hathitrust(hymn, language)
+            hits += search_hathitrust(hymn, language, translated_title=translated)
             if not self._pause():
                 self.log("Hunt stopped by user", "warn")
                 break
             self.log(f"  {hymn}: checking WorldCat", "info")
-            hits += search_worldcat(hymn, language)
+            hits += search_worldcat(hymn, language, translated_title=translated)
             if not self._pause():
                 self.log("Hunt stopped by user", "warn")
                 break
-            self.log(f"  {hymn}: checking MusicBrainz", "info")
-            hits += search_musicbrainz_hymn(hymn, language)
-            if not self._pause():
-                self.log("Hunt stopped by user", "warn")
-                break
-            self.log(f"  {hymn}: checking Discogs", "info")
-            hits += search_discogs_hymn(hymn, language)
-            if not self._pause():
-                self.log("Hunt stopped by user", "warn")
-                break
+            # MusicBrainz and Discogs disabled for hymn studies - these APIs return
+            # music recordings (rock bands, pop songs) not published hymnals with
+            # translator info required by RWS
             hits = filter_hymn_hits(hits, language)
             self.hymns_searched += 1
             if hits:

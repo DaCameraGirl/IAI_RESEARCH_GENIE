@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Love Divine
-Language: Russian
-Source: musicbrainz
-Title: Russian Love by Bionic Arm (2001)
-URL: https://musicbrainz.org/recording/aba96865-9962-4bce-af4d-6938f9304eb5
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment
