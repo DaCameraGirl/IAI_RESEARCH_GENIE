@@ -39,7 +39,7 @@ from study_bot import (  # noqa: E402
 # patent_hunter may not export list_candidates - that's in rws_gui. I'll define here or import from rws_gui logic
 
 PORT = 7842
-BUILD_VERSION = "v1.3 | 2026-07-26-poll-leak-fix"
+BUILD_VERSION = "v1.4 | 2026-07-27-hunt-state-fix"
 
 
 _hunt_threads: dict[str, threading.Thread] = {}
@@ -247,7 +247,7 @@ def _study_ui_copy(meta: dict) -> dict[str, str]:
         "empty_candidates": "No leads yet - run a hymn search.",
         "sources_html": (
             '<strong style="color:var(--cream)">Open access:</strong> archive.org, Google Books, '
-            "HathiTrust, WorldCat, MusicBrainz, Discogs.<br><br>"
+"HathiTrust, WorldCat.<br><br>"
             '<strong style="color:var(--cream)">Human step:</strong> open the actual source, '
             "confirm the target-language text, date, and translator, then capture a real screenshot "
             "before treating anything as submittable."
@@ -287,6 +287,16 @@ def _html_response(handler: BaseHTTPRequestHandler, html: str) -> None:
     handler.wfile.write(body)
 
 
+def _request_hunt_stop(study_id: str) -> dict:
+    """Request hunt stop without removing thread references."""
+    engine = _hunt_engines.get(study_id)
+    if engine:
+        engine.stop()
+    thread = _hunt_threads.get(study_id)
+    still_stopping = bool(thread and thread.is_alive())
+    return {"ok": True, "stopping": still_stopping}
+
+
 def _start_hunt(study_id: str) -> dict:
     if _study_hunt_running(study_id):
         return {"ok": False, "error": "Hunt already running for this study"}
@@ -313,7 +323,7 @@ def _start_hunt(study_id: str) -> dict:
                 _hunt_results[study_id] = engine.run()
                 state = load_state()
                 if study_id in state["studies"]:
-                    state["studies"][study_id]["candidates_found"] = _hunt_results[study_id].get("leads_found", 0)
+                    state["studies"][study_id]["candidates_found"] = len(_parse_candidates(study_id))
                     if not _hunt_results[study_id].get("stopped"):
                         state["studies"][study_id]["rounds_completed"] = state["studies"][study_id].get("rounds_completed", 0) + 1
                 save_state(state)
@@ -321,6 +331,7 @@ def _start_hunt(study_id: str) -> dict:
                 on_log(f"Hunt error: {exc}", "error")
             finally:
                 _hunt_engines.pop(study_id, None)
+                _hunt_threads.pop(study_id, None)
             return
 
         engine = HuntEngine(study_id, on_log=on_log)
@@ -337,6 +348,7 @@ def _start_hunt(study_id: str) -> dict:
             _hunt_results[study_id] = {"error": str(exc)}
         finally:
             _hunt_engines.pop(study_id, None)
+            _hunt_threads.pop(study_id, None)
 
     _hunt_threads[study_id] = threading.Thread(target=run, daemon=True)
     _hunt_threads[study_id].start()
@@ -751,7 +763,7 @@ footer {
 <script>
 let state = null;
 let selectedStudy = null;
-let pollTimer = null;
+let pollTimersByStudy = {};
 let hunting = false;
 let huntingStudy = null;
 let huntLogsByStudy = {};
@@ -931,7 +943,6 @@ function appendLog(entry, c=$('console')) {
 async function loadState() {
   const data = await api('/api/state');
   renderState(data);
-  if (document.querySelector('.tab.active')?.dataset.tab === 'candidates') loadCandidates();
 }
 
 let candidateRequestSeq = 0;
@@ -984,56 +995,63 @@ async function loadCandidates() {
 }
 
 async function startHunt() {
-  setHuntUi(true, selectedStudy);
-  huntLogsByStudy[selectedStudy] = [];
+  const studyId = selectedStudy;
+  setHuntUi(true, studyId);
+  huntLogsByStudy[studyId] = [];
   renderConsole();
   document.querySelector('[data-tab="console"]').click();
-  const started = await api('/api/hunt/start', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({study: selectedStudy}) });
+  const started = await api('/api/hunt/start', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({study: studyId}) });
   if (!started.ok) {
     setHuntUi(false, null);
-    huntLogsByStudy[selectedStudy] = huntLogsByStudy[selectedStudy] || [];
-    huntLogsByStudy[selectedStudy].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: started.error || 'Hunt failed to start', level: 'error'});
+    huntLogsByStudy[studyId] = huntLogsByStudy[studyId] || [];
+    huntLogsByStudy[studyId].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: started.error || 'Hunt failed to start', level: 'error'});
     renderConsole();
     loadState();
     return;
   }
-  pollLogs();
+  pollLogs(studyId);
 }
 
-function pollLogs() {
-  if (pollTimer) clearInterval(pollTimer);
-  pollTimer = setInterval(async () => {
-    const data = await api('/api/hunt/logs?study=' + selectedStudy);
-    data.logs.forEach(e => {
-      const sid = e.study || selectedStudy;
-      huntLogsByStudy[sid] = huntLogsByStudy[sid] || [];
-      huntLogsByStudy[sid].push(e);
-    });
-    await loadState();
-    renderConsole();
-    setHuntUi(Boolean(data.running), selectedStudy);
-    if (!data.running && hunting && huntingStudy === selectedStudy) {
-      setHuntUi(false, null);
-      $('roundBtn').style.display = 'inline-block';
-      $('roundBtn').classList.add('blink');
-      loadState();
-      loadCandidates();
-    }
-    if (!state?.hunt_running) {
-      clearInterval(pollTimer);
-      pollTimer = null;
-    }
-  }, 600);
+function pollLogs(studyId) {
+  if (!pollTimersByStudy[studyId]) {
+    pollTimersByStudy[studyId] = true;
+    const doPoll = async () => {
+      const data = await api('/api/hunt/logs?study=' + studyId);
+      data.logs.forEach(e => {
+        const sid = e.study || studyId;
+        huntLogsByStudy[sid] = huntLogsByStudy[sid] || [];
+        huntLogsByStudy[sid].push(e);
+      });
+      await loadState();
+      renderConsole();
+      setHuntUi(Boolean(data.running), studyId);
+      if (!data.running) {
+        delete pollTimersByStudy[studyId];
+        if (hunting && huntingStudy === studyId) {
+          setHuntUi(false, null);
+          $('roundBtn').style.display = 'inline-block';
+          $('roundBtn').classList.add('blink');
+          if (selectedStudy === studyId) {
+            loadCandidates();
+          }
+        }
+      } else {
+        setTimeout(doPoll, 1000);
+      }
+    };
+    doPoll();
+  }
 }
 
 $('huntBtn').onclick = startHunt;
 $('stopBtn').onclick = async () => {
+  const studyId = selectedStudy;
   $('stopBtn').disabled = true;
   $('stopBtn').textContent = 'Stopping...';
   setHuntUi(false, null);
-  await api('/api/hunt/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study: selectedStudy})});
-  huntLogsByStudy[selectedStudy] = huntLogsByStudy[selectedStudy] || [];
-  huntLogsByStudy[selectedStudy].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: 'Stop requested', level: 'warn'});
+  await api('/api/hunt/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study: studyId})});
+  huntLogsByStudy[studyId] = huntLogsByStudy[studyId] || [];
+  huntLogsByStudy[studyId].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: 'Stop requested', level: 'warn'});
   renderConsole();
   await loadState();
 };
@@ -1100,7 +1118,9 @@ document.querySelectorAll('.tab').forEach(t => {
 ensureFreshBuild().then(async () => {
   await loadState();
   await loadCandidates();
-  if (state?.hunt_running) pollLogs();
+  if (state?.active_hunts) {
+    state.active_hunts.forEach(studyId => pollLogs(studyId));
+  }
 });
 </script>
 </body>
@@ -1265,12 +1285,8 @@ class RWSHandler(BaseHTTPRequestHandler):
 
         if path == "/api/hunt/stop":
             sid = data.get("study") or current_id(load_state())
-            engine = _hunt_engines.get(sid)
-            if engine:
-                engine.stop()
-            _hunt_threads.pop(sid, None)
-            _hunt_engines.pop(sid, None)
-            _json_response(self, {"ok": True})
+            result = _request_hunt_stop(sid)
+            _json_response(self, result)
             return
 
 
