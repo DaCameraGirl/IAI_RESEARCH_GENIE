@@ -287,6 +287,14 @@ def _html_response(handler: BaseHTTPRequestHandler, html: str) -> None:
     handler.wfile.write(body)
 
 
+def _cleanup_hunt_refs(study_id: str, engine: object, thread: threading.Thread) -> None:
+    """Remove hunt references only if they match the provided objects."""
+    if _hunt_engines.get(study_id) is engine:
+        _hunt_engines.pop(study_id, None)
+    if _hunt_threads.get(study_id) is thread:
+        _hunt_threads.pop(study_id, None)
+
+
 def _request_hunt_stop(study_id: str) -> dict:
     """Request hunt stop without removing thread references."""
     engine = _hunt_engines.get(study_id)
@@ -315,6 +323,7 @@ def _start_hunt(study_id: str) -> dict:
         )
 
     def run() -> None:
+        current_thread = threading.current_thread()
         meta = STUDY_META[study_id]
         if meta.get("type") == "copyright":
             engine = HymnHuntEngine(study_id, on_log=on_log)
@@ -330,8 +339,7 @@ def _start_hunt(study_id: str) -> dict:
             except Exception as exc:
                 on_log(f"Hunt error: {exc}", "error")
             finally:
-                _hunt_engines.pop(study_id, None)
-                _hunt_threads.pop(study_id, None)
+                _cleanup_hunt_refs(study_id, engine, current_thread)
             return
 
         engine = HuntEngine(study_id, on_log=on_log)
@@ -347,8 +355,7 @@ def _start_hunt(study_id: str) -> dict:
             on_log(f"Hunt error: {exc}", "error")
             _hunt_results[study_id] = {"error": str(exc)}
         finally:
-            _hunt_engines.pop(study_id, None)
-            _hunt_threads.pop(study_id, None)
+            _cleanup_hunt_refs(study_id, engine, current_thread)
 
     _hunt_threads[study_id] = threading.Thread(target=run, daemon=True)
     _hunt_threads[study_id].start()
@@ -764,8 +771,6 @@ footer {
 let state = null;
 let selectedStudy = null;
 let pollTimersByStudy = {};
-let hunting = false;
-let huntingStudy = null;
 let huntLogsByStudy = {};
 const PAGE_VERSION = """ + '"' + BUILD_VERSION + '"' + """;
 
@@ -1013,9 +1018,10 @@ async function startHunt() {
 }
 
 function pollLogs(studyId) {
-  if (!pollTimersByStudy[studyId]) {
-    pollTimersByStudy[studyId] = true;
-    const doPoll = async () => {
+  if (pollTimersByStudy[studyId]) return;
+  
+  const doPoll = async () => {
+    try {
       const data = await api('/api/hunt/logs?study=' + studyId);
       data.logs.forEach(e => {
         const sid = e.study || studyId;
@@ -1024,21 +1030,31 @@ function pollLogs(studyId) {
       });
       await loadState();
       renderConsole();
-      setHuntUi(Boolean(data.running), studyId);
+      
       if (!data.running) {
         delete pollTimersByStudy[studyId];
-        setHuntUi(false, null);
-        $('roundBtn').style.display = 'inline-block';
-        $('roundBtn').classList.add('blink');
+        await loadState();
         if (selectedStudy === studyId) {
-          loadCandidates();
+          $('roundBtn').style.display = 'inline-block';
+          $('roundBtn').classList.add('blink');
+          await loadCandidates();
         }
       } else {
-        setTimeout(doPoll, 1000);
+        pollTimersByStudy[studyId] = setTimeout(doPoll, 1000);
       }
-    };
-    doPoll();
-  }
+    } catch (err) {
+      huntLogsByStudy[studyId] = huntLogsByStudy[studyId] || [];
+      huntLogsByStudy[studyId].push({
+        t: new Date().toLocaleTimeString('en-US', {hour12:false}),
+        msg: 'Poll error: ' + err.message,
+        level: 'error'
+      });
+      renderConsole();
+      pollTimersByStudy[studyId] = setTimeout(doPoll, 2000);
+    }
+  };
+  
+  pollTimersByStudy[studyId] = setTimeout(doPoll, 0);
 }
 
 $('huntBtn').onclick = startHunt;
@@ -1046,7 +1062,6 @@ $('stopBtn').onclick = async () => {
   const studyId = selectedStudy;
   $('stopBtn').disabled = true;
   $('stopBtn').textContent = 'Stopping...';
-  setHuntUi(false, null);
   await api('/api/hunt/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({study: studyId})});
   huntLogsByStudy[studyId] = huntLogsByStudy[studyId] || [];
   huntLogsByStudy[studyId].push({t: new Date().toLocaleTimeString('en-US', {hour12:false}), msg: 'Stop requested', level: 'warn'});
@@ -1115,7 +1130,9 @@ document.querySelectorAll('.tab').forEach(t => {
 
 ensureFreshBuild().then(async () => {
   await loadState();
-  await loadCandidates();
+  if (document.querySelector('.tab.active')?.dataset.tab === 'candidates') {
+    await loadCandidates();
+  }
   if (state?.active_hunts) {
     state.active_hunts.forEach(studyId => pollLogs(studyId));
   }
