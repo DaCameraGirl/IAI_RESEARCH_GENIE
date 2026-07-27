@@ -1027,13 +1027,11 @@ function pollLogs(studyId) {
       setHuntUi(Boolean(data.running), studyId);
       if (!data.running) {
         delete pollTimersByStudy[studyId];
-        if (hunting && huntingStudy === studyId) {
-          setHuntUi(false, null);
-          $('roundBtn').style.display = 'inline-block';
-          $('roundBtn').classList.add('blink');
-          if (selectedStudy === studyId) {
-            loadCandidates();
-          }
+        setHuntUi(false, null);
+        $('roundBtn').style.display = 'inline-block';
+        $('roundBtn').classList.add('blink');
+        if (selectedStudy === studyId) {
+          loadCandidates();
         }
       } else {
         setTimeout(doPoll, 1000);
