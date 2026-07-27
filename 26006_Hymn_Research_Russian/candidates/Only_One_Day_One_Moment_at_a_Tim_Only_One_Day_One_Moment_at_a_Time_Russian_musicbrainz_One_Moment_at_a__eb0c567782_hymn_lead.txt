@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Only One Day, One Moment at a Time
+Language: Russian
+Source: musicbrainz
+Title: One Moment at a Time by Flying Tulpa (2020-09-25)
+URL: https://musicbrainz.org/recording/8b0d24a8-8f95-4e2f-b6a0-73ea0b5134bd
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

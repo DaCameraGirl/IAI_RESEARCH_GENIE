@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Love Divine
+Language: Russian
+Source: musicbrainz
+Title: Russian Love by The Explosions (2008)
+URL: https://musicbrainz.org/recording/8c4457b1-4f3d-40f2-bc6e-6cff224da311
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

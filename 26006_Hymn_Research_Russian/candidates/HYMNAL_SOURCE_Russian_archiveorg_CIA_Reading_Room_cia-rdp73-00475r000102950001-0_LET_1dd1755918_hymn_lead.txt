@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room cia-rdp73-00475r000102950001-0: LETTER TO HECTOR LAGOMASINO FROM JOHN A. MELLIN
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp73-00475r000102950001-0
+Status: UNVERIFIED — open and search within before submitting anything from it

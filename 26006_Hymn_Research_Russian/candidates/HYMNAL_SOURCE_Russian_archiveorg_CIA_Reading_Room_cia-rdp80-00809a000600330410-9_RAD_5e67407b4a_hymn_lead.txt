@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room cia-rdp80-00809a000600330410-9: RADIO BROADCASTING IN THE SOVIET ARMY - - A POWERFUL MEDIUM OF AGITATION AND PROPAGANDA
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp80-00809a000600330410-9
+Status: UNVERIFIED — open and search within before submitting anything from it

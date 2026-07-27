@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rise Up, O Men of God
+Language: Cebuano
+Source: musicbrainz
+Title: Rise Up, O Men of God (Men) by William Henry Walter (2008-05-16)
+URL: https://musicbrainz.org/recording/af1feb77-20c0-456a-b538-7473f0d7e00b
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

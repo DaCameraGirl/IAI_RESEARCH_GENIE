@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Joy to the World
+Language: Russian
+Source: singpraises.net
+Title: Радуйся, мир! - Гимны, no. 116
+URL: https://singpraises.net/collections/ru/hymns/2356/joy-to-the-world?edition=2021-digital&tabIndex=1
+Status: UNVERIFIED - public lyrics and PDF path available; confirm screenshot/PDF attachment details before submitting. Source page identifies Russian title, full text, and collection as Гимны (2005, 2021-digital), no. 116.

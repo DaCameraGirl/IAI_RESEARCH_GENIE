@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Essential repertoire for the concert choir. Tenor, bass
+URL: https://archive.org/details/essentialreperto0000unse
+Status: UNVERIFIED — open and search within before submitting anything from it

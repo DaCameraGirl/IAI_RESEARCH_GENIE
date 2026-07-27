@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Have I Done Any Good
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room 0006146451: THE PRESIDENT'S DAILY BRIEF 7 NOVEMBER 1969
+URL: https://archive.org/details/cia-readingroom-document-0006146451
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

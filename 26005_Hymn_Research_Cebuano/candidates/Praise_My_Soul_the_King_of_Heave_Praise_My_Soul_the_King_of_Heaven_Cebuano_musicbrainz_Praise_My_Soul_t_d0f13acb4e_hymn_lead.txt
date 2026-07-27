@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise My Soul the King of Heaven by Nick Haigh (unknown)
+URL: https://musicbrainz.org/recording/f019637a-dd98-424d-9251-3aab57524500
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

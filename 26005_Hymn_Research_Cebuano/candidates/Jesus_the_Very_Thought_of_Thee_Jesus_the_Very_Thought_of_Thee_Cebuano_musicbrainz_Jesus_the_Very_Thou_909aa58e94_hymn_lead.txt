@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Jesus, the Very Thought of Thee
+Language: Cebuano
+Source: musicbrainz
+Title: Jesus, the Very Thought of Thee by Hymnstyles (unknown)
+URL: https://musicbrainz.org/recording/c9ed9238-978e-4719-a9a9-cd8931f6b1b6
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

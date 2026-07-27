@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Did You Think to Pray
+Language: Cebuano
+Source: musicbrainz
+Title: Did You Think to Pray by Doyle Lawson & Quicksilver (1997)
+URL: https://musicbrainz.org/recording/9237189d-aac9-4f7c-b97a-efd9f9738842
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

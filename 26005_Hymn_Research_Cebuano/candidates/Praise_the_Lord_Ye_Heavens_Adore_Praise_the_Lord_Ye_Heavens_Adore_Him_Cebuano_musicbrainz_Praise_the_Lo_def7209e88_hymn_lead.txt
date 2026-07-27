@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise the Lord! Ye Heavens Adore Him
+Language: Cebuano
+Source: musicbrainz
+Title: Praise the Lord Ye Heavens Adore Him by Mercy Message (2019-06-21)
+URL: https://musicbrainz.org/recording/bba88ec4-0d5a-4667-a867-630f978ef7ca
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Child Is This
+Language: Cebuano
+Source: archive.org
+Title: Des parents pour Noël
+URL: https://archive.org/details/isbn_9780373383931
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

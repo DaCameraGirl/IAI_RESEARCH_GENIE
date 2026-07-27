@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise, My Soul, the King of Heaven by The Choirs of the Cathedral of St. Paul, Buffalo (1996)
+URL: https://musicbrainz.org/recording/9acdc71a-6a90-483e-8544-05a523d76110
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

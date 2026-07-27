@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Wondrous Love Is This
+Language: Russian
+Source: archive.org
+Title: CIA Reading Room cia-rdp90-00965r000201310003-5: KGB
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp90-00965r000201310003-5
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

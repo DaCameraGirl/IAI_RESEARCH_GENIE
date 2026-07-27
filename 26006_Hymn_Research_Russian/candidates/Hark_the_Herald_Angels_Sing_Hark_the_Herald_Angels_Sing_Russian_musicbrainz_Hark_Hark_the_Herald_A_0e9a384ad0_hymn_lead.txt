@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: musicbrainz
+Title: Hark! Hark the Herald Angels Sing by Ex Cathedra (2006)
+URL: https://musicbrainz.org/recording/dc4d41f2-a938-4284-810f-f87ddd2cd8d1
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Oh, Come, All Ye Faithful
+Language: Cebuano
+Source: singpraises.net
+Title: Dali, Kamong Maunungon - Mga Himno, no. 121
+URL: https://singpraises.net/collections/ceb/hymns/20367/oh-come-all-ye-faithful?edition=2021-digital&tabIndex=1
+Status: UNVERIFIED - public lyrics page provides full Cebuano text and identifies collection as Mga Himno (2002, 2021-digital), no. 121. Confirm screenshot/PDF attachment before submitting.

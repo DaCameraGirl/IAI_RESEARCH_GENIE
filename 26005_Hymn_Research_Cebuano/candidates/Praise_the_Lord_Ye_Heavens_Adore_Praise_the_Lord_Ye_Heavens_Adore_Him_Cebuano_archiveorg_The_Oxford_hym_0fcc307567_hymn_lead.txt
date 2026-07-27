@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise the Lord! Ye Heavens Adore Him
+Language: Cebuano
+Source: archive.org
+Title: The Oxford hymn book
+URL: https://archive.org/details/oxfordhymnbook0000unse_f3r9
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

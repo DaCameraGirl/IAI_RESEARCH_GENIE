@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Cebuano
+Source: archive.org
+Title: Mga Himno ug mga Awit sa mga Bata (Cebuano, 1996)
+URL: https://archive.org/details/hymns-and-childrens-songs-cebuano-1996
+Status: UNVERIFIED — open and search within before submitting anything from it

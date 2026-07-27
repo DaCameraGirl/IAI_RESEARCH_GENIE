@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Cebuano
+Source: musicbrainz
+Title: The Lord Will Provide by Passion (2025-09-05)
+URL: https://musicbrainz.org/recording/a69f231e-aebf-42fd-9cf7-c89aabc2fb6d
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

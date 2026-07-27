@@ -850,7 +850,6 @@ class HuntEngine:
             if evidence.tier is EvidenceTier.LEAD:
                 self._write_lane_lead(folder, evidence)
                 l2_lead_files += 1
-                self._update_candidate_screen(folder, ready, hold)
         self.log(
             f"  L2 leads: {len(l2_result.records)} records · {l2_queue_count} patent targets queued · {l2_lead_files} lead files",
             "info",

@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: I Can't Count Them All
+Language: Russian
+Source: archive.org
+Title: ON THE ROAD - A Coruna / Dakar
+URL: https://archive.org/details/ontheroad-lacorunadakar_202403
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

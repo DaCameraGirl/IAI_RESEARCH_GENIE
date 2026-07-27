@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: If the Way Be Full of Trial, Weary Not
+Language: Russian
+Source: musicbrainz
+Title: Full Russian by xKore (2012-03-26)
+URL: https://musicbrainz.org/recording/c7b992b5-5c49-4b1e-9204-60e0819575fd
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

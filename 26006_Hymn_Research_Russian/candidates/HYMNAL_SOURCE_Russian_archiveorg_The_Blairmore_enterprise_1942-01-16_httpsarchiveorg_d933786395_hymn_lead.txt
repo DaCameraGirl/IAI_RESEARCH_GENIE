@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Blairmore enterprise (1942-01-16)
+URL: https://archive.org/details/BME_1942011601
+Status: UNVERIFIED — open and search within before submitting anything from it

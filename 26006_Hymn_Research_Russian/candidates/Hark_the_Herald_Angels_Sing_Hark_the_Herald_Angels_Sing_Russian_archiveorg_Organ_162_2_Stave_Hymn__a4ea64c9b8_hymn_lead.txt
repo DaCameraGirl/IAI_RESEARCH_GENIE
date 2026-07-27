@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Russian
+Source: archive.org
+Title: Organ 162. 2 Stave Hymn Tune Vol 1-6
+URL: https://archive.org/details/birch_162up
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

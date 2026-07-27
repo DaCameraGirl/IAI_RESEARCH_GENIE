@@ -617,17 +617,27 @@ class HymnHuntEngine:
         self._persist_progress(folder, language, hymnal_sources, leads)
         self._update_hunt_log(folder, len(hymns))
 
-        self.log(
-            f"Done — {len(hymnal_sources)} hymnal source(s) + {self.leads_found} per-hymn "
-            f"candidate(s) across {len(leads)}/{self.hymns_searched} hymns searched. "
-            "Every lead needs manual verification before submission — translator, date, and "
-            "copyright info can't be auto-confirmed, and RWS requires real screenshots anyway.",
-            "phase",
-        )
+        if self.stopped:
+            self.log(
+                f"Stopped by user — {len(hymnal_sources)} hymnal source(s) + {self.leads_found} "
+                f"per-hymn candidate(s) across {self.hymns_searched}/{len(hymns)} hymns searched "
+                "before the stop request landed. Run the hunt again to continue from the top of "
+                "the hymn list.",
+                "warn",
+            )
+        else:
+            self.log(
+                f"Done — {len(hymnal_sources)} hymnal source(s) + {self.leads_found} per-hymn "
+                f"candidate(s) across {self.hymns_searched}/{len(hymns)} hymns searched. "
+                "Every lead needs manual verification before submission — translator, date, and "
+                "copyright info can't be auto-confirmed, and RWS requires real screenshots anyway.",
+                "phase",
+            )
         return {
             "hymns_searched": self.hymns_searched,
             "leads_found": self.leads_found,
             "hymnal_sources": len(hymnal_sources),
+            "stopped": self.stopped,
         }
 
     def _write_candidate_screen(self, folder: Path, hymnal_sources: list[dict], leads: list[dict]) -> None:

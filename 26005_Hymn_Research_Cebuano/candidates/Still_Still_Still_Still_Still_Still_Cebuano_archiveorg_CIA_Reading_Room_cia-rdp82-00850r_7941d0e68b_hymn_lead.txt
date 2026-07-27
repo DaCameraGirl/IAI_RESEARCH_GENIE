@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Still, Still, Still
+Language: Cebuano
+Source: archive.org
+Title: CIA Reading Room cia-rdp82-00850r000500070023-4: JPRS ID: 10577 WORLDWIDE REPORT NARCOTICS AND DANGEROUS DRUGS
+URL: https://archive.org/details/cia-readingroom-document-cia-rdp82-00850r000500070023-4
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

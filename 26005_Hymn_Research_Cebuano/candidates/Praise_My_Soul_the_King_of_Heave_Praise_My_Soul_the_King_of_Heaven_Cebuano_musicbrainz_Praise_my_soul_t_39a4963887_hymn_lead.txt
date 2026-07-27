@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise, My Soul, the King of Heaven
+Language: Cebuano
+Source: musicbrainz
+Title: Praise, my soul, the King of Heaven by Black Dyke Mills Band (2011)
+URL: https://musicbrainz.org/recording/c034c4e9-e550-4343-ad0d-a8da9e26f98a
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

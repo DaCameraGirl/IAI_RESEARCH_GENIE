@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Bulat Okudschawa - Lieder - Песни Булата Окуджавы (vg)
+URL: https://archive.org/details/finereader
+Status: UNVERIFIED — open and search within before submitting anything from it

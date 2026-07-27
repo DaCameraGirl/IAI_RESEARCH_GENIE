@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Child Is This
+Language: Cebuano
+Source: archive.org
+Title: The new Oxford book of carols
+URL: https://archive.org/details/newoxfordbookofc0000unse_a1o3
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Cebuano
+Source: archive.org
+Title: My Father's world
+URL: https://archive.org/details/myfathersworld0000unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

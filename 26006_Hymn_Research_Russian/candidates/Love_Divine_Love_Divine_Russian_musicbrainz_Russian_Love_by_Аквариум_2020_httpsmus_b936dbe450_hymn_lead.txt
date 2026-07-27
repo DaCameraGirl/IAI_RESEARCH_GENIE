@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Love Divine
+Language: Russian
+Source: musicbrainz
+Title: Russian Love by Аквариум (2020)
+URL: https://musicbrainz.org/recording/a0a9945b-4ca4-4898-ae3a-2f143abbafa2
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

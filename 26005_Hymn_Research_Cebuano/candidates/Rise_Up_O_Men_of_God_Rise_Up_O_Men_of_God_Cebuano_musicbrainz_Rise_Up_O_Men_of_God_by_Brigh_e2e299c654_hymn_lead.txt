@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rise Up, O Men of God
+Language: Cebuano
+Source: musicbrainz
+Title: Rise Up, O Men of God by Brigham Young University Concert Choir (2007-04)
+URL: https://musicbrainz.org/recording/a3029a14-e1be-4ade-9b23-43f58763b833
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

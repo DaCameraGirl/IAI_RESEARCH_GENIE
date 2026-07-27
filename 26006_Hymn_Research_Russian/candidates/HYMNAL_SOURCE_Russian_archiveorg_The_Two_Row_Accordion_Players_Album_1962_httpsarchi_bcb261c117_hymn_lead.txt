@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Two Row Accordion Player’s Album 1962
+URL: https://archive.org/details/the-two-row-accordion-players-album-1962
+Status: UNVERIFIED — open and search within before submitting anything from it

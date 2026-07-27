@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: A Poor Wayfaring Man of Grief
+Language: Russian
+Source: musicbrainz
+Title: A Poor Wayfaring Man of Grief by Wade & Wanda Linstrom (unknown)
+URL: https://musicbrainz.org/recording/dc5ad2a6-9689-488b-b510-3c7fc980ea98
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

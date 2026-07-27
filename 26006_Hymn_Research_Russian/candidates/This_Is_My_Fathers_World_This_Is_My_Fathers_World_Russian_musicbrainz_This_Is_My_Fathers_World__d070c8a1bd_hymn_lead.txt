@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Russian
+Source: musicbrainz
+Title: This Is My Father's World by Choir of Yorkminster Park Baptist Church (unknown)
+URL: https://musicbrainz.org/recording/e27c1bd1-b5d8-4b07-b73a-37c87662a901
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Still, Still, Still
+Language: Cebuano
+Source: musicbrainz
+Title: Still Still Still by Judy Dow (1998)
+URL: https://musicbrainz.org/recording/4ac4ef4e-e0e1-42f7-a212-83985dc7ba94
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

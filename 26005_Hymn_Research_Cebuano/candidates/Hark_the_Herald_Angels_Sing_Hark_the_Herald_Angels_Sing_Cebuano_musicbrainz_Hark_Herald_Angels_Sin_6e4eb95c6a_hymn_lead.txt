@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Hark! the Herald Angels Sing
+Language: Cebuano
+Source: musicbrainz
+Title: Hark! Herald Angels Sing by Norman Hutchins (2003)
+URL: https://musicbrainz.org/recording/0b1ec473-7ba2-4b24-b2de-434833cde570
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

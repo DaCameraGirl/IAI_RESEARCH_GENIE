@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Raymond recorder (1926-08-27)
+URL: https://archive.org/details/RMR_1926082701
+Status: UNVERIFIED — open and search within before submitting anything from it

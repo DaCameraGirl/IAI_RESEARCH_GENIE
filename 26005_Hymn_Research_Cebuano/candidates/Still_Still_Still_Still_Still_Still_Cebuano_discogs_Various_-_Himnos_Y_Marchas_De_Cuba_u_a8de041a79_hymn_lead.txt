@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Still, Still, Still
+Language: Cebuano
+Source: discogs
+Title: Various - Himnos Y Marchas De Cuba (unknown, Vinyl, LP, Compilation)
+URL: /release/8165817-Various-Himnos-Y-Marchas-De-Cuba
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

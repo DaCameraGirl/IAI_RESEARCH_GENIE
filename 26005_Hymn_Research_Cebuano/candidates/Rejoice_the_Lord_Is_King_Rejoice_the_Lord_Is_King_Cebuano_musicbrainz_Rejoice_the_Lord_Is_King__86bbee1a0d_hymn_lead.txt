@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Cebuano
+Source: musicbrainz
+Title: Rejoice, the Lord Is King by Grimethorpe Colliery Band (2005-06-20)
+URL: https://musicbrainz.org/recording/1cc49a60-9565-43c8-86c0-8144c8eb6f21
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

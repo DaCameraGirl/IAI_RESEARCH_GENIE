@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Angels We Have Heard on High
+Language: Russian
+Source: musicbrainz
+Title: Angels We Have Heard On High by Kenny G (unknown)
+URL: https://musicbrainz.org/recording/0a5b48ef-4590-4eec-b1fc-d0ded991814c
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

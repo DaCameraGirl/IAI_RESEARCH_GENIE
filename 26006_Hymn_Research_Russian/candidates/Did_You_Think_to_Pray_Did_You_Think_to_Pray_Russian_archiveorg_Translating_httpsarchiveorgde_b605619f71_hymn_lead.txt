@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: Did You Think to Pray
+Language: Russian
+Source: archive.org
+Title: Translating
+URL: https://archive.org/details/art-of-translating
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

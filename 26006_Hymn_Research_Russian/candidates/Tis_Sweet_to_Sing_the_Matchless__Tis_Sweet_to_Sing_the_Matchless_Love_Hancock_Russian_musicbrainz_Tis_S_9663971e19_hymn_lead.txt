@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Russian
+Source: musicbrainz
+Title: 'Tis Sweet to Sing the Matchless Love by Mitch Davis (unknown)
+URL: https://musicbrainz.org/recording/a446a586-5df2-4af5-9f24-7c0d49c9bf4a
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

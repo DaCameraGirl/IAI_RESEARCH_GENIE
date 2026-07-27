@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Cebuano
+Source: musicbrainz
+Title: Rejoice, The Lord Is King by Susan Beisner (unknown)
+URL: https://musicbrainz.org/recording/fe01c010-8d6d-4f56-aa8c-a734ccdfba26
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

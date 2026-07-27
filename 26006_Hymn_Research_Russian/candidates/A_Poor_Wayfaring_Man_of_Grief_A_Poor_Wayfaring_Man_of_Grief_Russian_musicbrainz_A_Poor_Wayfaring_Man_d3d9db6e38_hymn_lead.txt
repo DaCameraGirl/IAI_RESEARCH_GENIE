@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: A Poor Wayfaring Man of Grief
+Language: Russian
+Source: musicbrainz
+Title: A Poor Wayfaring Man of Grief by Rob Gardner (2008-05-07)
+URL: https://musicbrainz.org/recording/6f035263-e275-4a7e-a78a-ef753c66c0cc
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

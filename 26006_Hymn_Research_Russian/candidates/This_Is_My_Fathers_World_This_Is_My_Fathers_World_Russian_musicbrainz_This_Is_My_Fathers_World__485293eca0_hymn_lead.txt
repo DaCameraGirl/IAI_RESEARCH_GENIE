@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Russian
+Source: musicbrainz
+Title: This Is My Father's World by Gary Chapman (1997-07-01)
+URL: https://musicbrainz.org/recording/947d2aa0-668d-4f2a-a17e-784c92418650
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

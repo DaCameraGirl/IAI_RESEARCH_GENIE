@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: I'm Gonna Live So God Can Use Me
+Language: Cebuano
+Source: musicbrainz
+Title: I’m Gonna Live So God Can Use Me by [traditional] (2010)
+URL: https://musicbrainz.org/recording/7c04b1d0-459a-4b42-b93c-9e08aac52f84
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Russian
+Source: archive.org
+Title: Declaration of Archbishop Carlo Maria Viganò on the Russia-Ukraine Crisis
+URL: https://archive.org/details/vigano_declaration_russia_ukraine
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

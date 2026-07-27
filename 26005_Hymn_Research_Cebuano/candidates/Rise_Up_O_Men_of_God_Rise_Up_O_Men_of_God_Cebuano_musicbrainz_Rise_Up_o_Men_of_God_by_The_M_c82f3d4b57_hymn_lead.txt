@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rise Up, O Men of God
+Language: Cebuano
+Source: musicbrainz
+Title: Rise Up, o Men of God by The Maranatha! Singers (unknown)
+URL: https://musicbrainz.org/recording/112bd211-c06f-4ed3-a299-081dcbe163ed
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

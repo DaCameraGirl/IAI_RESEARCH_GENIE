@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Favorite Songs And Pieces For The Chromatic Two Row Accordion 1963
+URL: https://archive.org/details/favorite-songs-and-pieces-for-the-chromatic-two-row-accordion-1963
+Status: UNVERIFIED — open and search within before submitting anything from it

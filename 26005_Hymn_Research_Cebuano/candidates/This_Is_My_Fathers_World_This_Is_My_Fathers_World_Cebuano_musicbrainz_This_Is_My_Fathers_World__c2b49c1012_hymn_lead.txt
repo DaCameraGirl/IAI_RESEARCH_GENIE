@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: This Is My Father's World
+Language: Cebuano
+Source: musicbrainz
+Title: This Is My Father's World by George Beverly Shea (unknown)
+URL: https://musicbrainz.org/recording/2ba3608c-d057-4f81-8294-d06591b6b60b
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

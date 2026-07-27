@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
+Language: Cebuano
+Source: musicbrainz
+Title: 'Tis Sweet to Sing the Matchless Love by Mark Small & Robert Torres Guitar Duo (2000)
+URL: https://musicbrainz.org/recording/97ae640b-05cd-4f20-84c8-7e52cf897bf9
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

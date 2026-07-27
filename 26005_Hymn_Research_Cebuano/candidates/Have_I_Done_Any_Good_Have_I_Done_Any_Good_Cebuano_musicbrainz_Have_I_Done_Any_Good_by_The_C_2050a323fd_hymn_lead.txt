@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Have I Done Any Good
+Language: Cebuano
+Source: musicbrainz
+Title: Have I Done Any Good by The Church of Jesus Christ of Latter-day Saints (1992)
+URL: https://musicbrainz.org/recording/0410ed6a-4b07-4a8f-9538-10833e218377
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: A Poor Wayfaring Man of Grief
+Language: Cebuano
+Source: musicbrainz
+Title: A Poor Wayfaring Man of Grief by Michael Ethington ()
+URL: https://musicbrainz.org/recording/f66a16f9-eb1e-4491-b350-2e6114f8f08e
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

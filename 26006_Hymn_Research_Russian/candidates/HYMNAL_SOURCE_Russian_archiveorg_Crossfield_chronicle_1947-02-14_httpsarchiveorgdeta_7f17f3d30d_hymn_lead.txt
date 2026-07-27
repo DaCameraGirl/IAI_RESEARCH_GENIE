@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Crossfield chronicle (1947-02-14)
+URL: https://archive.org/details/CFC_1947021401
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The King of Love My Shepherd Is
+Language: Cebuano
+Source: musicbrainz
+Title: The King of Love my Shepherd is by The London Fox Players (unknown)
+URL: https://musicbrainz.org/recording/ab97b4b2-1731-47a2-a9b4-b8af19084336
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

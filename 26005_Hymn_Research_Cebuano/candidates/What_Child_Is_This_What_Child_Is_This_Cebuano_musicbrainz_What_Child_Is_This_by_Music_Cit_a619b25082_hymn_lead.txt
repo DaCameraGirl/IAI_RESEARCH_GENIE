@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Child Is This
+Language: Cebuano
+Source: musicbrainz
+Title: What Child Is This by Music City Choir (1995)
+URL: https://musicbrainz.org/recording/3dfea078-ff23-4d62-af9c-ef5b262aaa55
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

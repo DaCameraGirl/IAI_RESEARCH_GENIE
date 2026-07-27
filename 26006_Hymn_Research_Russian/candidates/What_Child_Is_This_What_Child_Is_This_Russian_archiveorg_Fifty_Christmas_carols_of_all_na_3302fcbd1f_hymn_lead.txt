@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: What Child Is This
+Language: Russian
+Source: archive.org
+Title: Fifty Christmas carols of all nations / selected, harmonized and edited by Eduardo Marzo.
+URL: https://archive.org/details/uclamusic_9921601523606533
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

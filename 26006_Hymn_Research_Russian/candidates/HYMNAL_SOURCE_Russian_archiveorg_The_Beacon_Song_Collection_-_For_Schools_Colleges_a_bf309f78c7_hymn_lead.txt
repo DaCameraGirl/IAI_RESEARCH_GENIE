@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Beacon Song Collection - For Schools, Colleges and Choral Societies - Number One
+URL: https://archive.org/details/the-beacon-song-collection
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: This Is My Father's World
+Language: Cebuano
+Source: discogs
+Title: Cedarmont Niños - Himnos (2004, CD, Album, Enhanced, Reissue)
+URL: /release/33624924-Cedarmont-Ni%C3%B1os-Himnos
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

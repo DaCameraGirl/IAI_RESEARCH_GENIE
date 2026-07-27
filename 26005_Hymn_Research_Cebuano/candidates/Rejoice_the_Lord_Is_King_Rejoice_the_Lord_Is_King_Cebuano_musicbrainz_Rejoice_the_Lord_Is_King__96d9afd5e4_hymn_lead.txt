@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Cebuano
+Source: musicbrainz
+Title: Rejoice the Lord Is King by John Ellis (2010-12-06)
+URL: https://musicbrainz.org/recording/4bb3fee5-4194-48aa-8d80-898177f1bf14
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

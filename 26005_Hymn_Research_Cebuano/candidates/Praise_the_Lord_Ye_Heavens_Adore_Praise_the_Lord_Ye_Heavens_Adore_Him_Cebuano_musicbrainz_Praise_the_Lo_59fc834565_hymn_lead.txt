@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Praise the Lord! Ye Heavens Adore Him
+Language: Cebuano
+Source: musicbrainz
+Title: Praise the Lord! Ye Heavens Adore Him by The Wilds (unknown)
+URL: https://musicbrainz.org/recording/3804eb8a-3151-44a7-ab28-06f3f95acb25
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

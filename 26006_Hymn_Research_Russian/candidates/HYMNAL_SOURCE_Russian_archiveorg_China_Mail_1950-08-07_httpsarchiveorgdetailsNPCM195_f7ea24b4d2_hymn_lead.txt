@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: China Mail 1950-08-07
+URL: https://archive.org/details/NPCM19500807
+Status: UNVERIFIED — open and search within before submitting anything from it

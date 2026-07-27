@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Did You Think to Pray
+Language: Russian
+Source: archive.org
+Title: Favorite songs and hymns : a complete church hymnal
+URL: https://archive.org/details/favoritesongshym00morr
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

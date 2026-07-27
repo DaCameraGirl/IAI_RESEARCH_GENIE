@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: Bow Island review (1914-05-15)
+URL: https://archive.org/details/BIR_1914051501
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: himny-hristian-en-ru-1994
+URL: https://archive.org/details/himny-hristian-en-ru-1994
+Status: UNVERIFIED — open and search within before submitting anything from it

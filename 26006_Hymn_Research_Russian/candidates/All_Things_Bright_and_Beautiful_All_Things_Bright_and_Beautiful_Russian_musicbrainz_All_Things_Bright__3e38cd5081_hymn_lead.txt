@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: All Things Bright and Beautiful
+Language: Russian
+Source: musicbrainz
+Title: All Things Bright and Beautiful by Mark Russel (2000)
+URL: https://musicbrainz.org/recording/7365a3c7-cacb-424f-bb26-380c42438052
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

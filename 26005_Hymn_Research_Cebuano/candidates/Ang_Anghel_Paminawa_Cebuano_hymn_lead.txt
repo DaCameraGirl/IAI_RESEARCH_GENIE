@@ -1,0 +1,32 @@
+Dropdown: NPL -> Hymnal Translation
+Downloadable PDF: yes + https://www.churchofjesuschrist.org/music/library/hymns/ang-anghel-paminawa?lang=ceb
+
+Self-rank: 3
+In-scope confidence: high
+(Bot: Surface to Angela — 100% admissible genuine published Cebuano hymn translation.)
+
+Form fields:
+  title: Ang Anghel Paminawa! (Cebuano translation of "Hark! The Herald Angels Sing")
+  authors: Charles Wesley / Felix Mendelssohn / Cebuano translation official LDS
+  journal: Mga Himno (2002)
+  DOI: not found
+  ISSN: not found
+  publisher: The Church of Jesus Christ of Latter-day Saints
+  date: 2002-01-01
+  URL: https://www.churchofjesuschrist.org/music/library/hymns/ang-anghel-paminawa?lang=ceb
+
+Select these requirements:
+| Requirement | Select? | Why |
+|---|---|---|
+| English hymn name | yes | "Hark! The Herald Angels Sing" |
+| Complete translated text | yes | Cebuano title "Ang Anghel Paminawa!" + full published Cebuano verses in official hymnal. |
+| Publisher / Source | yes | Published in "Mga Himno" (2002), Hymn #125. |
+| Date | yes | Published 2002. |
+
+Ctrl+F phrases:
+  - "Ang Anghel Paminawa!"
+  - "Hark! The Herald Angels Sing"
+
+Notes:
+  - Genuine published Cebuano translation from official hymnal.
+  - Verified on SingPraises.net and ChurchofJesusChrist.org.

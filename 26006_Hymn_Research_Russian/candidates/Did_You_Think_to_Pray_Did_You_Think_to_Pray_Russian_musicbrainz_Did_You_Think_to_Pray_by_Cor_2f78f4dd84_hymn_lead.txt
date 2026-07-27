@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Did You Think to Pray
+Language: Russian
+Source: musicbrainz
+Title: Did You Think to Pray? by Cory Reese (unknown)
+URL: https://musicbrainz.org/recording/2832e8ac-d5e5-4f75-8dd3-437083fc56b2
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

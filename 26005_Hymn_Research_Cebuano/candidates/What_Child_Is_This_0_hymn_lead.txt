@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: What Child Is This
+Language: Cebuano
+Source: singpraises.net
+Title: Kinsa Ning Bataang Natu'g - Mga Himno alang sa Panimalay ug sa Simbahan, no. 1203
+URL: https://singpraises.net/collections/ceb/hymns-for-home-and-church/253196/what-child-is-this
+Status: UNVERIFIED - public lyrics page includes full Cebuano text and PDF link, but this translation is from the 2026 preview collection. Use if newer sources are acceptable; otherwise prefer 2002/2021 Mga Himno hits first.

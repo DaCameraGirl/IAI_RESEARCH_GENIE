@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: True to the Faith
+Language: Russian
+Source: archive.org
+Title: Napoleon's troublesome Americans : Franco-American relations, 1804-1815
+URL: https://archive.org/details/napoleonstrouble0000hill
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

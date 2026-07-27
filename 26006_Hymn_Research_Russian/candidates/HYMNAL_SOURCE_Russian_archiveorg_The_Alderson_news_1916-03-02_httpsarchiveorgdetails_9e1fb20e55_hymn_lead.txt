@@ -1,0 +1,6 @@
+Type: Candidate hymnal source (search within for the full hymn list)
+Language: Russian
+Source: archive.org
+Title: The Alderson news (1916-03-02)
+URL: https://archive.org/details/ADN_1916030201
+Status: UNVERIFIED — open and search within before submitting anything from it

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: In Hymns of Praise
+Language: Russian
+Source: musicbrainz
+Title: In Hymns of Praise by Nik Day (unknown)
+URL: https://musicbrainz.org/recording/0cc90eef-1c95-4c16-a426-f4df7af7addd
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

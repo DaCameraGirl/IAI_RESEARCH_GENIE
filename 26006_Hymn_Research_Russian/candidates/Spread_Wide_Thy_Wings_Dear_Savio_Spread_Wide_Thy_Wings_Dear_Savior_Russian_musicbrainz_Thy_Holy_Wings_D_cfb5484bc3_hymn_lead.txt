@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Spread Wide Thy Wings, Dear Savior
+Language: Russian
+Source: musicbrainz
+Title: Thy Holy Wings, Dear Savior by Augustana Heritage Association (unknown)
+URL: https://musicbrainz.org/recording/6dc2ac80-3a83-41ac-8b19-eeb1ac299acb
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

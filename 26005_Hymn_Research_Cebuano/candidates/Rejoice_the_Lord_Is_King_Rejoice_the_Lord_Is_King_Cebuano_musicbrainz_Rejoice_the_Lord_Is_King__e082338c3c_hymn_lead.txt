@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Rejoice, the Lord Is King!
+Language: Cebuano
+Source: musicbrainz
+Title: Rejoice, the Lord Is King by John Darwall (2012-05-01)
+URL: https://musicbrainz.org/recording/56b38af6-3921-487e-a90e-6bbdb7d780a0
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Come, All Ye Sorrowing
+Language: Cebuano
+Source: musicbrainz
+Title: Come All Ye! by Hymns From Nineveh (2011-02-21)
+URL: https://musicbrainz.org/recording/3210ef63-307d-46c6-80e3-0ac39738d45f
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

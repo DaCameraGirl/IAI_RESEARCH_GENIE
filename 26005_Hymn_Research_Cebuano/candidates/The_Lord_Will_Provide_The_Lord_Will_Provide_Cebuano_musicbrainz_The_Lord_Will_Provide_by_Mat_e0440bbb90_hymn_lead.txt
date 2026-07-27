@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: The Lord Will Provide
+Language: Cebuano
+Source: musicbrainz
+Title: The Lord Will Provide by Matthew Smith (unknown)
+URL: https://musicbrainz.org/recording/d1654406-7191-4311-b9c3-d589d4feca3c
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

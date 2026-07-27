@@ -1,0 +1,7 @@
+Type: Hymn translation lead (RWS follow-up request)
+Hymn: True to the Faith
+Language: Russian
+Source: archive.org
+Title: Didsbury pioneer (1917-03-21)
+URL: https://archive.org/details/DBP_1917032101
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

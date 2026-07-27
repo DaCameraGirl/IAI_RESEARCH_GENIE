@@ -1,0 +1,7 @@
+Type: Hymn translation lead
+Hymn: Angels We Have Heard on High
+Language: Cebuano
+Source: archive.org
+Title: Rejoice and sing : a hymnal for all services with accent on youth
+URL: https://archive.org/details/rejoicesimg0000unse
+Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment
