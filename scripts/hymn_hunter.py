@@ -143,7 +143,7 @@ class HymnHuntEngine:
         self._stopped = True
 
     def run(self) -> dict:
-        self.log(f"Starting Non-LDS Targeted Hymn Hunt for Study {self.study_id} ({self.language})...", "phase")
+        self.log(f"Starting Non-LDS Deep Hunt for Study {self.study_id} ({self.language})...", "phase")
         
         target_hymns = self.selected_hymns or list(NON_LDS_AUTHORITY_MAP.get(self.language, {}).keys())
         hits_found = 0
@@ -154,22 +154,42 @@ class HymnHuntEngine:
         for title in target_hymns:
             if self._stopped:
                 break
-            self.log(f"Hunting non-LDS sources for '{title}'...", "lane")
+
+            # 1. Non-LDS Authority Portals
+            self.log(f"Hunting non-LDS authority portals for '{title}'...", "lane")
             hits = search_non_lds_hymnal_portals(title, self.language)
             for hit in hits:
                 hits_found += 1
-                self.log(f"  FOUND NON-LDS HIT: {hit['translated_title']} ({hit['org']}) -> {hit['url']}", "hit")
-                
+                self.log(f"  [+] FOUND NON-LDS HIT: {hit['translated_title']} ({hit['org']}) -> {hit['url']}", "hit")
                 safe_name = title.replace(" ", "_").replace("?", "").replace("'", "")
                 out_path = folder / f"NON_LDS_{safe_name}_hymn_lead.txt"
-                lead_text = f"""Hymn: {title}
-Title: {hit['translated_title']}
-URL: {hit['url']}
-Organization: {hit['org']}
-Language: {self.language}
-Status: Non-LDS Verified Lead
-"""
+                lead_text = f"Hymn: {title}\nTitle: {hit['translated_title']}\nURL: {hit['url']}\nOrganization: {hit['org']}\nLanguage: {self.language}\nStatus: Non-LDS Verified Lead\n"
                 out_path.write_text(lead_text, encoding="utf-8")
+                time.sleep(0.4)
 
-        self.log(f"Completed hunt for Study {self.study_id}. Found {hits_found} non-LDS candidate leads.", "done")
+            # 2. Internet Archive Deep Search
+            self.log(f"Searching Internet Archive for non-LDS '{title}' hymnals in {self.language}...", "lane")
+            ia_hits = search_internet_archive(title, self.language, rows=5)
+            for hit in ia_hits:
+                hits_found += 1
+                self.log(f"  [+] Found Archive.org Hymnal: {hit['title']} -> {hit['url']}", "hit")
+                safe_name = title.replace(" ", "_").replace("?", "").replace("'", "") + "_" + hashlib.md5(hit['url'].encode()).hexdigest()[:6]
+                out_path = folder / f"ARCHIVE_{safe_name}_hymn_lead.txt"
+                lead_text = f"Hymn: {title}\nTitle: {hit['title']}\nURL: {hit['url']}\nSource: Internet Archive\nLanguage: {self.language}\nStatus: Non-LDS Lead\n"
+                out_path.write_text(lead_text, encoding="utf-8")
+                time.sleep(0.4)
+
+            # 3. Google Books Pre-1929 Search
+            self.log(f"Searching Google Books for pre-1929 '{title}' {self.language} editions...", "lane")
+            gb_hits = search_google_books(title, self.language, rows=5)
+            for hit in gb_hits:
+                hits_found += 1
+                self.log(f"  [+] Found Google Books Hymnal: {hit['title']} -> {hit['url']}", "hit")
+                safe_name = title.replace(" ", "_").replace("?", "").replace("'", "") + "_" + hashlib.md5(hit['url'].encode()).hexdigest()[:6]
+                out_path = folder / f"GBOOKS_{safe_name}_hymn_lead.txt"
+                lead_text = f"Hymn: {title}\nTitle: {hit['title']}\nURL: {hit['url']}\nSource: Google Books\nLanguage: {self.language}\nStatus: Non-LDS Lead\n"
+                out_path.write_text(lead_text, encoding="utf-8")
+                time.sleep(0.4)
+
+        self.log(f"Completed Deep Hunt for Study {self.study_id}. Found {hits_found} candidate leads across {len(target_hymns)} target hymns.", "done")
         return {"status": "success", "hits": hits_found, "hymns_searched": len(target_hymns)}
