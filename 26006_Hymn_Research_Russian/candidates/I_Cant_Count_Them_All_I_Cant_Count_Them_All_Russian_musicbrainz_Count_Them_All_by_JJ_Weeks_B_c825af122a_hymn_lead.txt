@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: I Can't Count Them All
-Language: Russian
-Source: musicbrainz
-Title: Count Them All by JJ Weeks Band (2016-04-08)
-URL: https://musicbrainz.org/recording/68760364-0241-41c5-aff7-47a01d4c25f9
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

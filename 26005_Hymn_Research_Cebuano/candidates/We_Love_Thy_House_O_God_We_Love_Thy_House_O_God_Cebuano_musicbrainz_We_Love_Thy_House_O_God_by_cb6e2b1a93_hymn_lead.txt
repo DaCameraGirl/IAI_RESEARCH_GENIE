@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: We Love Thy House, O God
-Language: Cebuano
-Source: musicbrainz
-Title: We Love Thy House, O God by The Church of Jesus Christ of Latter-day Saints (1992)
-URL: https://musicbrainz.org/recording/ab828f02-c9d3-46df-9f7a-cd179f481b6e
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

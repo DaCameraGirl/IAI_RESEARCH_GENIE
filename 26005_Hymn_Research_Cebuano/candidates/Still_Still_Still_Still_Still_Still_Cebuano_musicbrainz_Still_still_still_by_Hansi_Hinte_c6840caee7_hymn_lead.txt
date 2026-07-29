@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still, still, still by Hansi Hinterseer (1999-11-02)
-URL: https://musicbrainz.org/recording/0a2a660b-a6f4-48b8-aa8c-d83bdbc26a54
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

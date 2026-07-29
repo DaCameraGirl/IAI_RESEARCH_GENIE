@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: A Poor Wayfaring Man of Grief
-Language: Cebuano
-Source: musicbrainz
-Title: A Poor Wayfaring Man of Grief by Mark Geslison & Geoff Groberg (2006)
-URL: https://musicbrainz.org/recording/329b8fc2-935f-4e92-8d92-82461cf49368
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

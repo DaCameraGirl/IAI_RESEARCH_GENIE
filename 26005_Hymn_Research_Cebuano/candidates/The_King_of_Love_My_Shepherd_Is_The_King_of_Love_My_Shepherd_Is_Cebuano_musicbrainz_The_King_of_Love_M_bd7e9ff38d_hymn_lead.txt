@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The King of Love My Shepherd Is
-Language: Cebuano
-Source: musicbrainz
-Title: The King of Love My Shepherd Is by Mercy Message (2019-07-12)
-URL: https://musicbrainz.org/recording/ec8ceb60-d617-49d6-9499-112020792634
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still, still, still by Wiener Sängerknaben (2019-04-05)
-URL: https://musicbrainz.org/recording/2128367f-aa7a-4f80-a29f-64261749dc40
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

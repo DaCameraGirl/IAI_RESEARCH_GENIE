@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Only One Day, One Moment at a Time
-Language: Russian
-Source: musicbrainz
-Title: One Moment at a Time by Justin Chart (2022-07-29)
-URL: https://musicbrainz.org/recording/29ddb069-3812-4224-8bda-c3275aad9757
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

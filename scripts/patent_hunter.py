@@ -1231,17 +1231,7 @@ Notes:
                 written += 1
                 self.log(f"  Product: {domain} snapshot ({item['date']})", "info")
         
-        # MusicBrainz results (recordings - perfect for hymns)
-        for item in results.get("musicbrainz", [])[:10]:
-            if is_burned(item["recording_id"], burned)[0]:
-                continue
-            safe_title = re.sub(r"[^\w]+", "_", item["title"][:40])
-            path = cand_dir / f"MUSIC_musicbrainz_{safe_title}_RWS_format.txt"
-            content = self._draft_music_candidate(item, "MusicBrainz", critical)
-            path.write_text(content, encoding="utf-8")
-            written += 1
-            self.log(f"  Music: {item['title'][:50]} by {item['artist']} ({item['release_date']})", "info")
-        
+
         # Discogs results (album releases)
         for item in results.get("discogs", [])[:10]:
             if is_burned(item["url"], burned)[0]:

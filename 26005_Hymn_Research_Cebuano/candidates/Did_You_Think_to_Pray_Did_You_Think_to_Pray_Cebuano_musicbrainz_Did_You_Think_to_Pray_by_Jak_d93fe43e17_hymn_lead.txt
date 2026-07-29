@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Did You Think to Pray
-Language: Cebuano
-Source: musicbrainz
-Title: Did You Think to Pray? by Jake White (unknown)
-URL: https://musicbrainz.org/recording/a715a780-2345-4b80-8464-d80e1f874379
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

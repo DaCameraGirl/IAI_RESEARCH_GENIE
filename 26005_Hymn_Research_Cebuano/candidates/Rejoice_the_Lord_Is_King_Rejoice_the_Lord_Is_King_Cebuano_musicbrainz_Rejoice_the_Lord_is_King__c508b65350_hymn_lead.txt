@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rejoice, the Lord Is King!
-Language: Cebuano
-Source: musicbrainz
-Title: Rejoice the Lord is King by Scottish Festival Chorus (2004)
-URL: https://musicbrainz.org/recording/b0ac6820-e539-4914-afd1-1f0d970dcc45
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

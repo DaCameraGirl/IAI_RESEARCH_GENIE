@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still Still Still Still by Swallows (2006-07-01)
-URL: https://musicbrainz.org/recording/e3f3c2d4-96b5-4722-82a2-f7928be4c938
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

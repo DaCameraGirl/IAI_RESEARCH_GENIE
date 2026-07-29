@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rejoice, the Lord Is King!
-Language: Cebuano
-Source: musicbrainz
-Title: Rejoice, The Lord Is King by Barlow Bradford (2002)
-URL: https://musicbrainz.org/recording/8ad25dbf-dc47-40ab-b883-45f657fe0249
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

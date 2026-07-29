@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Have I Done Any Good
-Language: Russian
-Source: musicbrainz
-Title: Have I Done Any Good? by Steve Alder (2013-03-31)
-URL: https://musicbrainz.org/recording/8adfe71e-2b73-4e8f-b304-4a8510f0e50e
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Do As I'm Doing
-Language: Russian
-Source: musicbrainz
-Title: Do As I'm Doing by Robert C. Bowden (2010)
-URL: https://musicbrainz.org/recording/45cc1f4b-afb5-42cd-b3fc-4adc7b83e5a3
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

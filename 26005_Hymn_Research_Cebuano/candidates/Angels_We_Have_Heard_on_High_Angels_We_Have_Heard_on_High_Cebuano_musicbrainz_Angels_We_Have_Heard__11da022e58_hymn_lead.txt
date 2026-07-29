@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Cebuano
-Source: musicbrainz
-Title: Angels We Have Heard on High by Phil Coulter (unknown)
-URL: https://musicbrainz.org/recording/e57df539-c4a9-43a7-84a8-852049cf5506
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

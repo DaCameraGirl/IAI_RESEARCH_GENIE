@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: What Wondrous Love Is This
-Language: Russian
-Source: musicbrainz
-Title: What Wondrous Love Is This? by Oysterband (2008-11)
-URL: https://musicbrainz.org/recording/db02f3bb-83b3-4c96-b10d-8a0181d6bb06
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Praise the Lord! Ye Heavens Adore Him
-Language: Cebuano
-Source: musicbrainz
-Title: Praise The Lord Ye Heavens Adore Him by David Liebe Hart (2014-05-23)
-URL: https://musicbrainz.org/recording/2711fbc9-38e0-4481-adcc-50acbac66225
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

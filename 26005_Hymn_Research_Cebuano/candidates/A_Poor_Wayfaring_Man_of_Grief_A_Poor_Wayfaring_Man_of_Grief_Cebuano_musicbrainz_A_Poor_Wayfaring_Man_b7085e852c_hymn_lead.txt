@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: A Poor Wayfaring Man of Grief
-Language: Cebuano
-Source: musicbrainz
-Title: A Poor Wayfaring Man of Grief by The Sabre Rattlers (2010-12-12)
-URL: https://musicbrainz.org/recording/3dd60bbf-4e9b-4d0d-8ac8-30ebce1bc0f3
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

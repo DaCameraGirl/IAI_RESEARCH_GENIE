@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Cebuano
-Source: musicbrainz
-Title: Angels We Have Heard on High by Cumberland Gap Reunion (unknown)
-URL: https://musicbrainz.org/recording/74fd45e8-9e79-4d06-93b7-c74327e6e7d3
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

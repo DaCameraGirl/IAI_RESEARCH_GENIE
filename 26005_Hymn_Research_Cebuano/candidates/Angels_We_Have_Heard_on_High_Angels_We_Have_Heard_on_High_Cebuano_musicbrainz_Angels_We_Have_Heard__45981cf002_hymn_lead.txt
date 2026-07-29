@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Cebuano
-Source: musicbrainz
-Title: Angels We Have Heard on High by The Blenders (unknown)
-URL: https://musicbrainz.org/recording/76fc2804-a914-4283-9a73-b1ccd2414675
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

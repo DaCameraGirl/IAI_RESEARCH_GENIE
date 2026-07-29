@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: This Is My Father's World
-Language: Cebuano
-Source: musicbrainz
-Title: This Is My Father's World by Jennifer Haines (unknown)
-URL: https://musicbrainz.org/recording/80a3fbb1-c132-4062-bf6d-bf345164f54c
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

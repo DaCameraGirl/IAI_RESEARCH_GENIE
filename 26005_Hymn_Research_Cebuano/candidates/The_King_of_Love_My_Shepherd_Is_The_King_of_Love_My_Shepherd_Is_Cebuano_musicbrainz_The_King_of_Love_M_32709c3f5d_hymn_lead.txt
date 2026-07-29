@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The King of Love My Shepherd Is
-Language: Cebuano
-Source: musicbrainz
-Title: The King of Love My Shepherd Is by Galkin Evangelistic Team (unknown)
-URL: https://musicbrainz.org/recording/df48e12e-da7b-4b78-9b1d-15ca79fb587d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

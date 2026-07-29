@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Praise, My Soul, the King of Heaven
-Language: Cebuano
-Source: musicbrainz
-Title: Praise, My Soul, the King of Heaven by The Choir of St. Paul's Cathedral (1995)
-URL: https://musicbrainz.org/recording/08e5c3a6-54e1-4699-91ea-12317e703ab5
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Sweet Hour of Prayer
-Language: Cebuano
-Source: musicbrainz
-Title: Sweet Hour of Prayer by Jazz Hymns (unknown)
-URL: https://musicbrainz.org/recording/c41e6f9f-ceef-4320-8cbf-68a099ad5826
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

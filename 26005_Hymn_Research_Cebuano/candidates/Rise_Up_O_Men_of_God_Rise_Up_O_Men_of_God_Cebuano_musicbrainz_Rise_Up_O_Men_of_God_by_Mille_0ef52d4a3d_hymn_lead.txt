@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rise Up, O Men of God
-Language: Cebuano
-Source: musicbrainz
-Title: Rise Up, O Men of God by Millennium Three (2002)
-URL: https://musicbrainz.org/recording/45275018-cfa2-4d91-abdd-12e657e7fa92
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

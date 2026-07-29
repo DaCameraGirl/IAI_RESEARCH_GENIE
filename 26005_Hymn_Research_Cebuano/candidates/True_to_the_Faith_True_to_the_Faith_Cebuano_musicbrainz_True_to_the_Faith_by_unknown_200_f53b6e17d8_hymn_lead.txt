@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Cebuano
-Source: musicbrainz
-Title: True to the Faith by [unknown] (2001)
-URL: https://musicbrainz.org/recording/e88355a4-cbff-40ad-808d-12d5d7839be6
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

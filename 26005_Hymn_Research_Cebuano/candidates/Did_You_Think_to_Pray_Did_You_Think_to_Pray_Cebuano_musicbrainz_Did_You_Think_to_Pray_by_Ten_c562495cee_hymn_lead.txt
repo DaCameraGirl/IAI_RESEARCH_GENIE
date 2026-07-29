@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Did You Think to Pray
-Language: Cebuano
-Source: musicbrainz
-Title: Did You Think to Pray by Tennessee Ernie Ford (1992)
-URL: https://musicbrainz.org/recording/7db27d00-b13c-442e-9a08-c5417db0a5ba
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

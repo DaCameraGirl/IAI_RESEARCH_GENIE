@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Russian
-Source: musicbrainz
-Title: Angels/Angels We Have Heard on High by Matt Wilson (2014-11-07)
-URL: https://musicbrainz.org/recording/5825de0e-70c8-4f67-b915-d781b39902cb
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

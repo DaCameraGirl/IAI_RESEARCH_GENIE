@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: This Is My Father's World
-Language: Russian
-Source: musicbrainz
-Title: This is My Father's World by Kim Thiessen (2002)
-URL: https://musicbrainz.org/recording/85fd032e-1cce-4656-b847-a24eaf6215ba
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

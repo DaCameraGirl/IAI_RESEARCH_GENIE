@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: What Child Is This
-Language: Russian
-Source: musicbrainz
-Title: What Child Is This by Dave Williamson (unknown)
-URL: https://musicbrainz.org/recording/3ac1e99f-cab0-4296-9009-d314905c5258
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

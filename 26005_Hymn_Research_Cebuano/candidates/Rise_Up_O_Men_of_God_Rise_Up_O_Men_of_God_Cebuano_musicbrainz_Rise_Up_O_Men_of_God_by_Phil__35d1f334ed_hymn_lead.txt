@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rise Up, O Men of God
-Language: Cebuano
-Source: musicbrainz
-Title: Rise Up O Men of God by Phil Keaggy (1981)
-URL: https://musicbrainz.org/recording/e141a544-370b-4e8f-949b-305923023e6f
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

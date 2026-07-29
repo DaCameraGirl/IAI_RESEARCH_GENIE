@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: This Is My Father's World
-Language: Cebuano
-Source: musicbrainz
-Title: This Is My Father's World by Geoff Moore (2005)
-URL: https://musicbrainz.org/recording/9adc8d44-1235-4344-9010-1f64736dde9d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

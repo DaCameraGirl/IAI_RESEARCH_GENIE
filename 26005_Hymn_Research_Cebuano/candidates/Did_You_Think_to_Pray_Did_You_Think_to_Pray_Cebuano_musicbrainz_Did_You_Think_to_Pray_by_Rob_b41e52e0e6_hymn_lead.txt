@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Did You Think to Pray
-Language: Cebuano
-Source: musicbrainz
-Title: Did You Think to Pray? by Rob Gardner (2005-11-30)
-URL: https://musicbrainz.org/recording/1952ba98-3e56-42ab-afd6-6f44a5479700
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

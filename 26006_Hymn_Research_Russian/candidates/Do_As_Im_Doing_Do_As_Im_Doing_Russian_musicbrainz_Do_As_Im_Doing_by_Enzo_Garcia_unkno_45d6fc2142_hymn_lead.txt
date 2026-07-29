@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Do As I'm Doing
-Language: Russian
-Source: musicbrainz
-Title: Do As I'm Doing by Enzo Garcia (unknown)
-URL: https://musicbrainz.org/recording/19bf5a11-12a8-4eb1-a2a2-a32869fc3b06
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

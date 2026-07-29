@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Russian
-Source: musicbrainz
-Title: True to the Faith by Greg Hansen (unknown)
-URL: https://musicbrainz.org/recording/4d18d9b9-1d42-4404-8a10-356993d566de
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

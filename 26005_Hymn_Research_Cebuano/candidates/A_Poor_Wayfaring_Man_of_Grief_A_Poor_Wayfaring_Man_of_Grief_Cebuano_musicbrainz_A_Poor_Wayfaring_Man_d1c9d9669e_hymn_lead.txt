@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: A Poor Wayfaring Man of Grief
-Language: Cebuano
-Source: musicbrainz
-Title: A Poor Wayfaring Man of Grief by Dominic Moore (2009-09-15)
-URL: https://musicbrainz.org/recording/ae745c19-24e1-4e37-b4ee-74741e35f3e5
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

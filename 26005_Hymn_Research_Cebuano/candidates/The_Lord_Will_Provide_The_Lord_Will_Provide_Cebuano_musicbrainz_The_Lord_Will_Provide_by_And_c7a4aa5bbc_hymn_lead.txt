@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The Lord Will Provide
-Language: Cebuano
-Source: musicbrainz
-Title: The Lord Will Provide by Andy Statman (2011)
-URL: https://musicbrainz.org/recording/ebf919df-46b3-45e1-b057-5fdb9067a63f
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

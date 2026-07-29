@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Love Divine
-Language: Cebuano
-Source: musicbrainz
-Title: Sa Kidhat Mo (Cebuano) by Myrna Cawit (2001-10-02)
-URL: https://musicbrainz.org/recording/62d53d08-8d89-4d32-97d4-7a8df33fb142
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

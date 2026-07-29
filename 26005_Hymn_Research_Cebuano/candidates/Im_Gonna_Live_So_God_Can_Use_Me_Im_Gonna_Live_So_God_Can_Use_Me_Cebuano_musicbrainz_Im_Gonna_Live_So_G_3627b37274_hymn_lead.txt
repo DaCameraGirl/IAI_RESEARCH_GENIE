@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: I'm Gonna Live So God Can Use Me
-Language: Cebuano
-Source: musicbrainz
-Title: I'm Gonna Live So God Can Use Me by Jeremy Kempf (2014)
-URL: https://musicbrainz.org/recording/204b833e-ac5e-4a23-9d46-4f2bfee01283
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

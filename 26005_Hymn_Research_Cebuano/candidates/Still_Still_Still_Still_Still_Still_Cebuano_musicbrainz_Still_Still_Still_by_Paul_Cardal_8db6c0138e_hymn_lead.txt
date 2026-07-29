@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still, Still, Still by Paul Cardall (1997)
-URL: https://musicbrainz.org/recording/c2abd8d3-4703-4a69-8b86-b9e6897ea8e9
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

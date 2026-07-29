@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: O God, the Eternal Father
-Language: Russian
-Source: musicbrainz
-Title: O God, the Eternal Father by David Glen Hatch (2009)
-URL: https://musicbrainz.org/recording/049782a9-7dd1-46d3-a7ba-591e17dca30f
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

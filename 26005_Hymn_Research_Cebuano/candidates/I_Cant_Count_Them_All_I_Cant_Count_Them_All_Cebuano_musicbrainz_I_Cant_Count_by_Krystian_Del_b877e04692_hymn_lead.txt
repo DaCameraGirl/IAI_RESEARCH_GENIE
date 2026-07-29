@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: I Can't Count Them All
-Language: Cebuano
-Source: musicbrainz
-Title: I Can't Count by Krystian Dell (2006)
-URL: https://musicbrainz.org/recording/59c43ac6-0e9d-4066-9f3b-9020e5542727
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

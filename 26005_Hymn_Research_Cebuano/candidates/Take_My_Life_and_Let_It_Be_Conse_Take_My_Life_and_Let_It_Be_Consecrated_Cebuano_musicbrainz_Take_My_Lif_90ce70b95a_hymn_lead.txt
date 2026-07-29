@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Take My Life and Let It Be Consecrated
-Language: Cebuano
-Source: musicbrainz
-Title: Take My Life and Let It Be by Otto Krease (2006)
-URL: https://musicbrainz.org/recording/f8a56584-4292-4158-9989-1a055fc89e9b
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

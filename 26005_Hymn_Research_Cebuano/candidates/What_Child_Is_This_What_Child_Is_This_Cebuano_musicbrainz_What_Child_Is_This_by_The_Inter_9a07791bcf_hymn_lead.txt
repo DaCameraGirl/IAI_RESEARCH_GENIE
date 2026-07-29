@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: What Child Is This
-Language: Cebuano
-Source: musicbrainz
-Title: What Child Is This by The International Children’s Choir (1990-08-11)
-URL: https://musicbrainz.org/recording/9792996a-4c93-4f97-b1d0-8c915ed2646c
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

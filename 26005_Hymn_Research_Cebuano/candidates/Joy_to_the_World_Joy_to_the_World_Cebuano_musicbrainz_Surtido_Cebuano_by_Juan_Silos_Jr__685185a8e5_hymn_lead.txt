@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Joy to the World
-Language: Cebuano
-Source: musicbrainz
-Title: Surtido Cebuano by Juan Silos Jr. & Rondalla (2010-08-10)
-URL: https://musicbrainz.org/recording/f7894d8e-a224-49b8-895e-340174b1d3f8
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

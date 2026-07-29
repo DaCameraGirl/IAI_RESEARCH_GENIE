@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: A Poor Wayfaring Man of Grief
-Language: Cebuano
-Source: musicbrainz
-Title: A Poor Wayfaring Man of Grief by Afterglow (unknown)
-URL: https://musicbrainz.org/recording/f5dfb51d-00ab-4355-b09c-8c74a788cf39
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

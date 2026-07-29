@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Spread Wide Thy Wings, Dear Savior
-Language: Cebuano
-Source: musicbrainz
-Title: Spread Thy Wings by Red Mountain Church (2010-12-07)
-URL: https://musicbrainz.org/recording/695d1c00-0bcf-4760-b700-bdce9d39f026
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

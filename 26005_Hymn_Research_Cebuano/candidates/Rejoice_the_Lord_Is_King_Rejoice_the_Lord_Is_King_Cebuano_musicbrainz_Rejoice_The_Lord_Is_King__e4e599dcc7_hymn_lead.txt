@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rejoice, the Lord Is King!
-Language: Cebuano
-Source: musicbrainz
-Title: Rejoice, The Lord Is King by Norton Hall Band (2021-06-13)
-URL: https://musicbrainz.org/recording/6d4b7c55-f39a-480d-b392-3156ddd3d9d0
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

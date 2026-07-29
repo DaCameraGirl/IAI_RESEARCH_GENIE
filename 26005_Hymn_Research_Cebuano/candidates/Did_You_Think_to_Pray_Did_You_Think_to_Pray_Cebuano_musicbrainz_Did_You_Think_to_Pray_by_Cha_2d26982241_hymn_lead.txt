@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Did You Think to Pray
-Language: Cebuano
-Source: musicbrainz
-Title: Did You Think to Pray by Charley Pride (2003-07-22)
-URL: https://musicbrainz.org/recording/ea515b42-633a-4f52-8215-e3d0b6038d19
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

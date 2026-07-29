@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Spread Wide Thy Wings, Dear Savior
-Language: Cebuano
-Source: musicbrainz
-Title: Black Wings Spread Wide by Chains ov Beleth (unknown)
-URL: https://musicbrainz.org/recording/3be2b958-752b-416c-a068-00e370fe252c
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Have I Done Any Good
-Language: Russian
-Source: musicbrainz
-Title: Have I Done Any Good? by Craig Larson & Friends (unknown)
-URL: https://musicbrainz.org/recording/05714cff-64cb-46b2-b051-4f48d7669d2d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

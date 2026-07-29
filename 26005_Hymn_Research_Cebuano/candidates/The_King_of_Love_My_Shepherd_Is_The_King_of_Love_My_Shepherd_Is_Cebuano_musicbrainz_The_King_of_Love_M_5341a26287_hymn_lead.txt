@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The King of Love My Shepherd Is
-Language: Cebuano
-Source: musicbrainz
-Title: The King of Love My Shepherd Is by Garth Smith (2015-05-01)
-URL: https://musicbrainz.org/recording/07ccdd15-a10a-4f59-8674-a8889a982088
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

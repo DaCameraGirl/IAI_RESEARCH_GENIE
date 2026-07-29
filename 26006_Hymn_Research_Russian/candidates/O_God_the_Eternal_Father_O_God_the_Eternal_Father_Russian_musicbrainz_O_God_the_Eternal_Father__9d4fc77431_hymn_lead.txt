@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: O God, the Eternal Father
-Language: Russian
-Source: musicbrainz
-Title: O God, the Eternal Father by [unknown] (2001)
-URL: https://musicbrainz.org/recording/17101b42-e2cf-4dea-bc2d-dbd4cdbb782b
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

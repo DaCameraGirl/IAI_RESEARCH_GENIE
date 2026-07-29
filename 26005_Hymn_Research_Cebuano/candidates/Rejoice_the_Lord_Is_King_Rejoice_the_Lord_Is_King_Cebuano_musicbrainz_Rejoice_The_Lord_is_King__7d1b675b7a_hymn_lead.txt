@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rejoice, the Lord Is King!
-Language: Cebuano
-Source: musicbrainz
-Title: Rejoice, The Lord is King by Don Marsh (1997)
-URL: https://musicbrainz.org/recording/37b734bf-00d2-4aad-9f91-59223d6705fb
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: This Is My Father's World
-Language: Cebuano
-Source: musicbrainz
-Title: This is My Father's World by Cedarmont Baby (unknown)
-URL: https://musicbrainz.org/recording/44963c68-ae96-4658-bf01-94c2594a6978
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

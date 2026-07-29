@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Russian
-Source: musicbrainz
-Title: True to the Faith by The Church of Jesus Christ of Latter-day Saints (1992)
-URL: https://musicbrainz.org/recording/6cd1ec08-bbd3-4424-bf75-1f69dd5b0619
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -447,6 +447,7 @@ def search_product_evidence(
     _log(f"  [+] Found {len(results['semantic_scholar'])} Semantic Scholar results")
     
     # OpenAlex (academic papers - better coverage)
+    # OpenAlex academic search
     _log("  -> Searching OpenAlex for academic papers...")
     for query in queries[:3]:
         hits = search_openalex(query, before_date=before_date, max_results=max_per_source)
@@ -454,15 +455,6 @@ def search_product_evidence(
         if len(results["openalex"]) >= max_per_source * 2:
             break
     _log(f"  [+] Found {len(results['openalex'])} OpenAlex results")
-    
-    # MusicBrainz (recordings - perfect for hymns, no API key needed)
-    _log("  -> Searching MusicBrainz for recordings...")
-    for query in queries[:3]:
-        hits = search_musicbrainz(query, before_date=before_date, max_results=max_per_source)
-        results["musicbrainz"].extend(hits)
-        if len(results["musicbrainz"]) >= max_per_source * 2:
-            break
-    _log(f"  [+] Found {len(results['musicbrainz'])} MusicBrainz results")
     
     # Discogs (album releases - if API key available)
     discogs_api_key = os.environ.get("DISCOGS_API_KEY")
@@ -781,17 +773,8 @@ def search_musicbrainz(
     before_date: str | None = None,
     max_results: int = 10,
 ) -> list[dict[str, str]]:
-    """
-    Search MusicBrainz for recordings (perfect for hymns, no API key needed).
-    
-    Args:
-        query: Search query (e.g., "Amazing Grace Cebuano")
-        before_date: ISO date string (YYYY-MM-DD) for release date filter
-        max_results: Maximum results
-    
-    Returns:
-        List of dicts with keys: title, artist, url, release_date, recording_id
-    """
+    """MusicBrainz search disabled — audio recordings do not provide hymnal text or URLs."""
+    return []
     # MusicBrainz API: https://musicbrainz.org/doc/MusicBrainz_API
     q = urllib.parse.quote(query)
     url = f"https://musicbrainz.org/ws/2/recording/?query={q}&limit={max_results}&fmt=json"

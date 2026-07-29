@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: What Wondrous Love Is This
-Language: Cebuano
-Source: musicbrainz
-Title: What Wondrous Love Is This by Fernando Ortega (unknown)
-URL: https://musicbrainz.org/recording/eef4f333-c04b-4fdc-8f0d-a7d42b7cf92d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still, Still, Still by Mormon Tabernacle Choir (1966)
-URL: https://musicbrainz.org/recording/8651a094-57b9-475d-b7e4-a02b18734756
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

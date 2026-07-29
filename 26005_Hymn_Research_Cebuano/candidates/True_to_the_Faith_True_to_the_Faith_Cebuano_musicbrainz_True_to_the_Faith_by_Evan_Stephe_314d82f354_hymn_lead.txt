@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Cebuano
-Source: musicbrainz
-Title: True to the Faith by Evan Stephens (2008-05-16)
-URL: https://musicbrainz.org/recording/cb09fec5-de1d-4175-a151-9305afd956aa
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

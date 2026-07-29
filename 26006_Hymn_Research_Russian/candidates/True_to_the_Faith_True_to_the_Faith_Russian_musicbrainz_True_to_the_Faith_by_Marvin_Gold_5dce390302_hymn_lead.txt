@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: True to the Faith
-Language: Russian
-Source: musicbrainz
-Title: True to the Faith by Marvin Goldstein (2008-06-02)
-URL: https://musicbrainz.org/recording/3157b29d-e156-425b-9905-73134436dcc8
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

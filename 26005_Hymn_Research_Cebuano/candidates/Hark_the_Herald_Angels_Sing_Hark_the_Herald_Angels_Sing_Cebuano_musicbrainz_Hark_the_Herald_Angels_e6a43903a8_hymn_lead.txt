@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Hark! the Herald Angels Sing
-Language: Cebuano
-Source: musicbrainz
-Title: Hark the Herald Angels Sing by Rebecca St. James (2005-10-04)
-URL: https://musicbrainz.org/recording/5c1e9234-d449-4af0-a98d-308085c90895
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

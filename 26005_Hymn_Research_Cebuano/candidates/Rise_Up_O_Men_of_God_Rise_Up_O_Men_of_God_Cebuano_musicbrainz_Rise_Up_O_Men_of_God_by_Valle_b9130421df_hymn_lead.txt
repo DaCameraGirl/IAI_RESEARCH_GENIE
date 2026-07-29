@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Rise Up, O Men of God
-Language: Cebuano
-Source: musicbrainz
-Title: Rise Up O Men of God by Valley Male Chorus (2016)
-URL: https://musicbrainz.org/recording/fec0ff10-3bea-4cfe-8e09-74b3434e415f
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Did You Think to Pray
-Language: Cebuano
-Source: musicbrainz
-Title: Did You Think to Pray? by Adam Steffey (2001-10-23)
-URL: https://musicbrainz.org/recording/5091f67a-7776-4029-a180-a56d7e8cdf43
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

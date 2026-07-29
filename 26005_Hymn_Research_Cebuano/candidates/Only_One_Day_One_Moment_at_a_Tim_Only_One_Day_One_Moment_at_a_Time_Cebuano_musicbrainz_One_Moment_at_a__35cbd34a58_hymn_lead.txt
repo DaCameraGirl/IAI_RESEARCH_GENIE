@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Only One Day, One Moment at a Time
-Language: Cebuano
-Source: musicbrainz
-Title: One Moment at a Time by Stephen Stills (unknown)
-URL: https://musicbrainz.org/recording/59840073-79f8-49ac-b7bc-55b2c41d691e
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Still, Still, Still
-Language: Cebuano
-Source: musicbrainz
-Title: Still, Still, Still by Lorie Line (1991)
-URL: https://musicbrainz.org/recording/2c666bc4-3fee-4dd4-91a3-bef8bd2691eb
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

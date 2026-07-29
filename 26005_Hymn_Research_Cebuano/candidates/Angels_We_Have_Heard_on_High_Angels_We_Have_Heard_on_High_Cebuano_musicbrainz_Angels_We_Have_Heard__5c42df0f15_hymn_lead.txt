@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Cebuano
-Source: musicbrainz
-Title: Angels We Have Heard on High by Moore by Four (2001)
-URL: https://musicbrainz.org/recording/f6f0d0bf-7bb9-4271-a67a-128ecaa9115d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

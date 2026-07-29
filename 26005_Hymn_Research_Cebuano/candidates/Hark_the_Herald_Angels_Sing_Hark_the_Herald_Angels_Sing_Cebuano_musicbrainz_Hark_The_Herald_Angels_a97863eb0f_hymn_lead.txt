@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Hark! the Herald Angels Sing
-Language: Cebuano
-Source: musicbrainz
-Title: Hark! The Herald Angels Sing by Bach-Ahp Singers (unknown)
-URL: https://musicbrainz.org/recording/a635a222-a2e2-450f-a0f9-a5477dab25c2
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Russian
-Source: musicbrainz
-Title: Angels We Have Heard on High by Hayride (1999)
-URL: https://musicbrainz.org/recording/55d74dcb-893a-4b23-abfa-d8d447df1ddb
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

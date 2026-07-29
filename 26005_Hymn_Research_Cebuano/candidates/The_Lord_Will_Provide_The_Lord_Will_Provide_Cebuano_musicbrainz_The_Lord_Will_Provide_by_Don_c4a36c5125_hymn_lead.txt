@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The Lord Will Provide
-Language: Cebuano
-Source: musicbrainz
-Title: The Lord Will Provide by Don Rigsby & Midnight Call (2010)
-URL: https://musicbrainz.org/recording/9fb5660d-beda-4e45-9cf9-1a9e13b0798d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: A Poor Wayfaring Man of Grief
-Language: Russian
-Source: musicbrainz
-Title: A Poor Wayfaring Man of Grief by Paul Cardall (2000-08-04)
-URL: https://musicbrainz.org/recording/b3505410-fb21-4362-9143-a64c1135185e
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

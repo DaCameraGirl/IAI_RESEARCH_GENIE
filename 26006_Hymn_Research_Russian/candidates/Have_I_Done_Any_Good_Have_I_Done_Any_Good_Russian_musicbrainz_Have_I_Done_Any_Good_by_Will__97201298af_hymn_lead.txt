@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Have I Done Any Good
-Language: Russian
-Source: musicbrainz
-Title: Have I Done Any Good? by Will Lamartine Thompson (2008-05-16)
-URL: https://musicbrainz.org/recording/fee9dea5-c6eb-4b3d-b138-e615628ad6f6
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

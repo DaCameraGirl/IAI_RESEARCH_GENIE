@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Only One Day, One Moment at a Time
-Language: Cebuano
-Source: musicbrainz
-Title: One Moment at a Time by Abigail Dowd (2021-04-23)
-URL: https://musicbrainz.org/recording/b6c7ed9e-9efe-4beb-aa5e-db78fb242183
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

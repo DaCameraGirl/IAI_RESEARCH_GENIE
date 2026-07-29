@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Take My Life and Let It Be Consecrated
-Language: Russian
-Source: musicbrainz
-Title: Take My Life, and Let It Be Consecrated by David Davidson (2002)
-URL: https://musicbrainz.org/recording/e25b39ab-f7b7-4abb-8532-fcafd521f9a0
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

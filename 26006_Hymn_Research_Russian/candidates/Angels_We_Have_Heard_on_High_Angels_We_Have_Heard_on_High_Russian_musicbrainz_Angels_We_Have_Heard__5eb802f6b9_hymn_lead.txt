@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: Angels We Have Heard on High
-Language: Russian
-Source: musicbrainz
-Title: Angels We Have Heard on High by Mannheim Steamroller (1998-10-13)
-URL: https://musicbrainz.org/recording/244fab32-674f-4ff8-915f-4be602cfb30d
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

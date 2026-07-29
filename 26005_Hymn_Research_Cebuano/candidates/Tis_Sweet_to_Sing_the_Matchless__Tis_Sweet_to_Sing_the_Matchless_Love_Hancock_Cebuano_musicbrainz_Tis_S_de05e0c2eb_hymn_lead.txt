@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: 'Tis Sweet to Sing the Matchless Love (Hancock)
-Language: Cebuano
-Source: musicbrainz
-Title: 'Tis Sweet to Sing the Matchless Love by Mark Geslison & Geoff Groberg (2009)
-URL: https://musicbrainz.org/recording/326c794c-3a4b-4bba-9c98-7915ca52d205
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment

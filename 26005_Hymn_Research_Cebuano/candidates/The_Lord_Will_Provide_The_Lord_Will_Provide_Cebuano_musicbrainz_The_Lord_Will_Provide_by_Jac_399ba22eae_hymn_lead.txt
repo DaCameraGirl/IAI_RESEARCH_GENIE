@@ -1,7 +1,0 @@
-Type: Hymn translation lead
-Hymn: The Lord Will Provide
-Language: Cebuano
-Source: musicbrainz
-Title: The Lord Will Provide by Jacinth (2021-11-28)
-URL: https://musicbrainz.org/recording/49114b6e-3a45-4e0e-870e-bbba519a4ee9
-Status: UNVERIFIED — read the source and confirm translator/date/copyright before submitting; RWS requires a real screenshot attachment
