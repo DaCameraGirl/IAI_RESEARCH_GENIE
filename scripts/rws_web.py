@@ -106,6 +106,8 @@ def _parse_hymn_lead(path: Path, text: str) -> dict:
     hymn = field("Hymn")
     title = field("Title")
     org = field("Organization")
+    status = field("Status")
+    is_ready_lead = "Non-LDS" in text or "Verified" in text or "READY" in path.name or "Non-LDS Verified" in status
     return {
         "file": path.name,
         "publication": hymn or title or path.stem,
@@ -113,10 +115,10 @@ def _parse_hymn_lead(path: Path, text: str) -> dict:
         "url": field("URL"),
         "pdf_url": "",
         "doi": "not found",
-        "rank": 0,
-        "confidence": "high" if "Non-LDS" in text else "low",
-        "ready": True if "Non-LDS" in text else False,
-        "tier": "READY" if "Non-LDS" in text else "LEAD",
+        "rank": 2 if is_ready_lead else 0,
+        "confidence": "high" if is_ready_lead else "low",
+        "ready": is_ready_lead,
+        "tier": "READY" if is_ready_lead else "LEAD",
         "burned": False,
         "burn_relation": "",
         "text": text,
@@ -390,10 +392,20 @@ header {
 .cand {
   padding: 14px 16px; border-radius: 12px; cursor: pointer;
   background: rgba(0,0,0,0.22); border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.2s ease;
 }
+.cand.is-ready { border-left: 4px solid var(--green); background: rgba(94, 207, 138, 0.05); }
+.cand-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .cand .pub { font-weight: 600; font-size: 0.9rem; }
 .cand .ttl { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
-.cand-links a { color: var(--gold); text-decoration: none; margin-right: 10px; font-size: 0.8rem; }
+.cand-links { margin-top: 8px; }
+.cand-links a { color: var(--gold); text-decoration: none; margin-right: 10px; font-size: 0.8rem; font-weight: 500; }
+.status-badge {
+  font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
+}
+.status-badge.green { background: rgba(94, 207, 138, 0.2); color: var(--green); border: 1px solid rgba(94, 207, 138, 0.4); }
+.status-badge.lead { background: rgba(255, 255, 255, 0.05); color: var(--muted); border: 1px solid rgba(255, 255, 255, 0.1); }
 
 /* Strategy & Checkbox Controls Panel */
 .controls-panel {
@@ -579,8 +591,18 @@ async function loadCandidates() {
   }
   data.candidates.forEach(c => {
     const div = document.createElement('div');
-    div.className = 'cand';
-    div.innerHTML = `<div class="pub">${c.publication}</div><div class="ttl">${c.title}</div><div class="cand-links"><a href="${c.url}" target="_blank">Open Link</a></div>`;
+    div.className = 'cand ' + (c.ready ? 'is-ready' : '');
+    const badge = c.ready 
+      ? '<span class="status-badge green">🟢 READY</span>' 
+      : '<span class="status-badge lead">⚪ LEAD</span>';
+    div.innerHTML = `
+      <div class="cand-head">
+        <div class="pub">${c.publication}</div>
+        ${badge}
+      </div>
+      <div class="ttl">${c.title}</div>
+      <div class="cand-links"><a href="${c.url}" target="_blank" rel="noopener">Open Link</a></div>
+    `;
     el.appendChild(div);
   });
 }
