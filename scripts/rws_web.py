@@ -41,13 +41,12 @@ BUILD_VERSION = "v2.0 | Interactive Target Controls & Non-LDS Strategy Engine"
 
 _hunt_threads: dict[str, threading.Thread] = {}
 _hunt_engines: dict[str, object] = {}
-_log_queues: dict[str, queue.Queue[dict]] = {}
-_hunt_results: dict[str, dict | None] = {}
+_study_logs: dict[str, list[dict]] = {}
 
-def _get_log_queue(study_id: str) -> queue.Queue[dict]:
-    if study_id not in _log_queues:
-        _log_queues[study_id] = queue.Queue()
-    return _log_queues[study_id]
+def _get_study_logs(study_id: str) -> list[dict]:
+    if study_id not in _study_logs:
+        _study_logs[study_id] = []
+    return _study_logs[study_id]
 
 def _study_hunt_running(study_id: str) -> bool:
     thread = _hunt_threads.get(study_id)
@@ -226,17 +225,18 @@ def _study_ui_copy(meta: dict) -> dict[str, str]:
     }
 
 def _run_hunt_async(study_id: str, selected_hymns: list[str] | None = None, selected_denoms: list[str] | None = None) -> None:
-    q = _get_log_queue(study_id)
+    logs = _get_study_logs(study_id)
+    logs.clear()
 
     def log_fn(msg: str, level: str = "info") -> None:
         ts = datetime.now().strftime("%H:%M:%S")
-        q.put({"t": ts, "msg": msg, "level": level, "study": study_id})
+        logs.append({"t": ts, "msg": msg, "level": level, "study": study_id})
 
     meta = STUDY_META[study_id]
     log_fn(f"Deep Hunt initiated for {study_id} ({meta['title']})", "phase")
 
     try:
-        if meta.get("type") == "copyright_hymn":
+        if meta.get("type") in ("copyright", "copyright_hymn") or "hymn" in str(meta.get("folder", "")).lower():
             engine = HymnHuntEngine(study_id, selected_hymns=selected_hymns, selected_denoms=selected_denoms, log_fn=log_fn)
             _hunt_engines[study_id] = engine
             res = engine.run()
@@ -621,18 +621,28 @@ $('huntBtn').onclick = async () => {
   pollLogs();
 };
 
+let pollTimer = null;
+
 function pollLogs() {
-  setInterval(async () => {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
     const data = await api('/api/hunt/logs?study=' + selectedStudy);
     const consoleEl = $('console');
-    consoleEl.innerHTML = '';
-    data.logs.forEach(l => {
-      const d = document.createElement('div');
-      d.className = 'log-line ' + (l.level || '');
-      d.textContent = `[${l.t}] ${l.msg}`;
-      consoleEl.appendChild(d);
-    });
+    if (data.logs && data.logs.length > 0) {
+      consoleEl.innerHTML = '';
+      data.logs.forEach(l => {
+        const d = document.createElement('div');
+        d.className = 'log-line ' + (l.level || '');
+        d.textContent = `[${l.t}] ${l.msg}`;
+        consoleEl.appendChild(d);
+      });
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
     if (!data.running) {
+      if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+      }
       $('huntBtn').disabled = false;
       $('huntBtn').textContent = 'Run Deep Hunt';
       loadCandidates();
@@ -728,10 +738,7 @@ class RWSHandler(BaseHTTPRequestHandler):
 
         if path == "/api/hunt/logs":
             study_id = query.get("study", ["26006"])[0]
-            q = _get_log_queue(study_id)
-            logs = []
-            while not q.empty():
-                logs.append(q.get_nowait())
+            logs = _get_study_logs(study_id)
             _json_response(self, {"study": study_id, "running": _study_hunt_running(study_id), "logs": logs})
             return
 
