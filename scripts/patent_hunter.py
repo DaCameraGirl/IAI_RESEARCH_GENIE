@@ -34,7 +34,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 from check_burned import is_burned, load_burned, load_citation_seeds, patent_key  # noqa: E402
 from link_builder import crossref_lookup, patent_links  # noqa: E402
 from patent_search import search_queries  # noqa: E402
-from study_bot import STUDY_META  # noqa: E402
+from study_bot import STUDY_META, study_folder  # noqa: E402
 from study_requirements import ctrl_f_phrases, map_requirements  # noqa: E402
 from product_search import search_product_evidence  # noqa: E402
 
@@ -650,7 +650,7 @@ Notes:
 def regrade_stored_candidates(study_id: str, burned: dict[str, str] | None = None) -> int:
     """Demote on-disk READY files that fail the stricter gate → HOLD."""
     burned = burned or load_burned(study_id)
-    folder = REPO / STUDY_META[study_id]["folder"] / "candidates"
+    folder = study_folder(study_id) / "candidates"
     if not folder.exists():
         return 0
     demoted = 0
@@ -778,7 +778,7 @@ class HuntEngine:
 
     def run_deep(self) -> dict:
         meta = STUDY_META[self.study_id]
-        folder = REPO / meta["folder"]
+        folder = study_folder(self.study_id)
 
         if meta.get("type") == "copyright" or not meta.get("patent"):
             self.log(
@@ -1138,8 +1138,15 @@ Notes:
         if not critical:
             return 0
         
-        # Extract keywords from study metadata
-        meta = STUDY_META[self.study_id]
+        # Extract keywords from study_bot import
+        from study_bot import (
+            STUDY_META,
+            current_id,
+            is_blocked,
+            load_state,
+            save_state,
+            study_folder,
+        )
         product_keywords = []
         technical_terms = []
         

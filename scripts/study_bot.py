@@ -68,6 +68,9 @@ def current_id(state: dict) -> str:
 def study_folder(study_id: str, state: dict | None = None) -> Path:
     state = state or load_state()
     folder_name = state["studies"][study_id]["folder"]
+    in_studies = REPO / "studies" / folder_name
+    if in_studies.exists():
+        return in_studies
     return REPO / folder_name
 
 
@@ -76,7 +79,7 @@ def _build_study_meta(study_id: str) -> dict:
     if study_id not in state.get("studies", {}):
         raise KeyError(study_id)
     folder_name = state["studies"][study_id]["folder"]
-    folder = REPO / folder_name
+    folder = study_folder(study_id, state)
     meta_path = folder / STUDY_META_FILENAME
     data = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
 
