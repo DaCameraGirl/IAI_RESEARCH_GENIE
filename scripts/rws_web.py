@@ -34,6 +34,7 @@ from study_bot import (  # noqa: E402
     is_blocked,
     load_state,
     save_state,
+    study_folder,
 )
 
 PORT = 7842
@@ -68,7 +69,7 @@ def _purge_burned_candidates(study_id: str, burned: dict[str, str] | None = None
 
     burned = burned if burned is not None else load_burned(study_id)
     study_key = _study_patent_key(study_id)
-    folder = REPO / STUDY_META[study_id]["folder"] / "candidates"
+    folder = study_folder(study_id) / "candidates"
     if not folder.exists():
         return 0
     removed = 0
@@ -140,7 +141,7 @@ def _parse_candidates(study_id: str, burned: dict[str, str] | None = None) -> li
 
     burned = burned if burned is not None else load_burned(study_id)
     _purge_burned_candidates(study_id, burned)
-    folder = REPO / STUDY_META[study_id]["folder"] / "candidates"
+    folder = study_folder(study_id) / "candidates"
     if not folder.exists():
         return []
     out = []
