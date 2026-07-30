@@ -107,7 +107,16 @@ def _parse_hymn_lead(path: Path, text: str) -> dict:
     title = field("Title")
     org = field("Organization")
     status = field("Status")
-    is_ready_lead = "Non-LDS" in text or "Verified" in text or "READY" in path.name or "Non-LDS Verified" in status
+
+    title_l = (title or "").lower()
+    path_l = path.name.lower()
+    text_l = text.lower()
+
+    is_noise = any(k in title_l for k in ("cia reading room", "president's daily brief", "daily press", "newspaper", "jprs id", "espionage"))
+    hymnal_keywords = ("hymn", "hymnal", "carol", "songbook", "choral", "lutheran", "catholic", "methodist", "evangelic", "church of god", "fifty christmas carols", "50 christmas carols", "non-lds", "verified", "holy chords")
+    is_hymnal = any(k in title_l for k in hymnal_keywords) or any(k in path_l for k in ("non_lds", "archive_", "gbooks_")) or any(k in text_l for k in ("non-lds", "verified"))
+
+    is_ready_lead = (is_hymnal or "READY" in path.name or "Non-LDS" in status) and not is_noise
     return {
         "file": path.name,
         "publication": hymn or title or path.stem,
@@ -204,7 +213,7 @@ def _study_ui_copy(meta: dict) -> dict[str, str]:
     crit_date = meta.get("critical_date", "")
     patent = meta.get("patent", "")
     focus = meta.get("focus", "")
-    if meta.get("type") == "copyright_hymn" or not patent:
+    if meta.get("type") in ("copyright", "copyright_hymn") or "hymn" in str(meta.get("folder", "")).lower() or not patent:
         lang = meta.get("language", "target language")
         meta_line = f"Copyright research | <strong>{lang} translations</strong> | Expiration {crit_date}"
         focus_line = "Target: Find non-LDS existing translations from Baptist, Lutheran, Adventist, and Protestant hymnals. Avoid Mormon hymnal duplicates."
@@ -456,8 +465,8 @@ footer { margin-top: 28px; text-align: center; color: #4a5568; font-size: 0.75re
 
         <!-- Interactive Checkbox & Strategy Selection Panel -->
         <div class="controls-panel">
-          <h4>🎯 Target & Strategy Selection Controls (Isolated by Study)</h4>
-          <div class="controls-grid">
+          <h4 id="controlsTitle">🎯 Target & Strategy Selection Controls</h4>
+          <div id="hymnControls" class="controls-grid">
             <div class="control-col">
               <span style="font-size:0.75rem; color:var(--gold); font-weight:600; display:block; margin-bottom:6px;">Target Songs / Leads:</span>
               <div id="songCheckboxes" style="max-height:100px; overflow-y:auto; font-size:0.78rem;">
@@ -485,7 +494,26 @@ footer { margin-top: 28px; text-align: center; color: #4a5568; font-size: 0.75re
               <div style="font-size:0.78rem;">
                 <label><input type="checkbox" id="chk_wiki" checked> Wikipedia Authority Lane</label>
                 <label><input type="checkbox" id="chk_portals" checked> Hymnary / Holychords Lane</label>
-                <label><input type="checkbox" id="chk_offset" checked> Blender Offset Ratio (5%-15%)</label>
+                <label><input type="checkbox" id="chk_archive" checked> Internet Archive & Google Books</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="patentControls" class="controls-grid" style="display:none;">
+            <div class="control-col">
+              <span style="font-size:0.75rem; color:var(--gold); font-weight:600; display:block; margin-bottom:6px;">Patent Search Lanes:</span>
+              <div style="font-size:0.78rem;">
+                <label><input type="checkbox" checked disabled> L1: Backward Citation Graph</label>
+                <label><input type="checkbox" checked disabled> L2: Forward Citation Hop Analysis</label>
+                <label><input type="checkbox" checked disabled> L3: NPL & Conference Search</label>
+                <label><input type="checkbox" checked disabled> L4: CPC Class & Keywords</label>
+              </div>
+            </div>
+            <div class="control-col">
+              <span style="font-size:0.75rem; color:var(--gold); font-weight:600; display:block; margin-bottom:6px;">Filters & Burn Gate:</span>
+              <div style="font-size:0.78rem;">
+                <label><input type="checkbox" checked disabled> Exclude Known Prior Art (Burn Gate)</label>
+                <label><input type="checkbox" checked disabled> Strict Critical Date Filter</label>
               </div>
             </div>
           </div>
@@ -532,6 +560,15 @@ async function loadState() {
     selectedStudy = state.current_study;
   }
   renderPills();
+  loadCandidates();
+  pollLogs();
+}
+
+function selectStudy(sid) {
+  selectedStudy = sid;
+  renderPills();
+  loadCandidates();
+  pollLogs();
 }
 
 function renderPills() {
@@ -545,11 +582,7 @@ function renderPills() {
     btn.dataset.id = sid;
     const shortTitle = meta.title ? meta.title.split(' ')[0] : sid;
     btn.textContent = `${sid} · ${shortTitle}`;
-    btn.onclick = () => {
-      selectedStudy = sid;
-      renderPills();
-      loadCandidates();
-    };
+    btn.onclick = () => selectStudy(sid);
     pillsEl.appendChild(btn);
   });
   renderHero();
@@ -557,11 +590,22 @@ function renderPills() {
 }
 
 function renderHero() {
-  const meta = (state && state.studies && state.studies[selectedStudy]) || { title: 'Study ' + selectedStudy, meta_copy: '', focus: '' };
+  const meta = (state && state.studies && state.studies[selectedStudy]) || { title: 'Study ' + selectedStudy, meta_copy: '', focus: '', type: 'patent' };
   $('studyId').textContent = 'Study ' + selectedStudy;
   $('studyTitle').textContent = meta.title || 'Study ' + selectedStudy;
   $('studyMeta').innerHTML = meta.meta_copy || '';
   $('studyFocus').textContent = meta.focus || '';
+
+  const isHymn = (meta.type === 'copyright' || meta.type === 'copyright_hymn' || (meta.title && meta.title.toLowerCase().includes('hymn')));
+  if (isHymn) {
+    if ($('hymnControls')) $('hymnControls').style.display = 'grid';
+    if ($('patentControls')) $('patentControls').style.display = 'none';
+    if ($('controlsTitle')) $('controlsTitle').textContent = '🎯 Target & Strategy Selection Controls (Hymn Translation Research)';
+  } else {
+    if ($('hymnControls')) $('hymnControls').style.display = 'none';
+    if ($('patentControls')) $('patentControls').style.display = 'grid';
+    if ($('controlsTitle')) $('controlsTitle').textContent = '🎯 Target & Strategy Selection Controls (Patent Prior Art Hunt)';
+  }
 }
 
 function renderQueue() {
@@ -573,11 +617,7 @@ function renderQueue() {
     const d = document.createElement('div');
     d.className = 'queue-item ' + (sid === selectedStudy ? 'current' : '');
     d.innerHTML = `<div class="qid"><strong>${sid}</strong> - ${meta.title || ''}</div>`;
-    d.onclick = () => {
-      selectedStudy = sid;
-      renderPills();
-      loadCandidates();
-    };
+    d.onclick = () => selectStudy(sid);
     qEl.appendChild(d);
   });
 }
@@ -611,6 +651,9 @@ async function loadCandidates() {
 $('huntBtn').onclick = async () => {
   $('huntBtn').disabled = true;
   $('huntBtn').textContent = 'Hunting...';
+  $('stopBtn').style.display = 'inline-block';
+  $('stopBtn').disabled = false;
+  $('stopBtn').textContent = '🛑 Stop Hunt';
   
   const selectedHymns = Array.from(document.querySelectorAll('.chk-song:checked')).map(cb => cb.value);
   await api('/api/hunt', {
@@ -620,6 +663,16 @@ $('huntBtn').onclick = async () => {
   });
   
   pollLogs();
+};
+
+$('stopBtn').onclick = async () => {
+  $('stopBtn').disabled = true;
+  $('stopBtn').textContent = 'Stopping...';
+  await api('/api/hunt/stop', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({study: selectedStudy})
+  });
 };
 
 let pollTimer = null;
@@ -639,14 +692,17 @@ function pollLogs() {
       });
       consoleEl.scrollTop = consoleEl.scrollHeight;
     }
-    if (!data.running) {
-      if (pollTimer) {
-        clearInterval(pollTimer);
-        pollTimer = null;
-      }
+    if (data.running) {
+      $('huntBtn').disabled = true;
+      $('huntBtn').textContent = 'Hunting...';
+      $('stopBtn').style.display = 'inline-block';
+      $('stopBtn').disabled = false;
+      $('stopBtn').textContent = '🛑 Stop Hunt';
+    } else {
       $('huntBtn').disabled = false;
       $('huntBtn').textContent = 'Run Deep Hunt';
-      loadCandidates();
+      $('stopBtn').style.display = 'none';
+      $('stopBtn').disabled = false;
     }
   }, 1000);
 }
@@ -719,6 +775,7 @@ class RWSHandler(BaseHTTPRequestHandler):
                 q_ui = _study_ui_copy(qmeta)
                 queue_meta[qid] = {
                     "title": qmeta.get("title", f"Study {qid}"),
+                    "type": qmeta.get("type", "patent"),
                     "meta_copy": q_ui["meta_copy"],
                     "focus": q_ui["focus_copy"]
                 }
@@ -765,6 +822,15 @@ class RWSHandler(BaseHTTPRequestHandler):
             thread = threading.Thread(target=_run_hunt_async, args=(study_id, selected_hymns), daemon=True)
             _hunt_threads[study_id] = thread
             thread.start()
+            _json_response(self, {"ok": True, "study": study_id})
+            return
+
+        if path == "/api/hunt/stop":
+            study_id = payload.get("study", "26006")
+            engine = _hunt_engines.get(study_id)
+            if engine and hasattr(engine, "stop"):
+                engine.stop()
+            _get_study_logs(study_id).append({"t": datetime.now().strftime("%H:%M:%S"), "msg": "Stop hunt signal sent by user.", "level": "warn", "study": study_id})
             _json_response(self, {"ok": True, "study": study_id})
             return
 
