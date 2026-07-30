@@ -682,9 +682,9 @@ def regrade_stored_candidates(study_id: str, burned: dict[str, str] | None = Non
 
 
 class HuntEngine:
-    def __init__(self, study_id: str, on_log: LogFn | None = None) -> None:
+    def __init__(self, study_id: str, on_log: LogFn | None = None, log_fn: LogFn | None = None) -> None:
         self.study_id = study_id
-        self.on_log = on_log or (lambda m, l: None)
+        self.on_log = on_log or log_fn or (lambda m, l: None)
         self.stopped = False
         self.results: list[PatentRecord] = []
         self.inspected = 0
@@ -693,6 +693,9 @@ class HuntEngine:
 
     def log(self, msg: str, level: str = "info") -> None:
         self.on_log(msg, level)
+
+    def run(self) -> dict:
+        return self.run_deep()
 
     def stop(self) -> None:
         self.stopped = True
